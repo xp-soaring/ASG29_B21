@@ -96,7 +96,7 @@ P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
 P _gear/0/_scon 2964.311767578
-P _gear/0/_stat_def 0.404702306
+P _gear/0/_stat_def 0.404702246
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
 P _gear/0/_strut_comp -0.100000001
@@ -130,7 +130,7 @@ P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
 P _gear/1/_scon 673.707214355
-P _gear/1/_stat_def 0.099959567
+P _gear/1/_stat_def 0.099959537
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -259,7 +259,7 @@ P _obja/1/_v10_att_z_acf_prt_ref 0.0
 P _obja/1/_v10_is_internal -34612984
 P _obja/1/_v10_steers_with_gear 0
 P _obja/count 2
-P _panel_inst_3d 30
+P _panel_inst_3d 0
 P _part/10/_bot_s1 0.509999990
 P _part/10/_bot_s2 0.754000008
 P _part/10/_bot_t1 0.0
@@ -1714,7 +1714,7 @@ P _part/10/_part_phi 0.0
 P _part/10/_part_psi 0.0
 P _part/10/_part_rad 2.0
 P _part/10/_part_specs_eq 1
-P _part/10/_part_specs_invis 1
+P _part/10/_part_specs_invis 0
 P _part/10/_part_tex 0
 P _part/10/_part_the 0.0
 P _part/10/_part_x -18.280000687
@@ -3183,7 +3183,7 @@ P _part/11/_part_phi 0.0
 P _part/11/_part_psi 0.0
 P _part/11/_part_rad 0.0
 P _part/11/_part_specs_eq 1
-P _part/11/_part_specs_invis 1
+P _part/11/_part_specs_invis 0
 P _part/11/_part_tex 0
 P _part/11/_part_the 0.0
 P _part/11/_part_x 18.280000687
@@ -4652,7 +4652,7 @@ P _part/12/_part_phi 0.0
 P _part/12/_part_psi 0.0
 P _part/12/_part_rad 2.0
 P _part/12/_part_specs_eq 1
-P _part/12/_part_specs_invis 1
+P _part/12/_part_specs_invis 0
 P _part/12/_part_tex 0
 P _part/12/_part_the 0.0
 P _part/12/_part_x -29.100000381
@@ -6121,7 +6121,7 @@ P _part/13/_part_phi 0.0
 P _part/13/_part_psi 0.0
 P _part/13/_part_rad 2.0
 P _part/13/_part_specs_eq 1
-P _part/13/_part_specs_invis 1
+P _part/13/_part_specs_invis 0
 P _part/13/_part_tex 0
 P _part/13/_part_the 0.0
 P _part/13/_part_x 29.100000381
@@ -7590,7 +7590,7 @@ P _part/16/_part_phi 0.0
 P _part/16/_part_psi 0.0
 P _part/16/_part_rad 2.0
 P _part/16/_part_specs_eq 1
-P _part/16/_part_specs_invis 1
+P _part/16/_part_specs_invis 0
 P _part/16/_part_tex 0
 P _part/16/_part_the 0.0
 P _part/16/_part_x -0.0
@@ -9059,7 +9059,7 @@ P _part/17/_part_phi 0.0
 P _part/17/_part_psi 0.0
 P _part/17/_part_rad 0.0
 P _part/17/_part_specs_eq 1
-P _part/17/_part_specs_invis 1
+P _part/17/_part_specs_invis 0
 P _part/17/_part_tex 0
 P _part/17/_part_the 0.0
 P _part/17/_part_x 0.0
@@ -10528,7 +10528,7 @@ P _part/18/_part_phi 0.0
 P _part/18/_part_psi 0.0
 P _part/18/_part_rad 0.0
 P _part/18/_part_specs_eq 1
-P _part/18/_part_specs_invis 1
+P _part/18/_part_specs_invis 0
 P _part/18/_part_tex 0
 P _part/18/_part_the 0.0
 P _part/18/_part_x 0.0
@@ -11997,7 +11997,7 @@ P _part/56/_part_phi 0.0
 P _part/56/_part_psi 0.0
 P _part/56/_part_rad 1.399999976
 P _part/56/_part_specs_eq 1
-P _part/56/_part_specs_invis 1
+P _part/56/_part_specs_invis 0
 P _part/56/_part_tex 0
 P _part/56/_part_the 0.0
 P _part/56/_part_x 0.0
@@ -13466,7 +13466,7 @@ P _part/8/_part_phi 0.0
 P _part/8/_part_psi 0.0
 P _part/8/_part_rad 2.0
 P _part/8/_part_specs_eq 1
-P _part/8/_part_specs_invis 1
+P _part/8/_part_specs_invis 0
 P _part/8/_part_tex 0
 P _part/8/_part_the 0.0
 P _part/8/_part_x -0.720000029
@@ -14935,11 +14935,11 @@ P _part/85/_part_phi 0.0
 P _part/85/_part_psi 0.0
 P _part/85/_part_rad 2.0
 P _part/85/_part_specs_eq 0
-P _part/85/_part_specs_invis 1
+P _part/85/_part_specs_invis 0
 P _part/85/_part_tex 0
 P _part/85/_part_the 0.0
 P _part/85/_part_x 0.0
-P _part/85/_part_y -0.765297532
+P _part/85/_part_y -0.765297592
 P _part/85/_part_z 5.840000153
 P _part/85/_patt_con 0
 P _part/85/_patt_prt 0
@@ -16404,11 +16404,11 @@ P _part/86/_part_phi 0.0
 P _part/86/_part_psi 0.0
 P _part/86/_part_rad 2.0
 P _part/86/_part_specs_eq 0
-P _part/86/_part_specs_invis 1
+P _part/86/_part_specs_invis 0
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.200040445
+P _part/86/_part_y -0.200040475
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -17873,7 +17873,7 @@ P _part/87/_part_phi 0.0
 P _part/87/_part_psi 0.0
 P _part/87/_part_rad 2.0
 P _part/87/_part_specs_eq 0
-P _part/87/_part_specs_invis 1
+P _part/87/_part_specs_invis 0
 P _part/87/_part_tex 0
 P _part/87/_part_the 0.0
 P _part/87/_part_x -29.100000381
@@ -19342,7 +19342,7 @@ P _part/88/_part_phi 0.0
 P _part/88/_part_psi 0.0
 P _part/88/_part_rad 2.0
 P _part/88/_part_specs_eq 0
-P _part/88/_part_specs_invis 1
+P _part/88/_part_specs_invis 0
 P _part/88/_part_tex 0
 P _part/88/_part_the 0.0
 P _part/88/_part_x 29.100000381
@@ -20811,7 +20811,7 @@ P _part/9/_part_phi 0.0
 P _part/9/_part_psi 0.0
 P _part/9/_part_rad 0.0
 P _part/9/_part_specs_eq 1
-P _part/9/_part_specs_invis 1
+P _part/9/_part_specs_invis 0
 P _part/9/_part_tex 0
 P _part/9/_part_the 0.0
 P _part/9/_part_x 0.720000029
@@ -26535,7 +26535,7 @@ P acf/_has_refuel_snd 0
 P acf/_has_spot_lite 0
 P acf/_has_vac_cross_tied 0
 P acf/_has_vac_venturi 0
-P acf/_has_yawdamp_but 1
+P acf/_has_yawdamp_but 0
 P acf/_heat_x_ctr 0.0
 P acf/_hide_prop_at_00_vect 0
 P acf/_hide_prop_at_90_vect 0
@@ -27173,7 +27173,7 @@ P acf/_use_cus_gear_damping 0
 P acf/_use_cus_gear_defs 0
 P acf/_use_manual_prop_inc 0
 P acf/_user_can_fly 1
-P acf/_vario_type 737
+P acf/_vario_type -1
 P acf/_vect_EQ 0
 P acf/_vect_max_disc 0.0
 P acf/_vect_max_nace 0.0
@@ -27316,145 +27316,10 @@ P acf/_yel_lo_xmsn_P 0
 P acf/_yel_lo_xmsn_T 0
 PROPERTIES_END
 PANEL_2D_BEGIN
-rad_com1_BC rad_com1_BC
-  POS 425.000000 268.000000
-  DATAREF 
-  SIZE 1.100000
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-vvi_adap vvi_adap
-  POS 364.000000 665.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-alt_HM_dig alt_HM_dig
-  POS 363.500000 667.500000
-  DATAREF 
-  LIGHT_MODE BACK_LIT_MANUAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-EFIS_screen_1_GA EFIS_screen_1_GA
-  POS 424.500000 519.000000
-  DATAREF 
-  HIDE
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-but_battery but_battery
-  POS 134.000000 497.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-EFIS_vvi_dig EFIS_vvi_dig
-  POS 145.000000 290.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-ins_totalenergy_dec ins_totalenergy_dec
-  POS 488.500000 665.500000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-EFIS_vvi_dig EFIS_vvi_dig
-  POS 360.000000 661.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-EFIS_DME_waypoint EFIS_DME_waypoint
-  POS 256.000000 11.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-asi_adap_GA_nodig asi_adap_GA_nodig
-  POS 416.500000 519.785706
-  DATAREF 
-  SIZE 1.500000
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-alt_GA alt_GA
-  POS 573.000000 545.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-baro_pressure_disp baro_pressure_disp
-  POS 543.000000 547.000000
-  DATAREF 
-  SIZE 0.950000
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-compass_BC compass_BC
-  POS 424.500000 382.500000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-EFIS_radio_alt EFIS_radio_alt
-  POS 362.000000 644.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-but_map_zoom but_map_zoom
-  POS 425.000000 450.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-but_map_zoom but_map_zoom
-  POS 498.000000 -236.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
+PANEL_2D_END
+PANEL_3D_BEGIN
 but_jettison but_jettison
   POS 995.500000 562.500000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-but_puffer but_puffer
-  POS 995.000000 491.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-but_yawdamp but_yawdamp
-  POS 995.000000 422.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-
-but_inverter but_inverter
-  POS 497.500000 423.000000
   DATAREF 
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
@@ -27467,27 +27332,113 @@ han_dihed han_dihed
   LIGHT_RHEOSTAT 0
   BUS_SRC 1
 
-but_battery but_battery
-  POS 933.000000 519.000000
+ins_tailnum ins_tailnum
+  POS 189.000000 635.000000
   DATAREF 
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
   BUS_SRC 1
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
 
-but_tot_ener_audio but_totalenergy_aud
-  POS 599.500000 -192.500000
+gen_handle gen_handle
+  POS 934.000000 -186.000000
+  IMAGE gen_canopy
+  DATAREF sim/cockpit2/switches/canopy_open
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 -25.000000 1.000000
+  KEY_FRAME 1.000000 20.000000
+  CLICK_RADIUS 70.000000
+  HAS_DETENTS 0
+
+gen_rotary vario_302_backgroun
+  POS 435.000000 541.500000
+  IMAGE vario_302/vario_302_background
   DATAREF 
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
   KEY_FRAME 0.000000 0.000000 1.000000
   KEY_FRAME 1.000000 1.000000
+  DIGITS 1
+  ROTARY_TYPE ROTARY
+  CLICK_RADIUS 10.000000
+  CLICK_RADIUS_DY 0.000000
+  OFFSET 0.000000
+  STEP1 1.000000
+  STEP2 1.000000
+  CURSOR DEFAULT
+  CLICK_DX 0
+  CLICK_DY 0
 
-gen_LED gen_LED.png
-  POS 653.500000 541.500000
-  DATAREF sim/auriel/acoustic_switch
+gen_annun vario_302_ring
+  POS 434.500000 544.000000
+  IMAGE vario_302/ring
+  DATAREF 
+  SHOW_EQUAL 1.000000 b21/units_vario
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
-  CORNERS 0.000000 0.000000  -0.000000 -0.666667  -0.000000 -0.666667  0.000000 0.000000
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
+
+gen_LED vario_302_bottom
+  POS 431.500000 516.500000
+  IMAGE vario_302/num_bottom
+  DATAREF b21/vario_302/number_bottom
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 15.000000 15.000000
+  DIGITS 3
+  DECIMALS 1
+  PERIOD_WIDTH 6
+  LED_ROWS 0
+
+gen_LED vario_302_bottom_s
+  POS 425.500000 516.500000
+  IMAGE vario_302/num_sign
+  DATAREF b21/vario_302/number_bottom_sign
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1000.000000 1000.000000
+  DIGITS 4
+  DECIMALS 1
+  PERIOD_WIDTH 6
+  LED_ROWS 0
+
+gen_LED vario_302_number_r
+  POS 452.500000 542.500000
+  IMAGE vario_302/num_right
+  DATAREF b21/vario_302/number_right
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 10.000000 10.000000
+  DIGITS 3
+  DECIMALS 1
+  PERIOD_WIDTH 6
+  LED_ROWS 0
+
+gen_LED vario_203_number_t
+  POS 432.500000 563.500000
+  IMAGE vario_302/num_top
+  DATAREF b21/vario_302/number_top
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 20000.000000 20000.000000
+  DIGITS 5
+  DECIMALS 0
+  PERIOD_WIDTH 0
+  LED_ROWS 0
+
+gen_LED vario_302_num_top_s
+  POS 426.500000 563.500000
+  IMAGE vario_302/num_sign
+  DATAREF b21/vario_302/number_top_sign
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
   KEY_FRAME 0.000000 0.000000 1.000000
   KEY_FRAME 1.000000 1.000000
   DIGITS 6
@@ -27495,32 +27446,31 @@ gen_LED gen_LED.png
   PERIOD_WIDTH 0
   LED_ROWS 0
 
-gen_LED gen_LED.png
-  POS 654.500000 509.500000
-  DATAREF sim/auriel/vario_samplerate
+gen_needle vario_302_needle
+  POS 435.000000 542.500000
+  IMAGE vario_302/vario_302
+  DATAREF b21/vario_302/needle_fpm
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
+  KEY_FRAME -5000.000000 -179.000000 1.000000
+  KEY_FRAME -1000.000000 -179.000000 1.000000
   KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-  DIGITS 6
-  DECIMALS 0
-  PERIOD_WIDTH 0
-  LED_ROWS 0
+  KEY_FRAME 1000.000000 179.000000 1.000000
+  KEY_FRAME 5000.000000 179.000000
+  IS_DRAGGABLE 0
+  OFFSET 0.000000
 
-gen_rheostat gen_rheostat.png
-  POS 691.000000 541.000000
-  DATAREF sim/auriel/acoustic_switch
-  SIZE 0.850000
+gen_rheostat vario_302_knob
+  POS 374.000000 477.000000
+  IMAGE vario_302/vario_302_knob
+  DATAREF b21/vario_302/knob
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
   KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000 1.000000
-  KEY_FRAME 2.000000 2.000000 1.000000
-  KEY_FRAME 3.000000 3.000000 1.000000
-  KEY_FRAME 4.000000 4.000000
-  CLICK_RADIUS 10.000000
+  KEY_FRAME 15.000000 300.000000
+  CLICK_RADIUS 40.000000
   CLICK_RADIUS_DY 0.000000
-  STEP1 1.000000
+  STEP1 20.000000
   STEP2 1.000000
   OFFSET 0.000000
   CURSOR DEFAULT
@@ -27528,22 +27478,90 @@ gen_rheostat gen_rheostat.png
   CLICK_DY 0
   WRAP 0
 
-gen_rheostat gen_rheostat.png
-  POS 691.000000 507.000000
-  DATAREF sim/auriel/vario_samplerate
-  SIZE 0.850000
+gen_rotary vario_302_stf_te_sw
+  POS 339.000000 526.000000
+  IMAGE vario_302/stf_te_switch
+  DATAREF b21/vario_302/stf_te_switch
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
-  KEY_FRAME 25.000000 1.000000 1.000000
-  KEY_FRAME 50.000000 2.000000 1.000000
-  KEY_FRAME 100.000000 3.000000 1.000000
-  KEY_FRAME 150.000000 4.000000 1.000000
-  KEY_FRAME 200.000000 5.000000 1.000000
-  KEY_FRAME 250.000000 6.000000 1.000000
-  KEY_FRAME 300.000000 7.000000
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 2.000000 2.000000
+  DIGITS 3
+  ROTARY_TYPE ROTARY
+  CLICK_RADIUS 20.000000
+  CLICK_RADIUS_DY 0.000000
+  OFFSET 0.000000
+  STEP1 1.000000
+  STEP2 1.000000
+  CURSOR DEFAULT
+  CLICK_DX 0
+  CLICK_DY 0
+
+gen_annun vario_302_stf_te_in
+  POS 464.000000 530.000000
+  IMAGE vario_302/stf_te_ind
+  DATAREF 
+  SHOW_EQUAL 1.000000 b21/vario_302/stf_te_ind
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
+
+gen_annun vario_57_background
+  POS 273.000000 682.000000
+  IMAGE vario_57/vario_57_background
+  DATAREF 
+  SHOW_EQUAL 1.000000 b21/units_vario
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
+
+gen_needle vario_57_needle
+  POS 271.000000 685.000000
+  IMAGE vario_57/vario_57_needle
+  DATAREF b21/vario_57/needle_fpm
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME -10000.000000 -150.000000 1.000000
+  KEY_FRAME -1000.000000 -150.000000 1.000000
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1000.000000 150.000000 1.000000
+  KEY_FRAME 10000.000000 150.000000
+  IS_DRAGGABLE 0
+  OFFSET 0.000000
+  NEEDLE_OFFSET_Y -5.000000
+
+gen_rotary vario_57_center
+  POS 272.500000 680.500000
+  IMAGE vario_57/vario_57_center
+  DATAREF 
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 6.000000
+  DIGITS 1
+  ROTARY_TYPE ROTARY
   CLICK_RADIUS 10.000000
   CLICK_RADIUS_DY 0.000000
+  OFFSET 0.000000
   STEP1 1.000000
+  STEP2 1.000000
+  CURSOR DEFAULT
+  CLICK_DX 0
+  CLICK_DY 0
+
+gen_rheostat vario_sound_volume
+  POS 338.000000 580.000000
+  IMAGE vario_302/volume
+  DATAREF b21/vario_sound_volume
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1000.000000 200.000000
+  CLICK_RADIUS 20.000000
+  CLICK_RADIUS_DY 0.000000
+  STEP1 20.000000
   STEP2 1.000000
   OFFSET 0.000000
   CURSOR DEFAULT
@@ -27551,31 +27569,222 @@ gen_rheostat gen_rheostat.png
   CLICK_DY 0
   WRAP 0
 
-EFIS_DME_waypoint el_DME_waypoint.png
-  POS 20.000000 571.000000
+gen_rotary gpsnav_background
+  POS 430.000000 360.000000
+  IMAGE gpsnav/background
   DATAREF 
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 6.000000
+  DIGITS 7
+  ROTARY_TYPE ROTARY
+  CLICK_RADIUS 10.000000
+  CLICK_RADIUS_DY 0.000000
+  OFFSET 0.000000
+  STEP1 1.000000
+  STEP2 1.000000
+  CURSOR DEFAULT
+  CLICK_DX 0
+  CLICK_DY 0
+
+gen_trigger gpsnav_load
+  POS 401.000000 420.500000
+  IMAGE gpsnav/button_load
+  COMMAND b21/nav/load_task
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
+  CLICK_RADIUS 10.000000
+  CLICK_RADIUS_DY 0.000000
+  CURSOR DEFAULT
+  CLICK_DX 0
+  CLICK_DY 0
+
+gen_trigger gpsnav_left
+  POS 401.000000 303.500000
+  IMAGE gpsnav/button_left
+  COMMAND b21/nav/prev_waypoint
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
+  CLICK_RADIUS 10.000000
+  CLICK_RADIUS_DY 0.000000
+  CURSOR DEFAULT
+  CLICK_DX 0
+  CLICK_DY 0
+
+gen_trigger gpsnav_right
+  POS 457.000000 303.500000
+  IMAGE gpsnav/button_right
+  COMMAND b21/nav/next_waypoint
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
+  CLICK_RADIUS 10.000000
+  CLICK_RADIUS_DY 0.000000
+  CURSOR DEFAULT
+  CLICK_DX 0
+  CLICK_DY 0
+
+gen_handle gen_handle.png
+  POS 54.500000 413.000000
+  IMAGE spoiler_indicator/gen_handle
+  DATAREF sim/cockpit2/controls/speedbrake_ratio
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 -25.000000 1.000000
+  KEY_FRAME 1.000000 25.000000
+  CLICK_RADIUS 10.000000
+  HAS_DETENTS 0
+
+rad_com1_GA rad_com1_GA.png
+  POS 432.000000 215.500000
+  DATAREF 
+  SIZE 1.500000
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
   KEY_FRAME 0.000000 0.000000 1.000000
   KEY_FRAME 1.000000 1.000000
 
-rad_GPS_530_2d Garmin_530_2d.png
-  POS 101.000000 -13.000000
+rad_CDU739_2d CDU739_2d.png
+  POS 711.500000 293.000000
   DATAREF 
-  SIZE 0.200000
+  SIZE 0.100000
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
   KEY_FRAME 0.000000 0.000000 1.000000
   KEY_FRAME 1.000000 1.000000
 
-ins_gmeter_round gmeter_round.png
-  POS 256.857147 537.571411
+gen_annun asi
+  POS 573.500000 635.500000
+  IMAGE asi/asi_background
   DATAREF 
+  SHOW_EQUAL 1.000000 b21/units_speed
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
   KEY_FRAME 0.000000 0.000000 1.000000
   KEY_FRAME 1.000000 1.000000
 
-PANEL_2D_END
-PANEL_3D_BEGIN
+gen_needle asi_needle
+  POS 573.000000 636.500000
+  IMAGE asi/asi_needle
+  DATAREF sim/cockpit2/gauges/indicators/airspeed_kts_pilot
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 -180.000000 1.000000
+  KEY_FRAME 40.000000 -149.000000 1.000000
+  KEY_FRAME 50.000000 -118.000000 1.000000
+  KEY_FRAME 100.000000 12.000000 1.000000
+  KEY_FRAME 150.000000 139.000000
+  IS_DRAGGABLE 0
+  OFFSET 0.000000
+
+gen_needle altimeter_ft
+  POS 659.000000 509.000000
+  IMAGE altimeter/altimeter_ft
+  DATAREF b21/altimeter/needle_3_deg
+  SHOW_EQUAL 0.000000 b21/units_altitude
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 360.000000 360.000000
+  IS_DRAGGABLE 0
+  OFFSET 0.000000
+
+gen_needle altimeter_m
+  POS 659.000000 509.000000
+  IMAGE altimeter/altimeter_m
+  DATAREF b21/altimeter/needle_3_deg
+  SHOW_EQUAL 1.000000 b21/units_altitude
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 360.000000 360.000000
+  IS_DRAGGABLE 0
+  OFFSET 0.000000
+
+gen_needle altimeter_needle_2
+  POS 659.000000 508.000000
+  IMAGE altimeter/needle_small
+  DATAREF b21/altimeter/needle_2_deg
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 360.000000 360.000000
+  IS_DRAGGABLE 0
+  OFFSET 0.000000
+
+gen_needle altimeter_needle_1
+  POS 659.000000 508.000000
+  IMAGE altimeter/needle_large
+  DATAREF b21/altimeter/needle_1_deg
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 360.000000 360.000000
+  IS_DRAGGABLE 0
+  OFFSET 0.000000
+
+gen_rheostat altimeter_knob
+  POS 610.000000 450.000000
+  IMAGE altimeter/knob
+  DATAREF b21/altimeter/knob
+  KF_WRAP_BOTTOM
+  KF_WRAP_TOP
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 3.000000 3.000000
+  CLICK_RADIUS 20.000000
+  CLICK_RADIUS_DY 0.000000
+  STEP1 1.000000
+  STEP2 1.000000
+  OFFSET 0.000000
+  CURSOR DEFAULT
+  CLICK_DX 0
+  CLICK_DY 0
+  WRAP 1
+
+gen_pointer trim
+  POS 555.000000 407.000000
+  IMAGE trim/trim
+  DATAREF sim/cockpit2/controls/elevator_trim
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME -1.000000 45.000000 1.000000
+  KEY_FRAME 1.000000 -45.000000
+  IS_DRAGGABLE 0
+  IS_VERTICAL 0
+  OFFSET 0.000000
+
+gen_pointer compass
+  POS 431.000000 692.000000
+  IMAGE compass/compass_GA
+  DATAREF sim/cockpit2/gauges/indicators/compass_heading_deg_mag
+  CLIP
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 -73.000000 1.000000
+  KEY_FRAME 360.000000 71.000000
+  IS_DRAGGABLE 0
+  IS_VERTICAL 0
+  OFFSET 0.000000
+
+gen_pointer compass_background
+  POS 431.000000 691.000000
+  IMAGE compass/compass_background
+  DATAREF 
+  SIZE 1.400000
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 0.000000
+  IS_DRAGGABLE 0
+  IS_VERTICAL 0
+  OFFSET 0.000000
+
 PANEL_3D_END
