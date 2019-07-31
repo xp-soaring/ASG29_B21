@@ -5,7 +5,7 @@ Modded Windsock - rhb X-Plane Schleicher ASG-29 Glider
 * move flap position indicator texture
 * graduate/darken texture for leg area cockpit
 * make darker background texture for panel
-* change canopy open from dihedral hack to current x-plane dataref & command
+* change canopy open from dihedral hack to sim/flightmodel2/misc/canopy_open_ratio
 * speed up canopy open/close
 * add sound to canopy open/close
 * add ballast dump
