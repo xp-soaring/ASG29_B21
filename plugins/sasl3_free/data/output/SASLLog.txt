@@ -25,18 +25,14 @@
 [B21_SASL INFO]: [LUA]: loading	b21_altimeter
 [B21_SASL INFO]: [LUA]: "b21_altimeter"	b21_altimeter starting, ALTITUDE_UNITS =	0
 [B21_SASL INFO]: [LUA]: loading	b21_gmeter
-[B21_SASL INFO]: [LUA]: "b21_gmeter"	b21_gmeter.lua starting 0.9839238524437
+[B21_SASL INFO]: [LUA]: "b21_gmeter"	b21_gmeter.lua starting 0.99578714370728
 [B21_SASL INFO]: [LUA]: loading	b21_yawstring
 [B21_SASL INFO]: [LUA]: "b21_yawstring"	b21_yawstring.lua starting
 [B21_SASL INFO]: [LUA]: loading	b21_smoke
 [B21_SASL INFO]: [LUA]: "b21_smoke"	b21_smoke loading 0
 [B21_SASL INFO]: [LUA]: loading	b21_seat_toggle
 [B21_SASL INFO]: [LUA]: "b21_seat_toggle"	b21_seat_toggle.lua starting 
-[B21_SASL INFO]: [LUA]: loading	b21_canopy
-[B21_SASL INFO]: [LUA]: "b21_canopy"	b21_canopy starting
 [B21_SASL INFO]: [LUA]: loading	b21_controls_commands
 [B21_SASL INFO]: [LUA]: "b21_controls_commands"	b21_controls_commands.lua starting
 [B21_SASL INFO]: Module loaded
-[B21_SASL INFO]: [LUA]: "b21_canopy"	canopy up
-[B21_SASL INFO]: [LUA]: "b21_canopy"	canopy down
 [B21_SASL INFO]: Disabling...

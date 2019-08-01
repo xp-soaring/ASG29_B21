@@ -47,7 +47,7 @@ components = {
                 b21_yawstring {}, -- moves yawstring
                 b21_smoke {}, -- provides toggle smoke command
                 b21_seat_toggle {}, -- provides "b21/seat_toggle" command
-                b21_canopy {}, -- convert a 'dihed_rqst' change into canopy toggle command (hack for ASG29 canopy levers)
+                -- b21_canopy {}, -- convert a 'dihed_rqst' change into canopy toggle command (hack for ASG29 canopy levers)
                 b21_controls_commands {}
              }
 
