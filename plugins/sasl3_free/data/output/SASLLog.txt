@@ -1,8 +1,8 @@
 [B21_SASL INFO]: Initializing...
-[B21_SASL INFO]: Path to module: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 11/Aircraft/Extra Aircraft/ASG29_B21/plugins/sasl3_free/data/modules/main.lua
+[B21_SASL INFO]: Path to module: /mnt/usb1/ian_lewis/X-Plane 11/Aircraft/Extra Aircraft/ASG29_B21/plugins/sasl3_free/data/modules/main.lua
 [B21_SASL INFO]: Loading module...
 [B21_SASL INFO]: [LUA]: loading	module
-[B21_SASL INFO]: [LUA]: including	C:\Program Files (x86)/Steam/steamapps/common/X-Plane 11/Aircraft/Extra Aircraft/ASG29_B21/USER_SETTINGS.lua
+[B21_SASL INFO]: [LUA]: including	/mnt/usb1/ian_lewis/X-Plane 11/Aircraft/Extra Aircraft/ASG29_B21/USER_SETTINGS.lua
 [B21_SASL INFO]: [LUA]: "module"	ASK21 Loading Settings
 [B21_SASL INFO]: [LUA]: including	B21_POLAR.lua
 [B21_SASL INFO]: [LUA]: loading	b21_wings_level
@@ -34,5 +34,6 @@
 [B21_SASL INFO]: [LUA]: "b21_seat_toggle"	b21_seat_toggle.lua starting 
 [B21_SASL INFO]: [LUA]: loading	b21_controls_commands
 [B21_SASL INFO]: [LUA]: "b21_controls_commands"	b21_controls_commands.lua starting
+[B21_SASL INFO]: Loading cursors...
 [B21_SASL INFO]: Module loaded
 [B21_SASL INFO]: Disabling...
