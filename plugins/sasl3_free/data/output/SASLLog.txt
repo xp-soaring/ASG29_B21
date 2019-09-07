@@ -35,6 +35,4 @@
 [B21_SASL INFO]: [LUA]: loading	b21_controls_commands
 [B21_SASL INFO]: [LUA]: "b21_controls_commands"	b21_controls_commands.lua starting
 [B21_SASL INFO]: Module loaded
-[B21_SASL INFO]: [LUA]: "b21_wings_level"	WINGS_LEVEL_ON COMMAND
-[B21_SASL INFO]: [LUA]: "b21_wings_level"	WINGS_LEVEL AUTOCANCEL
 [B21_SASL INFO]: Disabling...
