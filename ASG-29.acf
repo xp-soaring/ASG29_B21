@@ -138,7 +138,7 @@ P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
 P _gear/1/_scon 672.559875488
-P _gear/1/_stat_def 0.222734332
+P _gear/1/_stat_def 0.222734377
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -16416,7 +16416,7 @@ P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.077265680
+P _part/86/_part_y -0.077265635
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -24227,6 +24227,7 @@ P acf/_Gneg 2.599999905
 P acf/_Gpos 5.300000191
 P acf/_HUD_del_x 240.0
 P acf/_HUD_del_y 120.0
+P acf/_ICAO ASG29 B21
 P acf/_ITT_is_C 1
 P acf/_Jxx_unitmass 0.0
 P acf/_Jyy_unitmass 0.0
@@ -24252,9 +24253,9 @@ P acf/_SFC_half_lo_JET 0.550000012
 P acf/_SFC_half_lo_PRP 0.439999998
 P acf/_TOGA_discos_servos 0
 P acf/_TRQ_is_pcnt 0
-P acf/_Vfe1_kts 99999.0
-P acf/_Vfem_kts 99999.0
-P acf/_Vle_kts 99999.0
+P acf/_Vfe1_kts 999.0
+P acf/_Vfem_kts 999.0
+P acf/_Vle_kts 999.0
 P acf/_Vmca_kts 0.0
 P acf/_Vne_kts 154.0
 P acf/_Vno_kts 0.0
@@ -24266,14 +24267,14 @@ P acf/_additonal_gear_flatplate 0.0
 P acf/_ai_can_fly 0
 P acf/_ailn1_cratR 0.150000006
 P acf/_ailn1_cratT 0.150000006
-P acf/_ailn1_dn 12.0
+P acf/_ailn1_dn 20.0
 P acf/_ailn1_flaps 0.0
 P acf/_ailn1_max_sweep_rat 1.0
 P acf/_ailn1_pitch 0.0
 P acf/_ailn1_rat1 1.0
 P acf/_ailn1_rat2 1.0
 P acf/_ailn1_sbrk 0.0
-P acf/_ailn1_up 20.0
+P acf/_ailn1_up 25.0
 P acf/_ailn1_v1 0.0
 P acf/_ailn1_v2 999.0
 P acf/_ailn2_cratR 0.0
@@ -26353,18 +26354,18 @@ P acf/_feathered_pitch 0.0
 P acf/_ff_rat_idle_JET 0.100000001
 P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_file_writer_version 113601
-P acf/_flap1_cd 0.005000000
+P acf/_flap1_cd 0.010000000
 P acf/_flap1_cl 0.300000012
-P acf/_flap1_cm 0.0
+P acf/_flap1_cm -0.300000012
 P acf/_flap1_cratR 0.140000001
 P acf/_flap1_cratT 0.140000001
-P acf/_flap1_dn/0 -2.0
-P acf/_flap1_dn/1 0.0
-P acf/_flap1_dn/2 5.0
-P acf/_flap1_dn/3 11.0
-P acf/_flap1_dn/4 19.0
-P acf/_flap1_dn/5 23.0
-P acf/_flap1_dn/6 47.0
+P acf/_flap1_dn/0 0.0
+P acf/_flap1_dn/1 3.0
+P acf/_flap1_dn/2 8.0
+P acf/_flap1_dn/3 14.0
+P acf/_flap1_dn/4 23.0
+P acf/_flap1_dn/5 26.0
+P acf/_flap1_dn/6 50.0
 P acf/_flap1_dn/7 0.0
 P acf/_flap1_dn/8 0.0
 P acf/_flap1_dn/9 0.0
@@ -26653,7 +26654,7 @@ P acf/_lock_with_elev_EQ 0
 P acf/_m_displaced 0.0
 P acf/_m_displaced_Y 0.0
 P acf/_m_empty 850.0
-P acf/_m_fuel_max_tot 0.010000000
+P acf/_m_fuel_max_tot 0.0
 P acf/_m_jett 440.0
 P acf/_m_max 1323.0
 P acf/_m_shift 0.0
@@ -26795,7 +26796,7 @@ P acf/_part_descrip/93 Nosegear steering link arm2
 P acf/_part_descrip/94 Nosegear axle truck
 P acf/_part_descrip/count 95
 P acf/_pe_xyz/0 0.0
-P acf/_pe_xyz/1 1.0
+P acf/_pe_xyz/1 1.100000024
 P acf/_pe_xyz/2 4.900000095
 P acf/_pe_xyz/count 3
 P acf/_phase_hdng_tvect_in_at_00 0
@@ -26959,10 +26960,10 @@ P acf/_rudd_trim_time 10.0
 P acf/_rudd_with_ailn_rat 0.0
 P acf/_rudd_with_fail 0.0
 P acf/_rwy_req_pave 0
-P acf/_sbrk1_cratR 0.200000003
-P acf/_sbrk1_cratT 0.200000003
-P acf/_sbrk1_up_flit 90.0
-P acf/_sbrk1_up_grnd 90.0
+P acf/_sbrk1_cratR 0.150000006
+P acf/_sbrk1_cratT 0.150000006
+P acf/_sbrk1_up_flit 40.0
+P acf/_sbrk1_up_grnd 40.0
 P acf/_sbrk2_cratR 0.0
 P acf/_sbrk2_cratT 0.0
 P acf/_sbrk2_up_flit 0.0
@@ -27120,7 +27121,7 @@ P acf/_tail_rot_with_v1_kts 0.0
 P acf/_tail_rot_with_v2_deg 0.0
 P acf/_tail_rot_with_v2_kts 0.0
 P acf/_tail_with_coll 0.0
-P acf/_tailnum ASG-29
+P acf/_tailnum B21
 P acf/_tailrotor_EQ 0
 P acf/_takeoff_trim_11 0.0
 P acf/_tank_part_en/0 0
@@ -27257,7 +27258,7 @@ P acf/_vect_power_for 1.0
 P acf/_vect_rate 2.0
 P acf/_vectarmY 0.0
 P acf/_vectarmZ 0.0
-P acf/_version 1.00
+P acf/_version 1.01
 P acf/_vvi_but_adjusts_pitch 0
 P acf/_warn_airliner 0
 P acf/_warn_alt_app_100 0
@@ -27400,7 +27401,7 @@ but_jettison but_jettison
   TOOLTIP this is but_jettison
 
 ins_tailnum ins_tailnum
-  POS 240.000000 649.000000
+  POS 163.000000 533.000000
   DATAREF 
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
@@ -27535,7 +27536,7 @@ gen_rheostat vario_302_knob
   WRAP 0
 
 gen_rotary vario_302_stf_te_sw
-  POS 182.000000 546.000000
+  POS 366.000000 596.000000
   IMAGE vario_302/stf_te_switch
   DATAREF b21/vario_302/stf_te_switch
   LIGHT_MODE MECHANICAL
@@ -27608,7 +27609,7 @@ gen_rotary vario_57_center
   CLICK_DY 0
 
 gen_rheostat vario_sound_volume
-  POS 281.000000 472.000000
+  POS 358.000000 522.000000
   IMAGE vario_302/volume
   DATAREF b21/vario_sound_volume
   LIGHT_MODE MECHANICAL
@@ -27868,7 +27869,7 @@ gen_handle gen_handle.png
   HAS_DETENTS 0
 
 gen_rotary gen_rotary.png
-  POS 392.000000 632.000000
+  POS 392.000000 647.000000
   IMAGE flap_indicator/flap_indicator
   DATAREF sim/flightmodel/controls/flaprqst
   LIGHT_MODE MECHANICAL

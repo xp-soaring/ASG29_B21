@@ -5,6 +5,8 @@ OBJ
 TEXTURE ASG-29_Text.png
 TEXTURE_LIT ASG-29_Text_lit.png
 POINT_COUNTS 37220 0 0 79059
+
+
 VT 0.006799 -0.114030 6.035000 0.993819 -0.111011 0.000000 0.537176 0.384598
 VT 0.006799 -0.113246 6.040960 0.993819 -0.107223 0.028742 0.538356 0.384752
 VT 0.009371 -0.091000 6.035000 1.000000 0.000001 0.000000 0.537176 0.389120
@@ -45513,6 +45515,8 @@ ANIM_trans -0.040000 0.178000 -0.270000 -0.040000 0.178000 -0.270000 0.000000 0.
 TRIS 58557 2808
 ANIM_end
 TRIS 61365 6
+
+# Canopy
 ANIM_begin
 ANIM_trans 0.000000 0.140000 0.380000 0.000000 0.140000 0.380000 0.000000 0.000000 none
 ANIM_rotate 1.000000 -0.000000 0.000000 0.000000 -65.000000 0.0 1.0 sim/flightmodel2/misc/canopy_open_ratio
@@ -45578,29 +45582,30 @@ ATTR_manip_command button sim/flight_controls/canopy_toggle Canopy open/close to
 TRIS 73449 204
 ANIM_end
 
-ANIM_begin
-ANIM_hide 1.000000 1.000000 sim/cockpit/engine/inverter_on[0]
-ATTR_cockpit
-TRIS 73653 1284
-ANIM_begin
-ANIM_show 0.000000 1.000000 sim/cockpit/switches/yaw_damper_on
-ANIM_hide 1.000000 1.000000 sim/cockpit/engine/inverter_on[0]
-ANIM_hide 0.000000 0.000000 sim/cockpit/switches/yaw_damper_on
-TRIS 74937 24
-ANIM_end
-ANIM_begin
-ANIM_show 1.000000 0.000000 sim/cockpit/switches/yaw_damper_on
-ANIM_hide 1.000000 1.000000 sim/cockpit/engine/inverter_on[0]
-ANIM_hide 1.000000 1.000000 sim/cockpit/switches/yaw_damper_on
-TRIS 74961 24
-ANIM_end
-ATTR_no_cull
-ATTR_no_cockpit
-TRIS 74985 2208
-ATTR_cockpit
-TRIS 77193 12
-ANIM_end
-ATTR_cull
-ATTR_no_cockpit
-TRIS 77205 1854
+#ANIM_begin
+#ANIM_hide 1.000000 1.000000 sim/cockpit/engine/inverter_on[0]
+#ATTR_cockpit
+#TRIS 73653 1284
+#ANIM_begin
+#ANIM_show 0.000000 1.000000 sim/cockpit/switches/yaw_damper_on
+#ANIM_hide 1.000000 1.000000 sim/cockpit/engine/inverter_on[0]
+#ANIM_hide 0.000000 0.000000 sim/cockpit/switches/yaw_damper_on
+#TRIS 74937 24
+#ANIM_end
+#ANIM_begin
+#ANIM_show 1.000000 0.000000 sim/cockpit/switches/yaw_damper_on
+#ANIM_hide 1.000000 1.000000 sim/cockpit/engine/inverter_on[0]
+#ANIM_hide 1.000000 1.000000 sim/cockpit/switches/yaw_damper_on
+#TRIS 74961 24
+#ANIM_end
+#ATTR_no_cull
+#ATTR_no_cockpit
+#TRIS 74985 2208
+#ATTR_cockpit
+#TRIS 77193 12
+#ANIM_end
+
+#ATTR_cull
+#ATTR_no_cockpit
+#TRIS 77205 1854
 ANIM_end
