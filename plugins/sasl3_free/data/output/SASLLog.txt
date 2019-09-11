@@ -12,20 +12,16 @@
 [B21_SASL INFO]: [LUA]: loading	b21_vario_302
 [B21_SASL INFO]: [LUA]: loading	b21_vario_57
 [B21_SASL INFO]: [LUA]: "b21_vario_57"	b21_vario_57 starting
-[B21_SASL INFO]: [LUA]: loading	b21_vario_winter
-[B21_SASL INFO]: [LUA]: "b21_vario_winter"	b21_vario_winter starting
 [B21_SASL INFO]: [LUA]: loading	b21_airbrakes
 [B21_SASL INFO]: [LUA]: "b21_airbrakes"	b21_airbrakes loaded
-[B21_SASL INFO]: [LUA]: loading	b21_gpsnav
-[B21_SASL INFO]: [LUA]: "b21_gpsnav"	b21_gpsnav.lua loaded
+[B21_SASL INFO]: [LUA]: loading	b21_panel
+[B21_SASL INFO]: [LUA]: "b21_panel"	b21_panel.lua starting v2.01
 [B21_SASL INFO]: [LUA]: loading	b21_clock
 [B21_SASL INFO]: [LUA]: "b21_clock"	b21_clock starting, CLOCK_MODE =	0
 [B21_SASL INFO]: [LUA]: loading	b21_trim
 [B21_SASL INFO]: [LUA]: "b21_trim"	b21_trim starting, v0.89
 [B21_SASL INFO]: [LUA]: loading	b21_altimeter
 [B21_SASL INFO]: [LUA]: "b21_altimeter"	b21_altimeter starting, ALTITUDE_UNITS =	0
-[B21_SASL INFO]: [LUA]: loading	b21_gmeter
-[B21_SASL INFO]: [LUA]: "b21_gmeter"	b21_gmeter.lua starting 0
 [B21_SASL INFO]: [LUA]: loading	b21_yawstring
 [B21_SASL INFO]: [LUA]: "b21_yawstring"	b21_yawstring.lua starting
 [B21_SASL INFO]: [LUA]: loading	b21_ballast
@@ -35,8 +31,4 @@
 [B21_SASL INFO]: Loading cursors...
 [B21_SASL INFO]: Module loaded
 [B21_SASL INFO]: [LUA]: "b21_ballast"	BALLAST_FILL COMMAND
-[B21_SASL INFO]: [LUA]: "b21_ballast"	BALLAST_OPEN COMMAND
-[B21_SASL INFO]: [LUA]: "b21_ballast"	ballast dump complete
-[B21_SASL INFO]: [LUA]: "b21_ballast"	BALLAST_FILL COMMAND
-[B21_SASL INFO]: [LUA]: "b21_ballast"	BALLAST_OPEN COMMAND
 [B21_SASL INFO]: Disabling...

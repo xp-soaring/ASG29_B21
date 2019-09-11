@@ -35,15 +35,13 @@ components = {
                 b21_sounds {}, -- load before variometers
                 b21_vario_302 {},
                 b21_vario_57 {},
-                b21_vario_winter {},
                 b21_airbrakes {},
-	            b21_gpsnav {
-                   position = { 604, 312, 100, 89}
+	            b21_panel { -- digital nav panel
+                   position = { 360, 620, 135, 220}
                 },
                 b21_clock {}, -- moves hands of watch on panel
                 b21_trim {}, -- provides trigger trim command and gradual movement of trim
                 b21_altimeter {}, -- moves needles of altimeter, supports imperial/metric units
-                b21_gmeter {}, -- moves min/max bugs on G-Meter, provides reset command
                 b21_yawstring {}, -- moves yawstring
                 b21_ballast {}, -- provides ballast % indicator and "b21/ballast/[open,close,fill]"
                 b21_controls_commands {}

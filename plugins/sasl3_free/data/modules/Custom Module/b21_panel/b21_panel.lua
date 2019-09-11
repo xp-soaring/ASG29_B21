@@ -1,6 +1,6 @@
--- B21
+-- b21_panel.lua
 
-print("b21_gpsnav.lua loaded")
+print("b21_panel.lua starting v2.01")
 
 -- WRITES these shared variables:
 --
@@ -117,11 +117,11 @@ local font = sasl.gl.loadFont ( "fonts/UbuntuMono-Regular.ttf" )
 --local green = { 0.0, 1.0, 0.0, 1.0 }
 local black = { 0.0, 0.0, 0.0, 1.0 }
 
-local background_img = sasl.gl.loadImage("images/gpsnav_background.png")
+local background_img = sasl.gl.loadImage("panel_background.png")
 
 -- bearing_image contains 7 x BEARING images, each 79x14, total 553x14
 -- where index 0 = turn hard left, 3 = ahead, 6 = hard right
-local bearing_img = sasl.gl.loadImage("images/gpsnav_bearing.png")
+local bearing_img = sasl.gl.loadImage("panel_bearing.png")
 
 local bearing_index = 3
 

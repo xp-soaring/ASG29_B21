@@ -104,7 +104,7 @@ P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
 P _gear/0/_scon 2959.263671875
-P _gear/0/_stat_def 0.396451801
+P _gear/0/_stat_def 0.396451831
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
 P _gear/0/_strut_comp -0.100000001
@@ -27547,7 +27547,7 @@ gen_rheostat vario_302_knob
   WRAP 0
 
 gen_rotary vario_302_stf_te_sw
-  POS 366.000000 596.000000
+  POS 295.000000 466.000000
   IMAGE vario_302/stf_te_switch
   DATAREF b21/vario_302/stf_te_switch
   LIGHT_MODE MECHANICAL
@@ -27620,7 +27620,7 @@ gen_rotary vario_57_center
   CLICK_DY 0
 
 gen_rheostat vario_sound_volume
-  POS 358.000000 522.000000
+  POS 328.000000 445.000000
   IMAGE vario_302/volume
   DATAREF b21/vario_sound_volume
   LIGHT_MODE MECHANICAL
