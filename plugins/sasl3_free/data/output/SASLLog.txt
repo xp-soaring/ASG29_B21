@@ -25,7 +25,7 @@
 [B21_SASL INFO]: [LUA]: loading	b21_altimeter
 [B21_SASL INFO]: [LUA]: "b21_altimeter"	b21_altimeter starting, ALTITUDE_UNITS =	0
 [B21_SASL INFO]: [LUA]: loading	b21_gmeter
-[B21_SASL INFO]: [LUA]: "b21_gmeter"	b21_gmeter.lua starting 1.1606397628784
+[B21_SASL INFO]: [LUA]: "b21_gmeter"	b21_gmeter.lua starting 0.98694145679474
 [B21_SASL INFO]: [LUA]: loading	b21_yawstring
 [B21_SASL INFO]: [LUA]: "b21_yawstring"	b21_yawstring.lua starting
 [B21_SASL INFO]: [LUA]: loading	b21_smoke

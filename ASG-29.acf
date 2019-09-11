@@ -104,7 +104,7 @@ P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
 P _gear/0/_scon 2959.263671875
-P _gear/0/_stat_def 0.396451831
+P _gear/0/_stat_def 0.396451801
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
 P _gear/0/_strut_comp -0.100000001
@@ -138,7 +138,7 @@ P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
 P _gear/1/_scon 672.559875488
-P _gear/1/_stat_def 0.222734377
+P _gear/1/_stat_def 0.222734332
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -16416,7 +16416,7 @@ P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.077265635
+P _part/86/_part_y -0.077265680
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -27869,7 +27869,7 @@ gen_handle gen_handle.png
   HAS_DETENTS 0
 
 gen_rotary gen_rotary.png
-  POS 392.000000 647.000000
+  POS 392.500000 647.000000
   IMAGE flap_indicator/flap_indicator
   DATAREF sim/flightmodel/controls/flaprqst
   LIGHT_MODE MECHANICAL
@@ -27883,6 +27883,75 @@ gen_rotary gen_rotary.png
   OFFSET 0.000000
   STEP1 1.000000
   STEP2 1.000000
+  CURSOR DEFAULT
+  CLICK_DX 0
+  CLICK_DY 0
+
+gen_LED ballast
+  POS 458.000000 564.000000
+  IMAGE ballast/ballast
+  DATAREF sim/flightmodel/weight/m_jettison
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
+  TOOLTIP Ballast (Kg)
+  DIGITS 3
+  DECIMALS 0
+  PERIOD_WIDTH 0
+  LED_ROWS 0
+
+gen_trigger ballast_close
+  POS 491.000000 544.000000
+  IMAGE ballast/gen_trigger
+  COMMAND b21/ballast/close
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
+  CLICK_RADIUS 10.000000
+  CLICK_RADIUS_DY 0.000000
+  CURSOR DEFAULT
+  CLICK_DX 0
+  CLICK_DY 0
+
+gen_trigger gen_trigger.png
+  POS -302.000000 511.000000
+  COMMAND 
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
+  CLICK_RADIUS 10.000000
+  CLICK_RADIUS_DY 0.000000
+  CURSOR DEFAULT
+  CLICK_DX 0
+  CLICK_DY 0
+
+gen_trigger ballast_open
+  POS 491.000000 583.000000
+  IMAGE ballast/gen_trigger
+  COMMAND b21/ballast/open
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
+  CLICK_RADIUS 10.000000
+  CLICK_RADIUS_DY 0.000000
+  CURSOR DEFAULT
+  CLICK_DX 0
+  CLICK_DY 0
+
+gen_trigger ballast_fill
+  POS 434.000000 566.000000
+  IMAGE ballast/gen_trigger
+  COMMAND b21/ballast/fill
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
+  CLICK_RADIUS 10.000000
+  CLICK_RADIUS_DY 0.000000
   CURSOR DEFAULT
   CLICK_DX 0
   CLICK_DY 0
