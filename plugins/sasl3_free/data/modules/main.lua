@@ -29,7 +29,7 @@ createGlobalPropertyf("b21/debug/1",0.1,false,true,false)
 createGlobalPropertyf("b21/debug/2",0.1,false,true,false)
 createGlobalPropertyf("b21/debug/3",0.1,false,true,false)
 
-components = { 
+components = {
                 b21_wings_level {}, -- load before b21_controls_commands
                 b21_total_energy {}, -- load before variometers
                 b21_sounds {}, -- load before variometers
@@ -37,7 +37,7 @@ components = {
                 b21_vario_57 {},
                 b21_vario_winter {},
                 b21_airbrakes {},
-	            b21_gpsnav { 
+	            b21_gpsnav {
                    position = { 604, 312, 100, 89}
                 },
                 b21_clock {}, -- moves hands of watch on panel
@@ -45,9 +45,7 @@ components = {
                 b21_altimeter {}, -- moves needles of altimeter, supports imperial/metric units
                 b21_gmeter {}, -- moves min/max bugs on G-Meter, provides reset command
                 b21_yawstring {}, -- moves yawstring
-                b21_smoke {}, -- provides toggle smoke command
-                b21_seat_toggle {}, -- provides "b21/seat_toggle" command
-                -- b21_canopy {}, -- convert a 'dihed_rqst' change into canopy toggle command (hack for ASG29 canopy levers)
+                b21_ballast {}, -- provides ballast % indicator and "b21/ballast/[open,close,fill]"
                 b21_controls_commands {}
              }
 

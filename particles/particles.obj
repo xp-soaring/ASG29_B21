@@ -1,0 +1,13 @@
+A
+800
+OBJ
+
+TEXTURE
+PARTICLE_SYSTEM aircraft_particles.pss
+
+POINT_COUNTS	0 0 0 0
+
+ANIM_begin
+	EMITTER ballast_L -1.9   0.2    2.7 0 0 0 0
+	EMITTER ballast_L  1.9   0.2    2.7 0 0 0 1
+ANIM_end

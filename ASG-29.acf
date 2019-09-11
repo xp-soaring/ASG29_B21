@@ -138,7 +138,7 @@ P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
 P _gear/1/_scon 672.559875488
-P _gear/1/_stat_def 0.222734332
+P _gear/1/_stat_def 0.222734347
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -266,7 +266,18 @@ P _obja/1/_v10_att_y_acf_prt_ref 0.0
 P _obja/1/_v10_att_z_acf_prt_ref 0.0
 P _obja/1/_v10_is_internal -34612984
 P _obja/1/_v10_steers_with_gear 0
-P _obja/count 2
+P _obja/2/_obj_flags 0
+P _obja/2/_v10_att_file_stl ../particles/particles.obj
+P _obja/2/_v10_att_part -1
+P _obja/2/_v10_att_phi_ref 0.0
+P _obja/2/_v10_att_psi_ref 0.0
+P _obja/2/_v10_att_the_ref 0.0
+P _obja/2/_v10_att_x_acf_prt_ref 0.0
+P _obja/2/_v10_att_y_acf_prt_ref 0.0
+P _obja/2/_v10_att_z_acf_prt_ref 0.0
+P _obja/2/_v10_is_internal 48
+P _obja/2/_v10_steers_with_gear 0
+P _obja/count 3
 P _panel_inst_3d 0
 P _part/10/_bot_s1 0.509999990
 P _part/10/_bot_s2 0.754000008
@@ -12117,7 +12128,7 @@ P _part/8/_geo_xyz/1,3,2 7.486987591
 P _part/8/_geo_xyz/1,4,0 -17.564584732
 P _part/8/_geo_xyz/1,4,1 2.884396315
 P _part/8/_geo_xyz/1,4,2 7.860076427
-P _part/8/_geo_xyz/1,5,0 -17.567382813
+P _part/8/_geo_xyz/1,5,0 -17.567382812
 P _part/8/_geo_xyz/1,5,1 2.830987453
 P _part/8/_geo_xyz/1,5,2 8.624908447
 P _part/8/_geo_xyz/1,6,0 -17.568338394
@@ -12126,7 +12137,7 @@ P _part/8/_geo_xyz/1,6,2 8.886071205
 P _part/8/_geo_xyz/1,7,0 -17.568338394
 P _part/8/_geo_xyz/1,7,1 2.812750101
 P _part/8/_geo_xyz/1,7,2 8.886071205
-P _part/8/_geo_xyz/1,8,0 -17.567382813
+P _part/8/_geo_xyz/1,8,0 -17.567382812
 P _part/8/_geo_xyz/1,8,1 2.830987453
 P _part/8/_geo_xyz/1,8,2 8.624908447
 P _part/8/_geo_xyz/1,9,0 -17.564584732
@@ -13491,7 +13502,7 @@ P _part/8/_top_t1 0.0
 P _part/8/_top_t2 0.384000003
 P _part/85/_bot_s1 0.632812500
 P _part/85/_bot_s2 0.753906250
-P _part/85/_bot_t1 0.254882813
+P _part/85/_bot_t1 0.254882812
 P _part/85/_bot_t2 0.295898438
 P _part/85/_geo_xyz/0,0,0 0.0
 P _part/85/_geo_xyz/0,0,1 2.0
@@ -14956,11 +14967,11 @@ P _part/85/_r_dim 10
 P _part/85/_s_dim 8
 P _part/85/_top_s1 0.632812500
 P _part/85/_top_s2 0.753906250
-P _part/85/_top_t1 0.254882813
+P _part/85/_top_t1 0.254882812
 P _part/85/_top_t2 0.295898438
 P _part/86/_bot_s1 0.632812500
 P _part/86/_bot_s2 0.753906250
-P _part/86/_bot_t1 0.254882813
+P _part/86/_bot_t1 0.254882812
 P _part/86/_bot_t2 0.295898438
 P _part/86/_geo_xyz/0,0,0 0.0
 P _part/86/_geo_xyz/0,0,1 2.0
@@ -16416,7 +16427,7 @@ P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.077265680
+P _part/86/_part_y -0.077265665
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -16425,11 +16436,11 @@ P _part/86/_r_dim 10
 P _part/86/_s_dim 8
 P _part/86/_top_s1 0.632812500
 P _part/86/_top_s2 0.753906250
-P _part/86/_top_t1 0.254882813
+P _part/86/_top_t1 0.254882812
 P _part/86/_top_t2 0.295898438
 P _part/87/_bot_s1 0.632812500
 P _part/87/_bot_s2 0.753906250
-P _part/87/_bot_t1 0.254882813
+P _part/87/_bot_t1 0.254882812
 P _part/87/_bot_t2 0.295898438
 P _part/87/_geo_xyz/0,0,0 0.0
 P _part/87/_geo_xyz/0,0,1 2.0
@@ -17894,11 +17905,11 @@ P _part/87/_r_dim 10
 P _part/87/_s_dim 8
 P _part/87/_top_s1 0.632812500
 P _part/87/_top_s2 0.753906250
-P _part/87/_top_t1 0.254882813
+P _part/87/_top_t1 0.254882812
 P _part/87/_top_t2 0.295898438
 P _part/88/_bot_s1 0.632812500
 P _part/88/_bot_s2 0.753906250
-P _part/88/_bot_t1 0.254882813
+P _part/88/_bot_t1 0.254882812
 P _part/88/_bot_t2 0.295898438
 P _part/88/_geo_xyz/0,0,0 0.0
 P _part/88/_geo_xyz/0,0,1 2.0
@@ -19363,7 +19374,7 @@ P _part/88/_r_dim 10
 P _part/88/_s_dim 8
 P _part/88/_top_s1 0.632812500
 P _part/88/_top_s2 0.753906250
-P _part/88/_top_t1 0.254882813
+P _part/88/_top_t1 0.254882812
 P _part/88/_top_t2 0.295898438
 P _part/9/_bot_s1 0.755999982
 P _part/9/_bot_s2 1.0
@@ -19462,7 +19473,7 @@ P _part/9/_geo_xyz/1,3,2 7.486987591
 P _part/9/_geo_xyz/1,4,0 17.564584732
 P _part/9/_geo_xyz/1,4,1 2.884396315
 P _part/9/_geo_xyz/1,4,2 7.860076427
-P _part/9/_geo_xyz/1,5,0 17.567382813
+P _part/9/_geo_xyz/1,5,0 17.567382812
 P _part/9/_geo_xyz/1,5,1 2.830987453
 P _part/9/_geo_xyz/1,5,2 8.624908447
 P _part/9/_geo_xyz/1,6,0 17.568338394
@@ -19471,7 +19482,7 @@ P _part/9/_geo_xyz/1,6,2 8.886071205
 P _part/9/_geo_xyz/1,7,0 17.568338394
 P _part/9/_geo_xyz/1,7,1 2.812750101
 P _part/9/_geo_xyz/1,7,2 8.886071205
-P _part/9/_geo_xyz/1,8,0 17.567382813
+P _part/9/_geo_xyz/1,8,0 17.567382812
 P _part/9/_geo_xyz/1,8,1 2.830987453
 P _part/9/_geo_xyz/1,8,2 8.624908447
 P _part/9/_geo_xyz/1,9,0 17.564584732
@@ -27717,7 +27728,7 @@ rad_CDU739_2d CDU739_2d.png
   KEY_FRAME 1.000000 1.000000
 
 gen_annun asi
-  POS 540.500000 644.500000
+  POS 540.500000 655.500000
   IMAGE asi/asi_background
   DATAREF 
   SHOW_EQUAL 1.000000 b21/units_speed
@@ -27727,7 +27738,7 @@ gen_annun asi
   KEY_FRAME 1.000000 1.000000
 
 gen_needle asi_needle
-  POS 540.000000 645.500000
+  POS 540.000000 656.500000
   IMAGE asi/asi_needle
   DATAREF sim/cockpit2/gauges/indicators/airspeed_kts_pilot
   LIGHT_MODE MECHANICAL
@@ -27741,7 +27752,7 @@ gen_needle asi_needle
   OFFSET 0.000000
 
 gen_needle altimeter_ft
-  POS 644.000000 547.000000
+  POS 633.000000 547.000000
   IMAGE altimeter/altimeter_ft
   DATAREF b21/altimeter/needle_3_deg
   SHOW_EQUAL 0.000000 b21/units_altitude
@@ -27753,7 +27764,7 @@ gen_needle altimeter_ft
   OFFSET 0.000000
 
 gen_needle altimeter_m
-  POS 644.000000 547.000000
+  POS 633.000000 547.000000
   IMAGE altimeter/altimeter_m
   DATAREF b21/altimeter/needle_3_deg
   SHOW_EQUAL 1.000000 b21/units_altitude
@@ -27765,7 +27776,7 @@ gen_needle altimeter_m
   OFFSET 0.000000
 
 gen_needle altimeter_needle_2
-  POS 644.000000 546.000000
+  POS 633.000000 546.000000
   IMAGE altimeter/needle_small
   DATAREF b21/altimeter/needle_2_deg
   LIGHT_MODE MECHANICAL
@@ -27776,7 +27787,7 @@ gen_needle altimeter_needle_2
   OFFSET 0.000000
 
 gen_needle altimeter_needle_1
-  POS 644.000000 546.000000
+  POS 633.000000 546.000000
   IMAGE altimeter/needle_large
   DATAREF b21/altimeter/needle_1_deg
   LIGHT_MODE MECHANICAL
@@ -27787,7 +27798,7 @@ gen_needle altimeter_needle_1
   OFFSET 0.000000
 
 gen_rheostat altimeter_knob
-  POS 594.000000 490.000000
+  POS 583.000000 490.000000
   IMAGE altimeter/knob
   DATAREF b21/altimeter/knob
   KF_WRAP_BOTTOM
@@ -27819,7 +27830,7 @@ gen_pointer trim
   OFFSET 0.000000
 
 gen_pointer compass
-  POS 428.000000 722.000000
+  POS 422.000000 722.000000
   IMAGE compass/compass_GA
   DATAREF sim/cockpit2/gauges/indicators/compass_heading_deg_mag
   CLIP
@@ -27832,7 +27843,7 @@ gen_pointer compass
   OFFSET 0.000000
 
 gen_pointer compass_background
-  POS 428.000000 721.000000
+  POS 422.000000 721.000000
   IMAGE compass/compass_background
   DATAREF 
   SIZE 1.400000
@@ -27858,18 +27869,8 @@ gen_trigger canopy_toggle
   CLICK_DX 0
   CLICK_DY 0
 
-gen_handle gen_handle.png
-  POS 392.500000 505.000000
-  DATAREF sim/flightmodel/weight/m_jettison
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 -25.000000 1.000000
-  KEY_FRAME 200.000000 25.000000
-  CLICK_RADIUS 10.000000
-  HAS_DETENTS 0
-
-gen_rotary gen_rotary.png
-  POS 392.500000 647.000000
+gen_rotary flap_indicator
+  POS 175.500000 561.000000
   IMAGE flap_indicator/flap_indicator
   DATAREF sim/flightmodel/controls/flaprqst
   LIGHT_MODE MECHANICAL
@@ -27888,13 +27889,13 @@ gen_rotary gen_rotary.png
   CLICK_DY 0
 
 gen_LED ballast
-  POS 458.000000 564.000000
+  POS 722.000000 492.000000
   IMAGE ballast/ballast
   DATAREF sim/flightmodel/weight/m_jettison
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
   KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
+  KEY_FRAME 200.000000 100.000000
   TOOLTIP Ballast (Kg)
   DIGITS 3
   DECIMALS 0
@@ -27902,54 +27903,45 @@ gen_LED ballast
   LED_ROWS 0
 
 gen_trigger ballast_close
-  POS 491.000000 544.000000
+  POS 748.000000 472.000000
   IMAGE ballast/gen_trigger
   COMMAND b21/ballast/close
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
   KEY_FRAME 0.000000 0.000000 1.000000
   KEY_FRAME 1.000000 1.000000
+  TOOLTIP Ballast Close
   CLICK_RADIUS 10.000000
   CLICK_RADIUS_DY 0.000000
-  CURSOR DEFAULT
-  CLICK_DX 0
-  CLICK_DY 0
-
-gen_trigger gen_trigger.png
-  POS -302.000000 511.000000
-  COMMAND 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-  CLICK_RADIUS 10.000000
-  CLICK_RADIUS_DY 0.000000
-  CURSOR DEFAULT
+  CURSOR HANDLE
   CLICK_DX 0
   CLICK_DY 0
 
 gen_trigger ballast_open
-  POS 491.000000 583.000000
+  POS 748.000000 507.000000
   IMAGE ballast/gen_trigger
   COMMAND b21/ballast/open
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
+  CORNERS 0.000000 -1.000000  0.000000 0.000000  0.000000 0.000000  0.000000 0.000000
   KEY_FRAME 0.000000 0.000000 1.000000
   KEY_FRAME 1.000000 1.000000
+  TOOLTIP Ballast open
   CLICK_RADIUS 10.000000
   CLICK_RADIUS_DY 0.000000
-  CURSOR DEFAULT
+  CURSOR BUTTON
   CLICK_DX 0
   CLICK_DY 0
 
 gen_trigger ballast_fill
-  POS 434.000000 566.000000
+  POS 698.000000 494.000000
   IMAGE ballast/gen_trigger
   COMMAND b21/ballast/fill
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
   KEY_FRAME 0.000000 0.000000 1.000000
   KEY_FRAME 1.000000 1.000000
+  TOOLTIP Ballast request fill
   CLICK_RADIUS 10.000000
   CLICK_RADIUS_DY 0.000000
   CURSOR DEFAULT

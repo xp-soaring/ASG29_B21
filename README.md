@@ -12,9 +12,7 @@
 * DONE change canopy open from dihedral hack to sim/flightmodel2/misc/canopy_open_ratio
 * speed up canopy open/close
 * add sound to canopy open/close
-* add ballast dump
 * DONE add flap indicator to panel
-* add ballast quantity to panel
 * DONE calibrate current flight performance
 * create aileron/flap move plugin to support flaperons, update .obj to these datarefs
 * create flightmodel best l/d polar (flap 4)
@@ -26,14 +24,25 @@
 * add airbrake open + gear up warning
 * DONE fix canopy visibility in 11.36
 * add tow release handle
-* quieter wind noise
+* DONE quieter wind noise
 * correct spoilers L/D
 * DONE correct pitch change on flaps deployment
 * weaken wheelbrake effectiveness
-* add ballast open - close - fill buttons + % indicator
-* adjust pilot view
+* DONE adjust pilot view
 * slight increase to flap Cl
 * DONE improve aileron effectiveness
 * DONE remove 'dihedral' handle hack patches used for canopy open/close
 * add canopy toggle command to under-panel button (for close)
+* DONE add ballast indicator and open/close/fill commands
+* update polar calibration data for ASG29
+* have netto include ballast
+* have gpsnav calculations include ballast
+* DONE add particle emitter for water ballast
+* check netto, STF correct for zero/max ballast
+* check flap, spoiler, ground run, wheel down wind sounds
+* check aileron authority
+* check rudder authority
+* check canopy open/close sounds (birdsong?)
+* add 'Flaps' label to indicator on panel
+* tidy up bezel highlight/shadow for ballast gauge
 
