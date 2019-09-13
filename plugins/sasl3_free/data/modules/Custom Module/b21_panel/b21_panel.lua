@@ -1,6 +1,9 @@
 -- b21_panel.lua
 
-print("b21_panel.lua starting v2.01")
+local w = size[1]
+local h = size[2]
+
+print("b21_panel.lua starting v2.02 ",w,'x',h)
 
 -- WRITES these shared variables:
 --
@@ -9,7 +12,7 @@ print("b21_panel.lua starting v2.01")
 -- project_settings.gpsnav_wp_altitude_m
 --
 
-size = { 100, 89 }
+-- size = { 100, 89 }
 
 local geo = require "b21_geo" -- contains useful geographic function like distance between lat/longs
 
@@ -56,7 +59,7 @@ local xplane_load_flightplan = sasl.findCommand("sim/FMS/key_load")
 
 -- delete all waypoints in FMS
 function clear_fms()
-    print("GPSNAV CLEAR")
+    print("b21_panel","GPSNAV CLEAR")
     local fms_count = sasl.countFMSEntries()
     for i = fms_count - 1, 0, -1
     do
@@ -65,6 +68,21 @@ function clear_fms()
     end
     task = {}
     task_index = 0
+end
+
+-- load new flightplan
+function load_fms()
+    print("b21_panel","load_fms()")
+    clear_fms() -- remove existing waypoints
+    sasl.commandOnce(xplane_load_flightplan)
+end
+
+function prev_wp()
+    set_waypoint(task_index - 1)
+end
+
+function next_wp()
+    set_waypoint(task_index + 1)
 end
 
 -- set waypoint to task[i]
@@ -82,9 +100,7 @@ function clicked_load(phase)
     if get(dataref_time_s) > prev_click_time_s + 2.0 and phase == SASL_COMMAND_BEGIN
     then
         prev_click_time_s = get(dataref_time_s)
-        print("GPSNAV LOAD")
-        clear_fms() -- remove existing waypoints
-        sasl.commandOnce(xplane_load_flightplan)
+        load_fms()
     end
     return 0
 end
@@ -92,9 +108,9 @@ end
 function clicked_left(phase)
     if get(dataref_time_s) > prev_click_time_s + 0.2 and task_index > 1 and phase == SASL_COMMAND_BEGIN
     then
-        print("GPSNAV LEFT")
+        print("b21_panel","GPSNAV LEFT")
         prev_click_time_s = get(dataref_time_s)
-        set_waypoint(task_index - 1)
+        prev_wp()
     end
     return 1
 end
@@ -102,9 +118,9 @@ end
 function clicked_right(phase)
     if get(dataref_time_s) > prev_click_time_s + 0.2 and task_index < #task and phase == SASL_COMMAND_BEGIN
     then
-        print("GPSNAV RIGHT")
+        print("b21_panel","GPSNAV RIGHT")
         prev_click_time_s = get(dataref_time_s)
-        set_waypoint(task_index + 1)
+        next_wp()
     end
     return 1
 end
@@ -123,7 +139,32 @@ local background_img = sasl.gl.loadImage("panel_background.png")
 -- where index 0 = turn hard left, 3 = ahead, 6 = hard right
 local bearing_img = sasl.gl.loadImage("panel_bearing.png")
 
+-- define coordinates of panel buttons
+local BUTTON1 = { 10,             10, (w-20)*0.2, 30, black } -- x,y,w,h
+local BUTTON2 = { 10+(w-20)*0.25, 10, (w-20)*0.2, 30, black } -- x,y,w,h
+local BUTTON3 = { 10+(w-20)*0.5,  10, (w-20)*0.2, 30, black } -- x,y,w,h
+local BUTTON4 = { 10+(w-20)*0.75, 10, (w-20)*0.2, 30, black } -- x,y,w,h
+
 local bearing_index = 3
+
+-- Pages:
+-- 1 : TASK (load task button, display task)
+-- 2 : NAV (direction arrow, arrival height)
+-- 3 : MAP (lat/long view of task)
+local page = 1
+local page_count = 3
+
+-- return true if mouse click x,y within bounds of button
+function in_button(x,y,button)
+    if x < button[1]
+        or x > button[1] + button[3]
+        or y < button[2]
+        or y > button[2] + button[4]
+    then
+        return false
+    end
+    return true
+end
 
 -- calculate index into bearing PNG panel image to display correct turn indication
 function update_bearing_index()
@@ -228,6 +269,60 @@ function update_fms()
     set_waypoint(1)
 end
 
+-- *************************
+-- ** BUTTON CLICKS ********
+-- *************************
+function button1_clicked()
+    print("b21_panel","button1_clicked")
+    page = page + 1
+    if page > page_count
+    then
+        page = 1
+    end
+end
+
+function button2_clicked()
+    print("b21_panel","button2_clicked")
+    load_fms()
+end
+
+function button3_clicked()
+    print("b21_panel","button3_clicked")
+    prev_wp()
+end
+
+function button4_clicked()
+    print("b21_panel","button4_clicked")
+    next_wp()
+end
+
+-- check mouse down to see if button clicked
+function onMouseDown(component, x, y, button, parentX, parentY)
+    if button == MB_LEFT and in_button(x,y,BUTTON1)
+    then
+        button1_clicked()
+        return
+    end
+    if button == MB_LEFT and in_button(x,y,BUTTON2)
+    then
+        button2_clicked()
+        return
+    end
+    if button == MB_LEFT and in_button(x,y,BUTTON3)
+    then
+        button3_clicked()
+        return
+    end
+    if button == MB_LEFT and in_button(x,y,BUTTON4)
+    then
+        button4_clicked()
+        return
+    end
+end
+
+-- *********************************************************
+-- ************ update()           *************************
+-- *********************************************************
 function update()
     update_wp_distance_and_heading()
     update_bearing_index()
@@ -235,19 +330,38 @@ function update()
 end --update
 
 
-function draw()
+-- *********************************************************
+-- ************ draw()             *************************
+-- *********************************************************
+-- h,w defined at startup as size[1],size[2] given to this plugin
+
+-- Draw button
+function draw_button(button, label)
+    sasl.gl.drawRectangle(button[1], button[2], button[3], button[4], button[5])
+    sasl.gl.drawText(font, button[1]+3,button[2]+3,label,20,false,false,TEXT_ALIGN_LEFT,white)
+end
+
+-- *****************
+-- ** TASK PAGE ****
+-- *****************
+function draw_page_task()
     -- logInfo("gpsnav draw called")
-    sasl.gl.drawTexture(background_img, 0, 0, 100, 89, {1.0,1.0,1.0,1.0}) -- draw background texture
+    sasl.gl.drawTexture(background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
     -- sasl.gl.drawLine(0,0,100,100,green)
+
+    draw_button(BUTTON1, "PAGE")
 
     -- "1/5: 1N7"
     local top_string
     if #task == 0
     then
         top_string = " LOAD TASK"
-    else
-        top_string = task_index .. "/" .. #task .. ":" .. task[task_index].ref
+        sasl.gl.drawText(font,5,h-30, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
+        draw_button(BUTTON2, "LOAD")
+        return
     end
+
+    top_string = "TASK "..task_index .. "/" .. #task .. ":" .. task[task_index].ref
 
     -- "DIST: 37.5km"
     local distance_string
@@ -269,16 +383,129 @@ function draw()
     local bottom_string = altitude_string
 
     --  TOP STRING                         size isBold isItalic
-    sasl.gl.drawText(font,5,70, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
-
-    -- BEARING GRAPHIC
-    sasl.gl.drawTexturePart(bearing_img, 10, 45, 79, 14, bearing_index * 79, 0, 79, 14)
+    sasl.gl.drawText(font,5,h-30, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
 
     -- MIDDLE STRING
-    sasl.gl.drawText(font,5,25, mid_string, 18, true, false, TEXT_ALIGN_LEFT, black)
+    sasl.gl.drawText(font,5,h-75, mid_string, 18, true, false, TEXT_ALIGN_LEFT, black)
 
     -- BOTTOM STRING
     sasl.gl.drawText(font,5,5, bottom_string, 18, true, false, TEXT_ALIGN_LEFT, black)
 
+    draw_button(BUTTON2, "LOAD")
+
+    draw_button(BUTTON3, "<")
+
+    draw_button(BUTTON4, ">")
+
 end
 
+-- *****************
+-- ** NAV PAGE *****
+-- *****************
+function draw_page_nav()
+    -- logInfo("gpsnav draw called")
+    sasl.gl.drawTexture(background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
+    -- sasl.gl.drawLine(0,0,100,100,green)
+
+    draw_button(BUTTON1, "PAGE")
+
+    -- "1/5: 1N7"
+    local top_string
+    if #task == 0
+    then
+        top_string = " LOAD TASK"
+        sasl.gl.drawText(font,5,h-30, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
+        draw_button(BUTTON2, "LOAD")
+        return
+    end
+
+    top_string = "NAV "..task_index .. "/" .. #task .. ":" .. task[task_index].ref
+
+    -- "DIST: 37.5km"
+    local distance_string
+    if project_settings.DISTANCE_UNITS == 0 -- (0=mi, 1=km)
+    then
+        distance_string = (math.floor(project_settings.gpsnav_wp_distance_m * M_TO_MI * 10.0) / 10.0) .. " MI"
+    else
+        distance_string = (math.floor(project_settings.gpsnav_wp_distance_m / 100.0) / 10.0) .. " KM"
+    end
+    local mid_string = distance_string
+
+    local altitude_string
+    if project_settings.ALTITUDE_UNITS == 0 -- (0=feet, 1=meters)
+    then
+        altitude_string = math.floor(project_settings.gpsnav_wp_altitude_m * M_TO_FT) .. " FT"
+    else
+        altitude_string = math.floor(project_settings.gpsnav_wp_altitude_m) .. " M"
+    end
+    local bottom_string = altitude_string
+
+    --  TOP STRING                         size isBold isItalic
+    sasl.gl.drawText(font,5,h-30, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
+
+    -- MIDDLE STRING
+    sasl.gl.drawText(font,5,h-75, mid_string, 18, true, false, TEXT_ALIGN_LEFT, black)
+
+    -- BOTTOM STRING
+    sasl.gl.drawText(font,5,5, bottom_string, 18, true, false, TEXT_ALIGN_LEFT, black)
+
+    draw_button(BUTTON2, "LOAD")
+
+    draw_button(BUTTON3, "<")
+
+    draw_button(BUTTON4, ">")
+
+end
+
+-- *****************
+-- ** MAP PAGE *****
+-- *****************
+function draw_page_map()
+    -- logInfo("gpsnav draw called")
+    sasl.gl.drawTexture(background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
+    -- sasl.gl.drawLine(0,0,100,100,green)
+
+    -- "1/5: 1N7"
+    local top_string
+    if #task == 0
+    then
+        top_string = " LOAD TASK"
+        sasl.gl.drawText(font,5,h-30, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
+        draw_button(BUTTON2, "LOAD")
+        return
+    end
+
+    top_string = "MAP "..task_index .. "/" .. #task .. ":" .. task[task_index].ref
+
+    local mid_string = "This is the Map page"
+
+    local bottom_string = "-*-*-*-"
+
+    --  TOP STRING                         size isBold isItalic
+    sasl.gl.drawText(font,5,h-30, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
+
+    -- MIDDLE STRING
+    sasl.gl.drawText(font,5,h-75, mid_string, 18, true, false, TEXT_ALIGN_LEFT, black)
+
+    -- BOTTOM STRING
+    sasl.gl.drawText(font,5,5, bottom_string, 18, true, false, TEXT_ALIGN_LEFT, black)
+
+    draw_button(BUTTON2, "LOAD")
+
+    draw_button(BUTTON3, "<")
+
+    draw_button(BUTTON4, ">")
+
+end
+
+function draw()
+    if page == 1
+    then
+        draw_page_task()
+    elseif page == 2
+    then
+        draw_page_nav()
+    else
+        draw_page_map()
+    end
+end

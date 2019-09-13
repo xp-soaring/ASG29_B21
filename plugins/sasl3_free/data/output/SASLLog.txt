@@ -15,7 +15,7 @@
 [B21_SASL INFO]: [LUA]: loading	b21_airbrakes
 [B21_SASL INFO]: [LUA]: "b21_airbrakes"	b21_airbrakes loaded
 [B21_SASL INFO]: [LUA]: loading	b21_panel
-[B21_SASL INFO]: [LUA]: "b21_panel"	b21_panel.lua starting v2.01
+[B21_SASL INFO]: [LUA]: "b21_panel"	b21_panel.lua starting v2.02 	135	x	220
 [B21_SASL INFO]: [LUA]: loading	b21_clock
 [B21_SASL INFO]: [LUA]: "b21_clock"	b21_clock starting, CLOCK_MODE =	0
 [B21_SASL INFO]: [LUA]: loading	b21_trim
@@ -31,4 +31,9 @@
 [B21_SASL INFO]: Loading cursors...
 [B21_SASL INFO]: Module loaded
 [B21_SASL INFO]: [LUA]: "b21_ballast"	BALLAST_FILL COMMAND
+[B21_SASL INFO]: [LUA]: "b21_panel"	GPSNAV LOAD
+[B21_SASL INFO]: [LUA]: "b21_panel"	GPSNAV CLEAR
+[B21_SASL INFO]: [LUA]: "b21_panel"	gpsnav fms_count	2
+[B21_SASL INFO]: [LUA]: "b21_panel"	GPSNAV[0] KSEA	47.449890136719	-122.31177520752	433	399.62843565571
+[B21_SASL INFO]: [LUA]: "b21_panel"	GPSNAV[1] KPAE	47.907001495361	-122.28158569336	604	583.57931301364
 [B21_SASL INFO]: Disabling...
