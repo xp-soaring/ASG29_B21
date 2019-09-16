@@ -104,7 +104,7 @@ P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
 P _gear/0/_scon 2959.263671875
-P _gear/0/_stat_def 0.396451801
+P _gear/0/_stat_def 0.396451741
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
 P _gear/0/_strut_comp -0.100000001
@@ -138,7 +138,7 @@ P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
 P _gear/1/_scon 672.559875488
-P _gear/1/_stat_def 0.222734332
+P _gear/1/_stat_def 0.222734302
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -14958,7 +14958,7 @@ P _part/85/_part_specs_invis 1
 P _part/85/_part_tex 0
 P _part/85/_part_the 0.0
 P _part/85/_part_x 0.0
-P _part/85/_part_y -0.773548007
+P _part/85/_part_y -0.773548126
 P _part/85/_part_z 5.840000153
 P _part/85/_patt_con 0
 P _part/85/_patt_prt 0
@@ -16427,7 +16427,7 @@ P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.077265680
+P _part/86/_part_y -0.077265710
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -27636,67 +27636,6 @@ gen_rheostat vario_sound_volume
   CLICK_DX 0
   CLICK_DY 0
   WRAP 0
-
-gen_rotary gpsnav_background
-  POS 430.000000 360.000000
-  IMAGE gpsnav/background
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 6.000000
-  DIGITS 7
-  ROTARY_TYPE ROTARY
-  CLICK_RADIUS 10.000000
-  CLICK_RADIUS_DY 0.000000
-  OFFSET 0.000000
-  STEP1 1.000000
-  STEP2 1.000000
-  CURSOR DEFAULT
-  CLICK_DX 0
-  CLICK_DY 0
-
-gen_trigger gpsnav_load
-  POS 401.000000 420.500000
-  IMAGE gpsnav/button_load
-  COMMAND b21/nav/load_task
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-  CLICK_RADIUS 10.000000
-  CLICK_RADIUS_DY 0.000000
-  CURSOR DEFAULT
-  CLICK_DX 0
-  CLICK_DY 0
-
-gen_trigger gpsnav_left
-  POS 401.000000 303.500000
-  IMAGE gpsnav/button_left
-  COMMAND b21/nav/prev_waypoint
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-  CLICK_RADIUS 10.000000
-  CLICK_RADIUS_DY 0.000000
-  CURSOR DEFAULT
-  CLICK_DX 0
-  CLICK_DY 0
-
-gen_trigger gpsnav_right
-  POS 457.000000 303.500000
-  IMAGE gpsnav/button_right
-  COMMAND b21/nav/next_waypoint
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-  CLICK_RADIUS 10.000000
-  CLICK_RADIUS_DY 0.000000
-  CURSOR DEFAULT
-  CLICK_DX 0
-  CLICK_DY 0
 
 gen_handle spoiler_indicator
   POS 52.500000 415.000000
