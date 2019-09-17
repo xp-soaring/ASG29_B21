@@ -21,11 +21,12 @@ end
 
 components = {
     rectangle {
-        color = { 0.2, 0.2, 0.2, 1.0 }
+        color = { 0.1, 0.1, 0.1, 1.0 }
     },
     mouseFocusedZone {
         mouseHovered = closeButtonFocused,
         onMouseDown = function()
+            print("MOUSE DOWNNNN")
             set(get(panel).visible, false)
             return true
         end

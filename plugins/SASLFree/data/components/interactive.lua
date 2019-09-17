@@ -4,9 +4,14 @@
 ---------------------------------------------------------------------------------------------------------------------------
 print("interactive loading ",size[1],'x',size[2])
 
+function onMouseDown(component, x, y, button, parent_x, parent_y)
+    print("MOUSE DOWN!")
+    return true
+end
+
 function draw()
     if true then --globalShowInteractiveAreas then
-        sasl.gl.drawFrame(0, 0, size[1], size[2])
+        sasl.gl.drawFrame(0, 0, size[1], size[2],{0.5,0.5,1.0,1.0})
     end
 end
 
