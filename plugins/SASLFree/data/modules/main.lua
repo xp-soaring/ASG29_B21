@@ -1,11 +1,13 @@
 -- B21
 
-sasl.options.setAircraftPanelRendering(true)
-sasl.options.setInteractivity(true)
-sasl.options.set3DRendering(false)
-sasl.options.setRenderingMode2D(SASL_RENDER_2D_DEFAULT)
-sasl.options.setPanelRenderingMode(SASL_RENDER_PANEL_DEFAULT)
-panel2d = true
+--sasl.options.setAircraftPanelRendering(true)
+--sasl.options.setInteractivity(true)
+--sasl.options.set3DRendering(false)
+--sasl.options.setRenderingMode2D(SASL_RENDER_2D_DEFAULT)
+--sasl.options.setPanelRenderingMode(SASL_RENDER_PANEL_DEFAULT)
+--panel2d = true
+
+panel2d = false
 
 size = { 2048, 2048 }
 
@@ -36,6 +38,12 @@ components = {
                 b21_vario_302 {},
                 b21_vario_57 {},
                 b21_airbrakes {},
+                popupCloseButton {
+                    position = { 360, 850, 40, 25 },
+                    --cursor = {x = 0, y = 0, width = 16, height = 16, shape = loadImage("interactive.png")},
+                    --onMouseDown = function() print("HELLO") return true end,
+                    --onMouseUp = function() print("HELLO END") return true end,
+                },
 	            b21_panel { -- digital nav panel
                     position = { 360, 620, 135, 220},
                     cursor = {
@@ -58,4 +66,8 @@ components = {
 
 function draw()
     drawAll(components)
+end
+
+function update()
+    updateAll(components)
 end
