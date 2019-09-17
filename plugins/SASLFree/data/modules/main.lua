@@ -1,7 +1,7 @@
 -- B21
 
---sasl.options.setAircraftPanelRendering(true)
---sasl.options.setInteractivity(true)
+sasl.options.setAircraftPanelRendering(true)
+sasl.options.setInteractivity(true)
 --sasl.options.set3DRendering(false)
 --sasl.options.setRenderingMode2D(SASL_RENDER_2D_DEFAULT)
 --sasl.options.setPanelRenderingMode(SASL_RENDER_PANEL_DEFAULT)
@@ -9,7 +9,7 @@
 
 panel2d = false
 
-size = { 2048, 2048 }
+size = { 1024, 1024 }
 
 project_settings = { } -- Project Globals, i.e. plugin data values shared between modules
 
@@ -32,19 +32,19 @@ createGlobalPropertyf("b21/debug/2",0.1,false,true,false)
 createGlobalPropertyf("b21/debug/3",0.1,false,true,false)
 
 components = {
-                b21_wings_level {}, -- load before b21_controls_commands
-                b21_total_energy {}, -- load before variometers
-                b21_sounds {}, -- load before variometers
-                b21_vario_302 {},
-                b21_vario_57 {},
-                b21_airbrakes {},
+                --b21_wings_level {}, -- load before b21_controls_commands
+                --b21_total_energy {}, -- load before variometers
+                --b21_sounds {}, -- load before variometers
+                --b21_vario_302 {},
+                --b21_vario_57 {},
+                --b21_airbrakes {},
                 popupCloseButton {
                     position = { 360, 850, 40, 25 },
                     --cursor = {x = 0, y = 0, width = 16, height = 16, shape = loadImage("interactive.png")},
                     --onMouseDown = function() print("HELLO") return true end,
                     --onMouseUp = function() print("HELLO END") return true end,
                 },
-	            b21_panel { -- digital nav panel
+	            --[[b21_panel { -- digital nav panel
                     position = { 360, 620, 135, 220},
                     cursor = {
 					    x = -8,
@@ -56,12 +56,13 @@ components = {
                     },
                     onMouseDown = function() print("MOUSE DOWN") return true end
                 },
-                b21_clock {}, -- moves hands of watch on panel
-                b21_trim {}, -- provides trigger trim command and gradual movement of trim
-                b21_altimeter {}, -- moves needles of altimeter, supports imperial/metric units
-                b21_yawstring {}, -- moves yawstring
-                b21_ballast {}, -- provides ballast % indicator and "b21/ballast/[open,close,fill]"
-                b21_controls_commands {}
+                ]]
+                --b21_clock {}, -- moves hands of watch on panel
+                --b21_trim {}, -- provides trigger trim command and gradual movement of trim
+                --b21_altimeter {}, -- moves needles of altimeter, supports imperial/metric units
+                --b21_yawstring {}, -- moves yawstring
+                --b21_ballast {}, -- provides ballast % indicator and "b21/ballast/[open,close,fill]"
+                --b21_controls_commands {}
              }
 
 function draw()
