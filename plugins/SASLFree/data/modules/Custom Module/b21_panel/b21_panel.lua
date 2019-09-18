@@ -3,7 +3,7 @@
 local w = size[1]
 local h = size[2]
 
-print("b21_panel.lua starting v2.03 ",w,'x',h)
+print("b21_panel.lua starting v2.04 ",w,'x',h)
 
 -- WRITES these shared variables:
 --
@@ -141,12 +141,6 @@ local background_img = sasl.gl.loadImage("panel_background.png")
 -- where index 0 = turn hard left, 3 = ahead, 6 = hard right
 local bearing_img = sasl.gl.loadImage("panel_bearing.png")
 
--- define coordinates of panel buttons
-local BUTTON1 = { 6,             6, (w-20)*0.25, 16, black } -- x,y,w,h
-local BUTTON2 = { 6+(w-10)*0.28, 6, (w-20)*0.25, 16, black } -- x,y,w,h
-local BUTTON3 = { 6+(w-10)*0.53,  6, (w-20)*0.15, 16, black } -- x,y,w,h
-local BUTTON4 = { 6+(w-10)*0.75, 6, (w-20)*0.15, 16, black } -- x,y,w,h
-
 local bearing_index = 3
 
 -- Pages:
@@ -155,18 +149,6 @@ local bearing_index = 3
 -- 3 : MAP (lat/long view of task)
 local page = 1
 local page_count = 3
-
--- return true if mouse click x,y within bounds of button
-function in_button(x,y,button)
-    if x < button[1]
-        or x > button[1] + button[3]
-        or y < button[2]
-        or y > button[2] + button[4]
-    then
-        return false
-    end
-    return true
-end
 
 -- calculate index into bearing PNG panel image to display correct turn indication
 function update_bearing_index()
@@ -274,8 +256,8 @@ end
 -- *************************
 -- ** BUTTON CLICKS ********
 -- *************************
-function button1_clicked()
-    print("b21_panel","button1_clicked")
+function button_page_clicked()
+    print("b21_panel","button PAGE clicked")
     page = page + 1
     if page > page_count
     then
@@ -283,44 +265,19 @@ function button1_clicked()
     end
 end
 
-function button2_clicked()
-    print("b21_panel","button2_clicked")
+function button_load_clicked()
+    print("b21_panel","button LOAD clicked")
     load_fms()
 end
 
-function button3_clicked()
-    print("b21_panel","button3_clicked")
+function button_left_clicked()
+    print("b21_panel","button LEFT clicked")
     prev_wp()
 end
 
-function button4_clicked()
-    print("b21_panel","button4_clicked")
+function button_right_clicked()
+    print("b21_panel","button RIGHT clicked")
     next_wp()
-end
-
--- check mouse down to see if button clicked
-function ZonMouseDown(component, x, y, button, parentX, parentY)
-    print("b21_panel mouse click")
-    if button == MB_LEFT and in_button(x,y,BUTTON1)
-    then
-        button1_clicked()
-        return true
-    end
-    if button == MB_LEFT and in_button(x,y,BUTTON2)
-    then
-        button2_clicked()
-        return true
-    end
-    if button == MB_LEFT and in_button(x,y,BUTTON3)
-    then
-        button3_clicked()
-        return true
-    end
-    if button == MB_LEFT and in_button(x,y,BUTTON4)
-    then
-        button4_clicked()
-        return true
-    end
 end
 
 -- *********************************************************
@@ -338,13 +295,6 @@ end --update
 -- *********************************************************
 -- h,w defined at startup as size[1],size[2] given to this plugin
 
--- Draw button
-function draw_button(button, label)
-    sasl.gl.drawRectangle(button[1], button[2], button[3], button[4], button[5])
-    sasl.gl.drawFrame(button[1], button[2], button[3], button[4], white)
-    sasl.gl.drawText(font, button[1]+3,button[2]+3,label,12,false,false,TEXT_ALIGN_LEFT,white)
-end
-
 -- *****************
 -- ** TASK PAGE ****
 -- *****************
@@ -353,15 +303,12 @@ function draw_page_task()
     sasl.gl.drawTexture(background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
     -- sasl.gl.drawLine(0,0,100,100,green)
 
-    draw_button(BUTTON1, "PAGE")
-
     -- "1/5: 1N7"
     local top_string
     if #task == 0
     then
         top_string = " LOAD TASK"
         sasl.gl.drawText(font,5,h-30, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
-        draw_button(BUTTON2, "LOAD")
         return
     end
 
@@ -393,13 +340,7 @@ function draw_page_task()
     sasl.gl.drawText(font,5,h-75, mid_string, 18, true, false, TEXT_ALIGN_LEFT, black)
 
     -- BOTTOM STRING
-    sasl.gl.drawText(font,5,5, bottom_string, 18, true, false, TEXT_ALIGN_LEFT, black)
-
-    draw_button(BUTTON2, "LOAD")
-
-    draw_button(BUTTON3, "<")
-
-    draw_button(BUTTON4, ">")
+    sasl.gl.drawText(font,5,55, bottom_string, 18, true, false, TEXT_ALIGN_LEFT, black)
 
 end
 
@@ -411,15 +352,12 @@ function draw_page_nav()
     sasl.gl.drawTexture(background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
     -- sasl.gl.drawLine(0,0,100,100,green)
 
-    draw_button(BUTTON1, "PAGE")
-
     -- "1/5: 1N7"
     local top_string
     if #task == 0
     then
         top_string = " LOAD TASK"
         sasl.gl.drawText(font,5,h-30, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
-        draw_button(BUTTON2, "LOAD")
         return
     end
 
@@ -451,13 +389,7 @@ function draw_page_nav()
     sasl.gl.drawText(font,5,h-75, mid_string, 18, true, false, TEXT_ALIGN_LEFT, black)
 
     -- BOTTOM STRING
-    sasl.gl.drawText(font,5,5, bottom_string, 18, true, false, TEXT_ALIGN_LEFT, black)
-
-    draw_button(BUTTON2, "LOAD")
-
-    draw_button(BUTTON3, "<")
-
-    draw_button(BUTTON4, ">")
+    sasl.gl.drawText(font,5,55, bottom_string, 18, true, false, TEXT_ALIGN_LEFT, black)
 
 end
 
@@ -475,7 +407,6 @@ function draw_page_map()
     then
         top_string = " LOAD TASK"
         sasl.gl.drawText(font,5,h-30, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
-        draw_button(BUTTON2, "LOAD")
         return
     end
 
@@ -492,15 +423,15 @@ function draw_page_map()
     sasl.gl.drawText(font,5,h-75, mid_string, 18, true, false, TEXT_ALIGN_LEFT, black)
 
     -- BOTTOM STRING
-    sasl.gl.drawText(font,5,5, bottom_string, 18, true, false, TEXT_ALIGN_LEFT, black)
-
-    draw_button(BUTTON2, "LOAD")
-
-    draw_button(BUTTON3, "<")
-
-    draw_button(BUTTON4, ">")
+    sasl.gl.drawText(font,5,55, bottom_string, 18, true, false, TEXT_ALIGN_LEFT, black)
 
 end
+
+callback = {}
+callback[1] = button_page_clicked
+callback[2] = button_load_clicked
+callback[3] = button_left_clicked
+callback[4] = button_right_clicked
 
 function draw()
     if page == 1
@@ -512,4 +443,12 @@ function draw()
     else
         draw_page_map()
     end
+    drawAll(components)
 end
+
+components = {
+    panel_button { id=1, position = { 6, 6, 28, 15}, text="PAGE" },
+    panel_button { id=2, position = { 37, 6, 28, 15}, text="LOAD" },
+    panel_button { id=3, position = { 68, 6, 28, 15}, text="LEFT" },
+    panel_button { id=4, position = { 100, 6, 28, 15}, text="RIGHT" }
+}
