@@ -45,4 +45,5 @@
 * check canopy open/close sounds (birdsong?)
 * add 'Flaps' label to indicator on panel
 * tidy up bezel highlight/shadow for ballast gauge
+* check Win CE tablet in cockpit properly disabled
 
