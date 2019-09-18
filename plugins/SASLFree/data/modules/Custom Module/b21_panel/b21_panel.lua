@@ -3,7 +3,7 @@
 local w = size[1]
 local h = size[2]
 
-print("b21_panel.lua starting v2.04 ",w,'x',h)
+print("b21_panel.lua starting v2.05 ",w,'x',h)
 
 -- WRITES these shared variables:
 --
@@ -22,6 +22,12 @@ local dataref_latitude = globalProperty("sim/flightmodel/position/latitude") -- 
 local dataref_longitude = globalProperty("sim/flightmodel/position/longitude") -- aircraft longitude
 local dataref_time_s = globalPropertyf("sim/network/misc/network_time_sec") -- time in seconds
 local DATAREF_ONGROUND = globalPropertyi("sim/flightmodel/failures/onground_any") -- =1 when on the ground
+
+local font = sasl.gl.loadFont ( "fonts/UbuntuMono-Regular.ttf" )
+
+local task_background_img = sasl.gl.loadImage("panel_task.png")
+local nav_background_img = sasl.gl.loadImage("panel_nav.png")
+local map_background_img = sasl.gl.loadImage("panel_map.png")
 
 M_TO_MI = 0.000621371
 FT_TO_M = 0.3048
@@ -133,9 +139,6 @@ sasl.registerCommandHandler(command_load, 0, clicked_load)
 sasl.registerCommandHandler(command_left, 1, clicked_left)
 sasl.registerCommandHandler(command_right, 1, clicked_right)
 
-local font = sasl.gl.loadFont ( "fonts/UbuntuMono-Regular.ttf" )
-
-local background_img = sasl.gl.loadImage("panel_background.png")
 
 -- bearing_image contains 7 x BEARING images, each 79x14, total 553x14
 -- where index 0 = turn hard left, 3 = ahead, 6 = hard right
@@ -300,7 +303,7 @@ end --update
 -- *****************
 function draw_page_task()
     -- logInfo("gpsnav draw called")
-    sasl.gl.drawTexture(background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
+    sasl.gl.drawTexture(task_background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
     -- sasl.gl.drawLine(0,0,100,100,green)
 
     -- "1/5: 1N7"
@@ -349,7 +352,7 @@ end
 -- *****************
 function draw_page_nav()
     -- logInfo("gpsnav draw called")
-    sasl.gl.drawTexture(background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
+    sasl.gl.drawTexture(nav_background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
     -- sasl.gl.drawLine(0,0,100,100,green)
 
     -- "1/5: 1N7"
@@ -398,7 +401,7 @@ end
 -- *****************
 function draw_page_map()
     -- logInfo("gpsnav draw called")
-    sasl.gl.drawTexture(background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
+    sasl.gl.drawTexture(map_background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
     -- sasl.gl.drawLine(0,0,100,100,green)
 
     -- "1/5: 1N7"
@@ -428,10 +431,10 @@ function draw_page_map()
 end
 
 callback = {}
-callback[1] = button_page_clicked
-callback[2] = button_load_clicked
-callback[3] = button_left_clicked
-callback[4] = button_right_clicked
+callback["page"] = button_page_clicked
+callback["load"] = button_load_clicked
+callback["wp_next"] = button_left_clicked
+callback["wp_prev"] = button_right_clicked
 
 function draw()
     if page == 1
@@ -447,8 +450,8 @@ function draw()
 end
 
 components = {
-    panel_button { id=1, position = { 6, 6, 28, 15}, text="PAGE" },
-    panel_button { id=2, position = { 37, 6, 28, 15}, text="LOAD" },
-    panel_button { id=3, position = { 68, 6, 28, 15}, text="LEFT" },
-    panel_button { id=4, position = { 100, 6, 28, 15}, text="RIGHT" }
+    panel_button { id="page", position = { 6, 189, 34, 18} },
+    panel_button { id="load", position = { 42, 189, 34, 18} },
+    panel_button { id="wp_next", position = { 79, 189, 34, 18} },
+    panel_button { id="wp_prev", position = { 116, 189, 34, 18} }
 }

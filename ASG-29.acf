@@ -104,7 +104,7 @@ P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
 P _gear/0/_scon 2959.263671875
-P _gear/0/_stat_def 0.396451801
+P _gear/0/_stat_def 0.396451831
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
 P _gear/0/_strut_comp -0.100000001
@@ -138,7 +138,7 @@ P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
 P _gear/1/_scon 672.559875488
-P _gear/1/_stat_def 0.222734362
+P _gear/1/_stat_def 0.222734332
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -12128,7 +12128,7 @@ P _part/8/_geo_xyz/1,3,2 7.486987591
 P _part/8/_geo_xyz/1,4,0 -17.564584732
 P _part/8/_geo_xyz/1,4,1 2.884396315
 P _part/8/_geo_xyz/1,4,2 7.860076427
-P _part/8/_geo_xyz/1,5,0 -17.567382812
+P _part/8/_geo_xyz/1,5,0 -17.567382813
 P _part/8/_geo_xyz/1,5,1 2.830987453
 P _part/8/_geo_xyz/1,5,2 8.624908447
 P _part/8/_geo_xyz/1,6,0 -17.568338394
@@ -12137,7 +12137,7 @@ P _part/8/_geo_xyz/1,6,2 8.886071205
 P _part/8/_geo_xyz/1,7,0 -17.568338394
 P _part/8/_geo_xyz/1,7,1 2.812750101
 P _part/8/_geo_xyz/1,7,2 8.886071205
-P _part/8/_geo_xyz/1,8,0 -17.567382812
+P _part/8/_geo_xyz/1,8,0 -17.567382813
 P _part/8/_geo_xyz/1,8,1 2.830987453
 P _part/8/_geo_xyz/1,8,2 8.624908447
 P _part/8/_geo_xyz/1,9,0 -17.564584732
@@ -13502,7 +13502,7 @@ P _part/8/_top_t1 0.0
 P _part/8/_top_t2 0.384000003
 P _part/85/_bot_s1 0.632812500
 P _part/85/_bot_s2 0.753906250
-P _part/85/_bot_t1 0.254882812
+P _part/85/_bot_t1 0.254882813
 P _part/85/_bot_t2 0.295898438
 P _part/85/_geo_xyz/0,0,0 0.0
 P _part/85/_geo_xyz/0,0,1 2.0
@@ -14967,11 +14967,11 @@ P _part/85/_r_dim 10
 P _part/85/_s_dim 8
 P _part/85/_top_s1 0.632812500
 P _part/85/_top_s2 0.753906250
-P _part/85/_top_t1 0.254882812
+P _part/85/_top_t1 0.254882813
 P _part/85/_top_t2 0.295898438
 P _part/86/_bot_s1 0.632812500
 P _part/86/_bot_s2 0.753906250
-P _part/86/_bot_t1 0.254882812
+P _part/86/_bot_t1 0.254882813
 P _part/86/_bot_t2 0.295898438
 P _part/86/_geo_xyz/0,0,0 0.0
 P _part/86/_geo_xyz/0,0,1 2.0
@@ -16427,7 +16427,7 @@ P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.077265650
+P _part/86/_part_y -0.077265680
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -16436,11 +16436,11 @@ P _part/86/_r_dim 10
 P _part/86/_s_dim 8
 P _part/86/_top_s1 0.632812500
 P _part/86/_top_s2 0.753906250
-P _part/86/_top_t1 0.254882812
+P _part/86/_top_t1 0.254882813
 P _part/86/_top_t2 0.295898438
 P _part/87/_bot_s1 0.632812500
 P _part/87/_bot_s2 0.753906250
-P _part/87/_bot_t1 0.254882812
+P _part/87/_bot_t1 0.254882813
 P _part/87/_bot_t2 0.295898438
 P _part/87/_geo_xyz/0,0,0 0.0
 P _part/87/_geo_xyz/0,0,1 2.0
@@ -17905,11 +17905,11 @@ P _part/87/_r_dim 10
 P _part/87/_s_dim 8
 P _part/87/_top_s1 0.632812500
 P _part/87/_top_s2 0.753906250
-P _part/87/_top_t1 0.254882812
+P _part/87/_top_t1 0.254882813
 P _part/87/_top_t2 0.295898438
 P _part/88/_bot_s1 0.632812500
 P _part/88/_bot_s2 0.753906250
-P _part/88/_bot_t1 0.254882812
+P _part/88/_bot_t1 0.254882813
 P _part/88/_bot_t2 0.295898438
 P _part/88/_geo_xyz/0,0,0 0.0
 P _part/88/_geo_xyz/0,0,1 2.0
@@ -19374,7 +19374,7 @@ P _part/88/_r_dim 10
 P _part/88/_s_dim 8
 P _part/88/_top_s1 0.632812500
 P _part/88/_top_s2 0.753906250
-P _part/88/_top_t1 0.254882812
+P _part/88/_top_t1 0.254882813
 P _part/88/_top_t2 0.295898438
 P _part/9/_bot_s1 0.755999982
 P _part/9/_bot_s2 1.0
@@ -19473,7 +19473,7 @@ P _part/9/_geo_xyz/1,3,2 7.486987591
 P _part/9/_geo_xyz/1,4,0 17.564584732
 P _part/9/_geo_xyz/1,4,1 2.884396315
 P _part/9/_geo_xyz/1,4,2 7.860076427
-P _part/9/_geo_xyz/1,5,0 17.567382812
+P _part/9/_geo_xyz/1,5,0 17.567382813
 P _part/9/_geo_xyz/1,5,1 2.830987453
 P _part/9/_geo_xyz/1,5,2 8.624908447
 P _part/9/_geo_xyz/1,6,0 17.568338394
@@ -19482,7 +19482,7 @@ P _part/9/_geo_xyz/1,6,2 8.886071205
 P _part/9/_geo_xyz/1,7,0 17.568338394
 P _part/9/_geo_xyz/1,7,1 2.812750101
 P _part/9/_geo_xyz/1,7,2 8.886071205
-P _part/9/_geo_xyz/1,8,0 17.567382812
+P _part/9/_geo_xyz/1,8,0 17.567382813
 P _part/9/_geo_xyz/1,8,1 2.830987453
 P _part/9/_geo_xyz/1,8,2 8.624908447
 P _part/9/_geo_xyz/1,9,0 17.564584732
@@ -27269,7 +27269,7 @@ P acf/_vect_power_for 1.0
 P acf/_vect_rate 2.0
 P acf/_vectarmY 0.0
 P acf/_vectarmZ 0.0
-P acf/_version 1.01
+P acf/_version 1.02
 P acf/_vvi_but_adjusts_pitch 0
 P acf/_warn_airliner 0
 P acf/_warn_alt_app_100 0
@@ -27412,7 +27412,7 @@ but_jettison but_jettison
   TOOLTIP this is but_jettison
 
 ins_tailnum ins_tailnum
-  POS 163.000000 533.000000
+  POS 284.000000 483.000000
   DATAREF 
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
@@ -27421,7 +27421,7 @@ ins_tailnum ins_tailnum
   KEY_FRAME 1.000000 1.000000
 
 gen_rotary vario_302_backgroun
-  POS 278.000000 561.500000
+  POS 257.000000 567.500000
   IMAGE vario_302/vario_302_background
   DATAREF 
   LIGHT_MODE MECHANICAL
@@ -27440,7 +27440,7 @@ gen_rotary vario_302_backgroun
   CLICK_DY 0
 
 gen_annun vario_302_ring
-  POS 277.500000 564.000000
+  POS 256.500000 570.000000
   IMAGE vario_302/ring
   DATAREF 
   SHOW_EQUAL 1.000000 b21/units_vario
@@ -27450,7 +27450,7 @@ gen_annun vario_302_ring
   KEY_FRAME 1.000000 1.000000
 
 gen_LED vario_302_bottom
-  POS 274.500000 536.500000
+  POS 253.500000 542.500000
   IMAGE vario_302/num_bottom
   DATAREF b21/vario_302/number_bottom
   LIGHT_MODE MECHANICAL
@@ -27463,7 +27463,7 @@ gen_LED vario_302_bottom
   LED_ROWS 0
 
 gen_LED vario_302_bottom_s
-  POS 268.500000 536.500000
+  POS 247.500000 542.500000
   IMAGE vario_302/num_sign
   DATAREF b21/vario_302/number_bottom_sign
   LIGHT_MODE MECHANICAL
@@ -27476,7 +27476,7 @@ gen_LED vario_302_bottom_s
   LED_ROWS 0
 
 gen_LED vario_302_number_r
-  POS 295.500000 562.500000
+  POS 274.500000 568.500000
   IMAGE vario_302/num_right
   DATAREF b21/vario_302/number_right
   LIGHT_MODE MECHANICAL
@@ -27489,7 +27489,7 @@ gen_LED vario_302_number_r
   LED_ROWS 0
 
 gen_LED vario_203_number_t
-  POS 275.500000 583.500000
+  POS 254.500000 589.500000
   IMAGE vario_302/num_top
   DATAREF b21/vario_302/number_top
   LIGHT_MODE MECHANICAL
@@ -27502,7 +27502,7 @@ gen_LED vario_203_number_t
   LED_ROWS 0
 
 gen_LED vario_302_num_top_s
-  POS 269.500000 583.500000
+  POS 248.500000 589.500000
   IMAGE vario_302/num_sign
   DATAREF b21/vario_302/number_top_sign
   LIGHT_MODE MECHANICAL
@@ -27515,7 +27515,7 @@ gen_LED vario_302_num_top_s
   LED_ROWS 0
 
 gen_needle vario_302_needle
-  POS 278.000000 562.500000
+  POS 257.000000 568.500000
   IMAGE vario_302/vario_302
   DATAREF b21/vario_302/needle_fpm
   LIGHT_MODE MECHANICAL
@@ -27529,7 +27529,7 @@ gen_needle vario_302_needle
   OFFSET 0.000000
 
 gen_rheostat vario_302_knob
-  POS 217.000000 497.000000
+  POS 196.000000 502.000000
   IMAGE vario_302/vario_302_knob
   DATAREF b21/vario_302/knob
   LIGHT_MODE MECHANICAL
@@ -27547,7 +27547,7 @@ gen_rheostat vario_302_knob
   WRAP 0
 
 gen_rotary vario_302_stf_te_sw
-  POS 295.000000 466.000000
+  POS 368.000000 614.000000
   IMAGE vario_302/stf_te_switch
   DATAREF b21/vario_302/stf_te_switch
   LIGHT_MODE MECHANICAL
@@ -27566,7 +27566,7 @@ gen_rotary vario_302_stf_te_sw
   CLICK_DY 0
 
 gen_annun vario_302_stf_te_in
-  POS 307.000000 550.000000
+  POS 286.000000 556.000000
   IMAGE vario_302/stf_te_ind
   DATAREF 
   SHOW_EQUAL 1.000000 b21/vario_302/stf_te_ind
@@ -27620,7 +27620,7 @@ gen_rotary vario_57_center
   CLICK_DY 0
 
 gen_rheostat vario_sound_volume
-  POS 328.000000 445.000000
+  POS 425.000000 615.000000
   IMAGE vario_302/volume
   DATAREF b21/vario_sound_volume
   LIGHT_MODE MECHANICAL
@@ -27638,7 +27638,7 @@ gen_rheostat vario_sound_volume
   WRAP 0
 
 gen_handle spoiler_indicator
-  POS 52.500000 415.000000
+  POS 803.500000 407.000000
   IMAGE spoiler_indicator/gen_handle
   DATAREF sim/cockpit2/controls/speedbrake_ratio
   LIGHT_MODE MECHANICAL
@@ -27649,7 +27649,7 @@ gen_handle spoiler_indicator
   HAS_DETENTS 0
 
 rad_com1_GA rad_com1_GA.png
-  POS 432.000000 215.500000
+  POS 432.000000 269.500000
   DATAREF 
   SIZE 1.500000
   LIGHT_MODE MECHANICAL
@@ -27667,7 +27667,7 @@ rad_CDU739_2d CDU739_2d.png
   KEY_FRAME 1.000000 1.000000
 
 gen_annun asi
-  POS 540.500000 655.500000
+  POS 630.500000 556.500000
   IMAGE asi/asi_background
   DATAREF 
   SHOW_EQUAL 1.000000 b21/units_speed
@@ -27677,7 +27677,7 @@ gen_annun asi
   KEY_FRAME 1.000000 1.000000
 
 gen_needle asi_needle
-  POS 540.000000 656.500000
+  POS 630.000000 557.500000
   IMAGE asi/asi_needle
   DATAREF sim/cockpit2/gauges/indicators/airspeed_kts_pilot
   LIGHT_MODE MECHANICAL
@@ -27691,7 +27691,7 @@ gen_needle asi_needle
   OFFSET 0.000000
 
 gen_needle altimeter_ft
-  POS 633.000000 547.000000
+  POS 532.000000 662.000000
   IMAGE altimeter/altimeter_ft
   DATAREF b21/altimeter/needle_3_deg
   SHOW_EQUAL 0.000000 b21/units_altitude
@@ -27703,7 +27703,7 @@ gen_needle altimeter_ft
   OFFSET 0.000000
 
 gen_needle altimeter_m
-  POS 633.000000 547.000000
+  POS 532.000000 662.000000
   IMAGE altimeter/altimeter_m
   DATAREF b21/altimeter/needle_3_deg
   SHOW_EQUAL 1.000000 b21/units_altitude
@@ -27715,7 +27715,7 @@ gen_needle altimeter_m
   OFFSET 0.000000
 
 gen_needle altimeter_needle_2
-  POS 633.000000 546.000000
+  POS 532.000000 661.000000
   IMAGE altimeter/needle_small
   DATAREF b21/altimeter/needle_2_deg
   LIGHT_MODE MECHANICAL
@@ -27726,7 +27726,7 @@ gen_needle altimeter_needle_2
   OFFSET 0.000000
 
 gen_needle altimeter_needle_1
-  POS 633.000000 546.000000
+  POS 532.000000 661.000000
   IMAGE altimeter/needle_large
   DATAREF b21/altimeter/needle_1_deg
   LIGHT_MODE MECHANICAL
@@ -27737,7 +27737,7 @@ gen_needle altimeter_needle_1
   OFFSET 0.000000
 
 gen_rheostat altimeter_knob
-  POS 583.000000 490.000000
+  POS 491.000000 617.000000
   IMAGE altimeter/knob
   DATAREF b21/altimeter/knob
   KF_WRAP_BOTTOM
@@ -27757,9 +27757,10 @@ gen_rheostat altimeter_knob
   WRAP 1
 
 gen_pointer trim
-  POS 149.000000 500.000000
+  POS 558.000000 476.000000
   IMAGE trim/trim
   DATAREF sim/cockpit2/controls/elevator_trim
+  SIZE 0.700000
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
   KEY_FRAME -1.000000 45.000000 1.000000
@@ -27809,7 +27810,7 @@ gen_trigger canopy_toggle
   CLICK_DY 0
 
 gen_rotary flap_indicator
-  POS 175.500000 561.000000
+  POS 421.500000 643.000000
   IMAGE flap_indicator/flap_indicator
   DATAREF sim/flightmodel/controls/flaprqst
   LIGHT_MODE MECHANICAL
@@ -27828,7 +27829,7 @@ gen_rotary flap_indicator
   CLICK_DY 0
 
 gen_LED ballast
-  POS 722.000000 492.000000
+  POS 722.000000 490.000000
   IMAGE ballast/ballast
   DATAREF sim/flightmodel/weight/m_jettison
   LIGHT_MODE MECHANICAL

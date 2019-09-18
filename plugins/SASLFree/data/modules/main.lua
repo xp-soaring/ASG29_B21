@@ -1,19 +1,20 @@
 -- B21
 
+-- various SASL setup options
 sasl.options.setAircraftPanelRendering(true)
 sasl.options.setInteractivity(true)
---sasl.options.set3DRendering(false)
---sasl.options.setRenderingMode2D(SASL_RENDER_2D_DEFAULT)
---sasl.options.setPanelRenderingMode(SASL_RENDER_PANEL_DEFAULT)
---panel2d = true
-
+sasl.options.set3DRendering(false)
+sasl.options.setRenderingMode2D(SASL_RENDER_2D_DEFAULT)
+sasl.options.setPanelRenderingMode(SASL_RENDER_PANEL_DEFAULT)
 panel2d = false
+
+-- cockpit panel texture dimensions
 panelWidth3d = 1024
 panelHeight3d = 1024
-
 size = { 1024, 1024 }
 
-project_settings = { } -- Project Globals, i.e. plugin data values shared between modules
+-- Project Globals, i.e. plugin data values shared between modules will be stored as properties in this table.
+project_settings = { }
 
 -- INCLUDE USER SETTINGS (e.g. vario sound volume) IN AIRCRAFT ROOT FOLDER
 -- i.e. <X-Plane Install Folder>/Aircraft/<something>/ASK21_B21
@@ -41,7 +42,7 @@ components = {
                 b21_vario_57 {},
                 b21_airbrakes {},
 	            b21_panel { -- digital nav panel
-                    position = { 360, 620, 135, 220}
+                    position = { 348, 637, 155, 210}
                 },
                 b21_clock {}, -- moves hands of watch on panel
                 b21_trim {}, -- provides trigger trim command and gradual movement of trim
