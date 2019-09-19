@@ -477,7 +477,8 @@ end
 ]]
 
 function update_arrival_height()
-
+    --debug
+    if true then return end
     -- READ shared vars set by gpsnav for waypoint altitude, distance and heading
     local wp_alt_m = project_settings.gpsnav_wp_altitude_m
 
