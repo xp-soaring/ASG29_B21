@@ -25,22 +25,27 @@ local DATAREF_ONGROUND = globalPropertyi("sim/flightmodel/failures/onground_any"
 
 local font = sasl.gl.loadFont ( "fonts/UbuntuMono-Regular.ttf" )
 
+-- images
 local task_background_img = sasl.gl.loadImage("panel_task.png")
 local nav_background_img = sasl.gl.loadImage("panel_nav.png")
 local map_background_img = sasl.gl.loadImage("panel_map.png")
+local map_background_img = sasl.gl.loadImage("panel_map.png")
+local logo_img = sasl.gl.loadImage("panel_logo.png")
+local nav_wp_pointer = sasl.gl.loadImage("nav_wp_pointer.png")
+local nav_wp2_pointer = sasl.gl.loadImage("nav_wp2_pointer.png")
 
+-- Unit conversion factors
 M_TO_MI = 0.000621371
 FT_TO_M = 0.3048
 M_TO_FT = 1.0 / FT_TO_M
 DEG_TO_RAD = 0.0174533
 
+-- colors
 local red =   { 1.0, 0.0, 0.0, 1.0 }
 local green = { 0.0, 1.0, 0.0, 1.0 }
 local blue =  { 0.0, 0.0, 1.0, 1.0 }
 local black = { 0.0, 0.0, 0.0, 1.0 }
 local white = { 1.0, 1.0, 1.0, 1.0 }
-
-local bearing_index = 3
 
 -- Pages:
 -- 1 : TASK (load task button, display task)
@@ -49,23 +54,14 @@ local bearing_index = 3
 local page = 1
 local page_count = 3
 
--- e.g { { type = 1, ref = "X1N7", alt_m = 375.0 (note METERS), lat = 40.971146, lng = -74.997475 }, ..}
+-- e.g { { type = 1, ref = "X1N7", alt_m = 375.0 (note METERS), point = { 40.971146, -74.997475 }, ..}
 local task = { }
 
 local task_length_m = 0.0 -- length of current task in meters
 
 local task_index = 0 -- which task entry is current
 
-local wp_point = { } -- { lat, lng } of current wp
-
 local prev_click_time_s = 0.0 -- time button was previously clicked (so only one action per click)
-
--- gpsnav vars shared with other instruments (e.g. 302 vario)
-project_settings.gpsnav_wp_distance_m = 0.0 -- distance to next waypoint in meters
-
-project_settings.gpsnav_wp_heading_deg = 0.0 -- heading (true) to next waypoint in degrees
-
-project_settings.gpsnav_wp_altitude_m = 0.0 -- altitude MSL of next waypoint in meters
 
 -- command callbacks from gpsnav buttons
 
@@ -110,12 +106,9 @@ end
 
 -- set waypoint to task[i]
 function set_waypoint(i)
--- e.g  { type = 1, ref = "X1N7", alt_m = 375.0 (METERS), lat = 40.971146, lng = -74.997475 }
     if i > 0 and i <= #task
     then
         task_index = i
-        wp_point = task[task_index].point
-        project_settings.gpsnav_wp_altitude_m = task[task_index].alt_m -- altitude MSL of next waypoint in meters
     end
 end
 
@@ -156,52 +149,22 @@ sasl.registerCommandHandler(command_right, 1, clicked_right)
 -- ************ update()           *************************
 -- *********************************************************
 
--- calculate index into bearing PNG panel image to display correct turn indication
-function update_bearing_index()
-    if get(DATAREF_ONGROUND) == 1
-    then
-        bearing_index = 3 -- center
-        return
-    end
-    local heading_delta_deg = get(dataref_heading_deg) - project_settings.gpsnav_wp_heading_deg
-    local left_deg
-    local right_deg
-    if heading_delta_deg > 0
-    then
-        left_deg = heading_delta_deg
-        right_deg = 360 - heading_delta_deg
-    else
-        left_deg = heading_delta_deg + 360
-        right_deg = -heading_delta_deg
-    end
-    local turn_deg
-    if left_deg < right_deg
-    then
-        turn_deg = -left_deg
-    else
-        turn_deg = right_deg
-    end
-    if turn_deg > 70 then bearing_index = 6
-    elseif turn_deg > 40 then bearing_index = 5
-    elseif turn_deg > 10 then bearing_index = 4
-    elseif turn_deg > -10 then bearing_index = 3 -- center
-    elseif turn_deg > -40 then bearing_index = 2
-    elseif turn_deg > -70 then bearing_index = 1
-    else bearing_index = 0
-    end
-end --calculate_bearing_index
-
 -- update the shared variables for wp bearing and distance
-function update_wp_distance_and_heading()
+function update_wp_distance_and_bearing()
     if #task ~= 0
     then
         local aircraft_point = { lat= get(dataref_latitude),
-                                lng= get(dataref_longitude)
+                                 lng= get(dataref_longitude)
                             }
 
-        project_settings.gpsnav_wp_distance_m = geo.get_distance(aircraft_point, wp_point)
+        task[task_index].distance_m = geo.get_distance(aircraft_point, task[task_index].point)
+        task[task_index].bearing_deg = geo.get_bearing(aircraft_point, task[task_index].point)
 
-        project_settings.gpsnav_wp_heading_deg = geo.get_bearing(aircraft_point, wp_point)
+        if task_index < #task
+        then
+            task[task_index+1].distance_m = geo.get_distance(aircraft_point, task[task_index+1].point)
+            task[task_index+1].bearing_deg = geo.get_bearing(aircraft_point, task[task_index+1].point)
+        end
     end
 end
 
@@ -250,15 +213,15 @@ function update_fms()
             wp_elevation_m = fms_altitude_ft * FT_TO_M
         end
 
-        local wp_distance_m = 0.0 -- distance from previous wp
+        local leg_length_m = 0.0 -- distance from previous wp
 
         if i > 0
         then
             -- note first WP in task is task[1] as Lua arrays start from 1
-            wp_distance_m = geo.get_distance(task[i].point, wp_point)
+            leg_length_m = geo.get_distance(task[i].point, wp_point)
         end
 
-        task_length_m = task_length_m + wp_distance_m
+        task_length_m = task_length_m + leg_length_m
 
         print("GPSNAV["..i.."] "..fms_name,
                                  fms_latitude,
@@ -269,7 +232,7 @@ function update_fms()
                             ref =  fms_name,
                             alt_m = wp_elevation_m,
                             point = wp_point,
-                            dist_m = wp_distance_m
+                            length_m = leg_length_m
                         })
     end
 
@@ -278,8 +241,7 @@ function update_fms()
 end
 
 function update()
-    update_wp_distance_and_heading()
-    update_bearing_index()
+    update_wp_distance_and_bearing()
     update_fms()
 end --update
 
@@ -325,6 +287,10 @@ function draw_current_wp()
    sasl.gl.drawText(font,5,h-50, wp_string, 20, true, false, TEXT_ALIGN_LEFT, blue)
 end
 
+-- *****************
+-- ** TASK PAGE ****
+-- *****************
+
 -- Draw text list of waypoints
 -- e.g.
 -- 1: 1N7
@@ -340,13 +306,12 @@ function draw_task()
     do
         local wp = task[i]
 
-        -- "DIST: 37.5km"
-        local distance_string
+        local length_string
         if project_settings.DISTANCE_UNITS == 0 -- (0=mi, 1=km)
         then
-            distance_string = (math.floor(wp.dist_m * M_TO_MI * 10.0) / 10.0) .. " MI"
+            length_string = (math.floor(wp.length_m * M_TO_MI * 10.0) / 10.0) .. " MI"
         else
-            distance_string = (math.floor(wp.dist_m / 100.0) / 10.0) .. " KM"
+            length_string = (math.floor(wp.length_m / 100.0) / 10.0) .. " KM"
         end
 
         local altitude_string
@@ -357,7 +322,7 @@ function draw_task()
             altitude_string = math.floor(wp.alt_m) .. " M"
         end
 
-        local wp_string = i..":" .. wp.ref.." "..distance_string.." "..altitude_string
+        local wp_string = i..":" .. wp.ref.." "..length_string.." "..altitude_string
 
         --  WP STRING                          size isBold isItalic
         sasl.gl.drawText(font,line_x,line_y, wp_string, 20, true, false, TEXT_ALIGN_LEFT, black)
@@ -381,13 +346,11 @@ end
 
 -- if no task is loaded, put message on task page
 function draw_no_task()
-    local top_string = " LOAD TASK"
-    sasl.gl.drawText(font,5,h-80, top_string, 24, true, false, TEXT_ALIGN_LEFT, red)
+    local msg_string = " LOAD TASK"
+    sasl.gl.drawText(font,40,h-60, top_string, 24, true, false, TEXT_ALIGN_LEFT, red)
+    sasl.gl.drawTexture(logo_img, 20, h-190, 115, 112, {1.0,1.0,1.0,1.0}) -- draw logo
 end
 
--- *****************
--- ** TASK PAGE ****
--- *****************
 function draw_page_task()
     -- logInfo("gpsnav draw called")
     sasl.gl.drawTexture(task_background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
@@ -407,6 +370,21 @@ end
 -- *****************
 -- ** NAV PAGE *****
 -- *****************
+
+function draw_nav_bearings()
+    local bearing_deg = task[task_index].bearing_deg
+
+    -- draw pointer to current waypoint
+    sasl.gl.drawRotatedTexture(nav_wp_pointer, bearing_deg, 55, 150, 15,16, {1.0,1.0,1.0,1.0})
+
+    if task_index < #task
+    then
+        bearing_deg = task[task_index+1].bearing_deg
+        -- draw pointer to next waypoint
+        sasl.gl.drawRotatedTexture(nav_wp2_pointer, bearing_deg, 75, 130, 15,8, {1.0,1.0,1.0,1.0})
+    end
+end
+
 function draw_page_nav()
     -- logInfo("gpsnav draw called")
     sasl.gl.drawTexture(nav_background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
@@ -417,39 +395,13 @@ function draw_page_nav()
     if #task == 0
     then
         top_string = " LOAD TASK"
-        sasl.gl.drawText(font,5,h-30, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
+        sasl.gl.drawText(font,40,h-30, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
         return
     end
 
-    top_string = "NAV "..task_index .. "/" .. #task .. ":" .. task[task_index].ref
+    draw_current_wp()
 
-    -- "DIST: 37.5km"
-    local distance_string
-    if project_settings.DISTANCE_UNITS == 0 -- (0=mi, 1=km)
-    then
-        distance_string = (math.floor(project_settings.gpsnav_wp_distance_m * M_TO_MI * 10.0) / 10.0) .. " MI"
-    else
-        distance_string = (math.floor(project_settings.gpsnav_wp_distance_m / 100.0) / 10.0) .. " KM"
-    end
-    local mid_string = distance_string
-
-    local altitude_string
-    if project_settings.ALTITUDE_UNITS == 0 -- (0=feet, 1=meters)
-    then
-        altitude_string = math.floor(project_settings.gpsnav_wp_altitude_m * M_TO_FT) .. " FT"
-    else
-        altitude_string = math.floor(project_settings.gpsnav_wp_altitude_m) .. " M"
-    end
-    local bottom_string = altitude_string
-
-    --  TOP STRING                         size isBold isItalic
-    sasl.gl.drawText(font,5,h-30, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
-
-    -- MIDDLE STRING
-    sasl.gl.drawText(font,5,h-75, mid_string, 18, true, false, TEXT_ALIGN_LEFT, black)
-
-    -- BOTTOM STRING
-    sasl.gl.drawText(font,5,55, bottom_string, 18, true, false, TEXT_ALIGN_LEFT, black)
+    draw_nav_bearings()
 
 end
 
