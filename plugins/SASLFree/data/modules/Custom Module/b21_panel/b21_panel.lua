@@ -3,7 +3,7 @@
 local w = size[1]
 local h = size[2]
 
-print("b21_panel.lua starting v2.05 ",w,'x',h)
+print("b21_panel.lua starting v2.06 ",w,'x',h)
 
 -- WRITES these shared variables:
 --
@@ -34,16 +34,29 @@ FT_TO_M = 0.3048
 M_TO_FT = 1.0 / FT_TO_M
 DEG_TO_RAD = 0.0174533
 
+local red =   { 1.0, 0.0, 0.0, 1.0 }
 local green = { 0.0, 1.0, 0.0, 1.0 }
+local blue =  { 0.0, 0.0, 1.0, 1.0 }
 local black = { 0.0, 0.0, 0.0, 1.0 }
 local white = { 1.0, 1.0, 1.0, 1.0 }
 
--- e.g { { type = 1, ref = "X1N7", alt = 375.0 (note METERS), lat = 40.971146, lng = -74.997475 }, ..}
+local bearing_index = 3
+
+-- Pages:
+-- 1 : TASK (load task button, display task)
+-- 2 : NAV (direction arrow, arrival height)
+-- 3 : MAP (lat/long view of task)
+local page = 1
+local page_count = 3
+
+-- e.g { { type = 1, ref = "X1N7", alt_m = 375.0 (note METERS), lat = 40.971146, lng = -74.997475 }, ..}
 local task = { }
+
+local task_length_m = 0.0 -- length of current task in meters
 
 local task_index = 0 -- which task entry is current
 
-local wp_point = { }
+local wp_point = { } -- { lat, lng } of current wp
 
 local prev_click_time_s = 0.0 -- time button was previously clicked (so only one action per click)
 
@@ -97,12 +110,12 @@ end
 
 -- set waypoint to task[i]
 function set_waypoint(i)
--- e.g  { type = 1, ref = "X1N7", alt = 375.0 (METERS), lat = 40.971146, lng = -74.997475 }
+-- e.g  { type = 1, ref = "X1N7", alt_m = 375.0 (METERS), lat = 40.971146, lng = -74.997475 }
     if i > 0 and i <= #task
     then
         task_index = i
-        wp_point = { lat = task[task_index].lat, lng = task[task_index].lng }
-        project_settings.gpsnav_wp_altitude_m = task[task_index].alt -- altitude MSL of next waypoint in meters
+        wp_point = task[task_index].point
+        project_settings.gpsnav_wp_altitude_m = task[task_index].alt_m -- altitude MSL of next waypoint in meters
     end
 end
 
@@ -139,19 +152,9 @@ sasl.registerCommandHandler(command_load, 0, clicked_load)
 sasl.registerCommandHandler(command_left, 1, clicked_left)
 sasl.registerCommandHandler(command_right, 1, clicked_right)
 
-
--- bearing_image contains 7 x BEARING images, each 79x14, total 553x14
--- where index 0 = turn hard left, 3 = ahead, 6 = hard right
-local bearing_img = sasl.gl.loadImage("panel_bearing.png")
-
-local bearing_index = 3
-
--- Pages:
--- 1 : TASK (load task button, display task)
--- 2 : NAV (direction arrow, arrival height)
--- 3 : MAP (lat/long view of task)
-local page = 1
-local page_count = 3
+-- *********************************************************
+-- ************ update()           *************************
+-- *********************************************************
 
 -- calculate index into bearing PNG panel image to display correct turn indication
 function update_bearing_index()
@@ -203,8 +206,8 @@ function update_wp_distance_and_heading()
 end
 
 -- use X-Plane probeTerrain function to find ground elevation (meters) at waypoint lat/long
-function get_elevation_m(lat, lng)
-    local wp_x, wp_y, wp_z = sasl.worldToLocal(lat, lng, 0.0)
+function get_elevation_m(point)
+    local wp_x, wp_y, wp_z = sasl.worldToLocal(point.lat, point.lng, 0.0)
     local result, x, y, z, nx, ny, nz, vx, vy, vz, isWet = sasl.probeTerrain(wp_x, wp_y, wp_z)
     if result == PROBE_HIT_TERRAIN
     then
@@ -212,12 +215,14 @@ function get_elevation_m(lat, lng)
         -- print("gpsnav PROBE_HIT_TERRAIN", wp_lat, wp_lng, wp_elevation_m)
         return wp_elevation_m
     else
-        print("gpsnav PROBE TERRAIN MISS", lat, lng)
+        print("gpsnav PROBE TERRAIN MISS", point.lat, point.lng)
         return 0.0
     end
 end
 
 -- detect when FMS has loaded a new flightplan
+-- load flightplan into task table
+-- accumulate task distance in task_length_m
 function update_fms()
     local fms_count = sasl.countFMSEntries()
     if fms_count <= #task
@@ -229,16 +234,31 @@ function update_fms()
 
     task = {}
 
+    task_length_m = 0.0 -- we will accumulate total task length
+
     for i=0, fms_count-1
     do
         -- get next waypoint from X-Plane flight plan
         local fms_type, fms_name, fms_id, fms_altitude_ft, fms_latitude, fms_longitude = sasl.getFMSEntryInfo(i)
+
+        local wp_point = { fms_latitude, fms_longitude }
+
         -- try lookup ground elevation at the waypoint
-        local wp_elevation_m = get_elevation_m(fms_latitude, fms_longitude)
+        local wp_elevation_m = get_elevation_m(wp_point)
         if wp_elevation_m == 0
         then
             wp_elevation_m = fms_altitude_ft * FT_TO_M
         end
+
+        local wp_distance_m = 0.0 -- distance from previous wp
+
+        if i > 0
+        then
+            -- note first WP in task is task[1] as Lua arrays start from 1
+            wp_distance_m = geo.get_distance(task[i].point, wp_point)
+        end
+
+        task_length_m = task_length_m + wp_distance_m
 
         print("GPSNAV["..i.."] "..fms_name,
                                  fms_latitude,
@@ -247,18 +267,25 @@ function update_fms()
                                  wp_elevation_m * M_TO_FT)
         table.insert(task,{ type = fms_type,
                             ref =  fms_name,
-                            alt = wp_elevation_m,
-                            lat = fms_latitude,
-                            lng = fms_longitude
+                            alt_m = wp_elevation_m,
+                            point = wp_point,
+                            dist_m = wp_distance_m
                         })
     end
 
+    -- will set task_index = 1
     set_waypoint(1)
 end
 
--- *************************
--- ** BUTTON CLICKS ********
--- *************************
+function update()
+    update_wp_distance_and_heading()
+    update_bearing_index()
+    update_fms()
+end --update
+
+-- ******************************************************
+-- ** BUTTON CLICKS *************************************
+-- ******************************************************
 function button_page_clicked()
     print("b21_panel","button PAGE clicked")
     page = page + 1
@@ -283,20 +310,80 @@ function button_right_clicked()
     next_wp()
 end
 
--- *********************************************************
--- ************ update()           *************************
--- *********************************************************
-function update()
-    update_wp_distance_and_heading()
-    update_bearing_index()
-    update_fms()
-end --update
-
-
--- *********************************************************
--- ************ draw()             *************************
--- *********************************************************
+-- ************************************************************
+-- ************ draw()             ****************************
+-- ************************************************************
 -- h,w defined at startup as size[1],size[2] given to this plugin
+
+-- ---------------------------------------------------------
+-- Draw current waypoint at top of panel
+-- e.g. "2/5:SUNFISH "
+function draw_current_wp()
+   local wp_string = task_index .. "/" .. #task .. ":" .. task[task_index].ref
+
+   --  WP STRING                          size isBold isItalic
+   sasl.gl.drawText(font,5,h-50, wp_string, 20, true, false, TEXT_ALIGN_LEFT, blue)
+end
+
+-- Draw text list of waypoints
+-- e.g.
+-- 1: 1N7
+-- 2: SUNFISH
+-- 3: SLATGTN
+-- 4: WINDGAP
+-- 5: 1N7
+function draw_task()
+    local line_x = 10
+    local line_y = h - 90
+
+    for i = 1, #task
+    do
+        local wp = task[i]
+
+        -- "DIST: 37.5km"
+        local distance_string
+        if project_settings.DISTANCE_UNITS == 0 -- (0=mi, 1=km)
+        then
+            distance_string = (math.floor(wp.dist_m * M_TO_MI * 10.0) / 10.0) .. " MI"
+        else
+            distance_string = (math.floor(wp.dist_m / 100.0) / 10.0) .. " KM"
+        end
+
+        local altitude_string
+        if project_settings.ALTITUDE_UNITS == 0 -- (0=feet, 1=meters)
+        then
+            altitude_string = math.floor(wp.alt_m * M_TO_FT) .. " FT"
+        else
+            altitude_string = math.floor(wp.alt_m) .. " M"
+        end
+
+        local wp_string = i..":" .. wp.ref.." "..distance_string.." "..altitude_string
+
+        --  WP STRING                          size isBold isItalic
+        sasl.gl.drawText(font,line_x,line_y, wp_string, 20, true, false, TEXT_ALIGN_LEFT, black)
+        line_y = line_y - 30
+    end
+
+    local task_length_string
+    if project_settings.DISTANCE_UNITS == 0 -- (0=mi, 1=km)
+    then
+        task_length_string = (math.floor(task_length_m * M_TO_MI * 10.0) / 10.0) .. " MI"
+    else
+        task_length_string = (math.floor(task_length_m / 100.0) / 10.0) .. " KM"
+    end
+
+    task_length_string = "TOTAL: "+task_length_string
+
+    --  TASK LENGTH STRING                                 size isBold isItalic
+    sasl.gl.drawText(font,line_x,line_y, task_length_string, 20, true, false, TEXT_ALIGN_LEFT, black)
+
+end
+
+-- if no task is loaded, put message on task page
+function draw_no_task()
+    local top_string = " LOAD TASK"
+    sasl.gl.drawText(font,5,h-80, top_string, 24, true, false, TEXT_ALIGN_LEFT, red)
+end
 
 -- *****************
 -- ** TASK PAGE ****
@@ -306,45 +393,15 @@ function draw_page_task()
     sasl.gl.drawTexture(task_background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
     -- sasl.gl.drawLine(0,0,100,100,green)
 
-    -- "1/5: 1N7"
-    local top_string
     if #task == 0
     then
-        top_string = " LOAD TASK"
-        sasl.gl.drawText(font,5,h-30, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
+        draw_no_task()
         return
     end
 
-    top_string = "TASK "..task_index .. "/" .. #task .. ":" .. task[task_index].ref
+    draw_current_wp()
 
-    -- "DIST: 37.5km"
-    local distance_string
-    if project_settings.DISTANCE_UNITS == 0 -- (0=mi, 1=km)
-    then
-        distance_string = (math.floor(project_settings.gpsnav_wp_distance_m * M_TO_MI * 10.0) / 10.0) .. " MI"
-    else
-        distance_string = (math.floor(project_settings.gpsnav_wp_distance_m / 100.0) / 10.0) .. " KM"
-    end
-    local mid_string = distance_string
-
-    local altitude_string
-    if project_settings.ALTITUDE_UNITS == 0 -- (0=feet, 1=meters)
-    then
-        altitude_string = math.floor(project_settings.gpsnav_wp_altitude_m * M_TO_FT) .. " FT"
-    else
-        altitude_string = math.floor(project_settings.gpsnav_wp_altitude_m) .. " M"
-    end
-    local bottom_string = altitude_string
-
-    --  TOP STRING                         size isBold isItalic
-    sasl.gl.drawText(font,5,h-30, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
-
-    -- MIDDLE STRING
-    sasl.gl.drawText(font,5,h-75, mid_string, 18, true, false, TEXT_ALIGN_LEFT, black)
-
-    -- BOTTOM STRING
-    sasl.gl.drawText(font,5,55, bottom_string, 18, true, false, TEXT_ALIGN_LEFT, black)
-
+    draw_task()
 end
 
 -- *****************
