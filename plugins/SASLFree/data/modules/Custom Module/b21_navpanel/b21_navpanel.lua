@@ -8,9 +8,9 @@ print("b21_navpanel.lua starting v2.07 ",w,'x',h)
 local geo = require "b21_geo" -- contains useful geographic function like distance between lat/longs
 
 -- UNITS datarefs from USER_SETTINGS.lua
-DATAREF_UNITS_VARIO = globalPropertyi("b21/units_vario") -- 0 = knots, 1 = m/s
-DATAREF_UNITS_ALTITUDE = globalPropertyi("b21/units_altitude") -- 0 = feet, 1 = meters
-DATAREF_UNITS_SPEED = globalPropertyi("b21/units_speed") -- 0 = knots, 1 = km/h
+local DATAREF_UNITS_VARIO = globalPropertyi("b21/units_vario") -- 0 = knots, 1 = m/s
+local DATAREF_UNITS_ALTITUDE = globalPropertyi("b21/units_altitude") -- 0 = feet, 1 = meters
+local DATAREF_UNITS_SPEED = globalPropertyi("b21/units_speed") -- 0 = knots, 1 = km/h
 
 -- datarefs READ
 local DATAREF_HEADING_DEG = globalPropertyf("sim/flightmodel/position/hpath") -- aircraft ground path
@@ -20,6 +20,8 @@ local DATAREF_TIME_S = globalPropertyf("sim/network/misc/network_time_sec") -- t
 local DATAREF_ONGROUND = globalPropertyi("sim/flightmodel/failures/onground_any") -- =1 when on the ground
 local DATAREF_WIND_DEG = globalPropertyf("sim/weather/wind_direction_degt") -- wind direction (degrees)
 local DATAREF_WIND_KTS = globalPropertyf("sim/weather/wind_speed_kt") -- wind speed (knots)
+local DATAREF_WEIGHT_TOTAL_KG = globalPropertyf("sim/flightmodel/weight/m_total")
+local DATAREF_ALT_FT = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_pilot") -- 3000
 
 -- datarefs for aircraft panel
 local DATAREF_MACCREADY_KNOB = createGlobalPropertyi("b21/maccready_knob") -- 1..N = Maccready steps in knots or m/s
@@ -42,8 +44,13 @@ KM_TO_MI = 0.621371
 FT_TO_M = 0.3048
 M_TO_FT = 1.0 / FT_TO_M
 DEG_TO_RAD = 0.0174533
-KMH_TO_KTS = 1.852
-KTS_TO_KMH = 1.0 / KMH_TO_KTS
+KPH_TO_KTS = 1.852
+KTS_TO_KPH = 1.0 / KPH_TO_KTS
+KTS_TO_MPS = 0.514444
+MPS_TO_FPM = 196.85
+MPS_TO_KTS = 1.0 / KTS_TO_MPS
+MPS_TO_KPH = 3.6
+KPH_TO_MPS = 1 / MPS_TO_KPH
 
 -- colors
 local red =   { 1.0, 0.0, 0.0, 1.0 }
@@ -59,8 +66,22 @@ local white = { 1.0, 1.0, 1.0, 1.0 }
 local page = 1
 local page_count = 3
 
--- e.g { { type = 1, ref = "X1N7", alt_m = 375.0 (note METERS), point = { 40.971146, -74.997475 }, ..}
+-- task contains the list [1..N] of waypoints
 local task = { }
+--[[ e.g { {
+             -- loaded from FMS
+             type = 1,
+             ref = "X1N7",
+             alt_m = 375.0, (note METERS),
+             point = { lat=40.971146, lng=-74.997475 },
+             -- added during FMS load
+             length_m = 123456.7, (task leg length in meters)
+             -- updated during update():
+             distance_m (aircraft distance to waypoint, meters)
+             bearing_deg (true bearing to waypoint from aircraft position, degrees)
+             heading_deg (relative directional heading to waypoint from aircraft (e.g. +10 deg = starboard))
+              ..}
+ ]]
 
 local task_length_m = 0.0 -- length of current task in meters
 
@@ -301,9 +322,47 @@ function update_fms()
     update_wp_distance_and_bearing()
 end
 
+-- add arrival height to each WP in task
+function update_arrival_height(wp_index)
+    -- get current waypoint
+    local wp = task[wp_index]
+
+    -- READ shared vars set by gpsnav for waypoint altitude, distance and heading
+    local theta_radians = math.rad(get(DATAREF_WIND_DEG)) - math.rad(wp.bearing_deg) - math.pi
+
+    local wind_velocity_mps = get(DATAREF_WIND_KTS) * KTS_TO_MPS
+
+    local x_mps = math.cos(theta_radians) * wind_velocity_mps
+
+    local y_mps = math.sin(theta_radians) * wind_velocity_mps
+
+    local vw_mps = math.sqrt(maccready_mps^2 - y_mps^2) + x_mps
+
+    local height_needed_m = wp.distance_m / vw_mps * B21_302_mc_sink_mps
+
+    wp.arrival_height_m = get(DATAREF_ALT_FT) * FT_TO_M - height_needed_m - wp.alt_m
+
+    --print("Wind",dataref_read("WIND_RADIANS"),"radians",dataref_read("WIND_MPS"),"mps") --debug
+    --print("B21_302_height_needed_m", B21_302_height_needed_m) --debug
+    --print("B21_302_arrival_height_m", B21_302_arrival_height_m) --debug
+    -- dataref_write("DEBUG1", math.floor(project_settings.gpsnav_wp_distance_m / 1000))
+    -- dataref_write("DEBUG2", math.floor(project_settings.gpsnav_wp_heading_deg))
+end
+
+function update_arrival_heights()
+    update_arrival_height(task_index)
+    if task_index < #task
+    then
+        update_arrival_height(task_index+1)
+    end
+end
+
+
 function update()
     update_wp_distance_and_bearing()
     update_fms()
+    update_maccready()
+    update_arrival_heights()
 end --update
 
 -- ******************************************************
@@ -484,6 +543,30 @@ function draw_distance_to_go()
     -- debug still need to do distance to second waypoint
 end
 
+function draw_arrival_height()
+    local altitude_units_str = "FT"
+    if project_settings.ALTITUDE_UNITS == 1 -- 0 = FT, 1 = M
+    then
+        altitude_units_str = "M"
+    end
+    -- draw distance units i.e. "FT" or "M"
+    sasl.gl.drawText(font,135,70, altitude_units_str, 12, true, false, TEXT_ALIGN_LEFT, black)
+
+    local arrival_height = task[task_index].arrival_height_m -- meters
+    if project_settings.DISTANCE_UNITS == 0 -- 0 = FT, 1 = M
+    then
+        arrival_height = arrival_height * M_TO_FT
+    end
+    -- build the actual arrival height number string "123" or "6.7"
+    local arrival_height_str = tostring(math.floor(arrival_height))
+    if arrival_height < 0
+    then
+        arrival_height_str = "-"..arrival_height_str
+    -- draw arrival_height value e.g. "123"
+    sasl.gl.drawText(font,135,55, arrival_height_str, 20, true, false, TEXT_ALIGN_RIGHT, black)
+
+end
+
 -- write wind speed in circle graphic and add pointer to circle
 function draw_wind()
 
@@ -491,7 +574,7 @@ function draw_wind()
     -- convert to km/h if necessary
     if get(DATAREF_UNITS_SPEED) == 1 -- km/h
     then
-        wind_speed = wind_speed * KTS_TO_KMH
+        wind_speed = wind_speed * KTS_TO_KPH
     end
 
     -- remove decimals and convert to string
