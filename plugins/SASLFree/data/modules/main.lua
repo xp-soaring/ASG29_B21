@@ -41,7 +41,7 @@ components = {
                 b21_vario_302 {},
                 b21_vario_57 {},
                 b21_airbrakes {},
-	            b21_panel { -- digital nav panel
+	            b21_navpanel { -- digital nav panel
                     position = { 348, 637, 155, 210}
                 },
                 b21_clock {}, -- moves hands of watch on panel

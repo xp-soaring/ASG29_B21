@@ -7,29 +7,43 @@ print("b21_navpanel.lua starting v2.07 ",w,'x',h)
 
 local geo = require "b21_geo" -- contains useful geographic function like distance between lat/longs
 
--- datarefs READ
-local dataref_heading_deg = globalPropertyf("sim/flightmodel/position/hpath") -- aircraft ground path
-local dataref_latitude = globalProperty("sim/flightmodel/position/latitude") -- aircraft latitude
-local dataref_longitude = globalProperty("sim/flightmodel/position/longitude") -- aircraft longitude
-local dataref_time_s = globalPropertyf("sim/network/misc/network_time_sec") -- time in seconds
-local DATAREF_ONGROUND = globalPropertyi("sim/flightmodel/failures/onground_any") -- =1 when on the ground
+-- UNITS datarefs from USER_SETTINGS.lua
+DATAREF_UNITS_VARIO = globalPropertyi("b21/units_vario") -- 0 = knots, 1 = m/s
+DATAREF_UNITS_ALTITUDE = globalPropertyi("b21/units_altitude") -- 0 = feet, 1 = meters
+DATAREF_UNITS_SPEED = globalPropertyi("b21/units_speed") -- 0 = knots, 1 = km/h
 
-local font = sasl.gl.loadFont ( "fonts/UbuntuMono-Regular.ttf" )
+-- datarefs READ
+local DATAREF_HEADING_DEG = globalPropertyf("sim/flightmodel/position/hpath") -- aircraft ground path
+local DATAREF_LATITUDE = globalProperty("sim/flightmodel/position/latitude") -- aircraft latitude
+local DATAREF_LONGITUDE = globalProperty("sim/flightmodel/position/longitude") -- aircraft longitude
+local DATAREF_TIME_S = globalPropertyf("sim/network/misc/network_time_sec") -- time in seconds
+local DATAREF_ONGROUND = globalPropertyi("sim/flightmodel/failures/onground_any") -- =1 when on the ground
+local DATAREF_WIND_DEG = globalPropertyf("sim/weather/wind_direction_degt") -- wind direction (degrees)
+local DATAREF_WIND_KTS = globalPropertyf("sim/weather/wind_speed_kt") -- wind speed (knots)
+
+-- datarefs for aircraft panel
+local DATAREF_MACCREADY_KNOB = createGlobalPropertyi("b21/maccready_knob") -- 1..N = Maccready steps in knots or m/s
+
+--local font = sasl.gl.loadFont( "fonts/UbuntuMono-Regular.ttf" )
+local font = sasl.gl.loadFont( "fonts/RubikMonoOne-Regular.ttf" )
 
 -- images
-local task_background_img = sasl.gl.loadImage("panel_task.png")
-local nav_background_img = sasl.gl.loadImage("panel_nav.png")
-local map_background_img = sasl.gl.loadImage("panel_map.png")
-local map_background_img = sasl.gl.loadImage("panel_map.png")
-local logo_img = sasl.gl.loadImage("panel_logo.png")
-local nav_wp_pointer = sasl.gl.loadImage("nav_wp_pointer.png")
-local nav_wp2_pointer = sasl.gl.loadImage("nav_wp2_pointer.png")
+local task_background_img = sasl.gl.loadImage("page_task.png")
+local nav_background_img = sasl.gl.loadImage("page_nav.png")
+local map_background_img = sasl.gl.loadImage("page_map.png")
+local logo_img = sasl.gl.loadImage("navpanel_logo.png")
+local nav_wp_pointer = sasl.gl.loadImage("wp_pointer.png")
+local nav_wp2_pointer = sasl.gl.loadImage("wp2_pointer.png")
+local wind_pointer = sasl.gl.loadImage("wind_pointer.png")
 
 -- Unit conversion factors
 M_TO_MI = 0.000621371
+KM_TO_MI = 0.621371
 FT_TO_M = 0.3048
 M_TO_FT = 1.0 / FT_TO_M
 DEG_TO_RAD = 0.0174533
+KMH_TO_KTS = 1.852
+KTS_TO_KMH = 1.0 / KMH_TO_KTS
 
 -- colors
 local red =   { 1.0, 0.0, 0.0, 1.0 }
@@ -53,6 +67,13 @@ local task_length_m = 0.0 -- length of current task in meters
 local task_index = 0 -- which task entry is current
 
 local prev_click_time_s = 0.0 -- time button was previously clicked (so only one action per click)
+
+local maccready_whole = "0" -- display value for Maccready 'whole numbers' (e.g "3")
+local maccready_decimal = "0" -- display value for Maccready 'decimal' (e.g. "5")
+local maccready_knob_prev = 0 -- history of knob value so we can efficiently detect change
+local maccready_mps = 0.0 -- meters/second Maccready value used in the calculations
+
+local aircraft_heading_deg = 0.0 -- current aircraft heading degrees true
 
 -- command callbacks from navpanel buttons
 
@@ -105,29 +126,29 @@ function set_waypoint(i)
 end
 
 function clicked_load(phase)
-    if get(dataref_time_s) > prev_click_time_s + 2.0 and phase == SASL_COMMAND_BEGIN
+    if get(DATAREF_TIME_S) > prev_click_time_s + 2.0 and phase == SASL_COMMAND_BEGIN
     then
-        prev_click_time_s = get(dataref_time_s)
+        prev_click_time_s = get(DATAREF_TIME_S)
         load_fms()
     end
     return 0
 end
 
 function clicked_left(phase)
-    if get(dataref_time_s) > prev_click_time_s + 0.2 and task_index > 1 and phase == SASL_COMMAND_BEGIN
+    if get(DATAREF_TIME_S) > prev_click_time_s + 0.2 and task_index > 1 and phase == SASL_COMMAND_BEGIN
     then
         print("b21_navpanel","LEFT")
-        prev_click_time_s = get(dataref_time_s)
+        prev_click_time_s = get(DATAREF_TIME_S)
         prev_wp()
     end
     return 1
 end
 
 function clicked_right(phase)
-    if get(dataref_time_s) > prev_click_time_s + 0.2 and task_index < #task and phase == SASL_COMMAND_BEGIN
+    if get(DATAREF_TIME_S) > prev_click_time_s + 0.2 and task_index < #task and phase == SASL_COMMAND_BEGIN
     then
         print("b21_navpanel","RIGHT")
-        prev_click_time_s = get(dataref_time_s)
+        prev_click_time_s = get(DATAREF_TIME_S)
         next_wp()
     end
     return 1
@@ -141,21 +162,68 @@ sasl.registerCommandHandler(command_right, 1, clicked_right)
 -- ************ update()           *************************
 -- *********************************************************
 
--- update the shared variables for wp bearing and distance
+-- update Maccready value from knob rotation 0..15
+-- note we update differently for mps / knots so display moves 0.5 units in each units setting.
+-- will WRITE globals:
+--     maccready_whole
+--     maccready_decimal
+--     maccready_mps
+--     maccready_knob_prev
+function update_maccready()
+    local knob = get(DATAREF_MACCREADY_KNOB) -- 0..15
+    if knob == maccready_knob_prev -- only update if knob position changes
+    then
+        return
+    end
+    if get(DATAREF_UNITS_VARIO) == 1 -- UNITS = meters per second
+    then
+        maccready_mps = knob / 2
+        local units = math.floor(maccready_mps)
+        maccready_whole = tostring(units)
+        maccready_decimal = tostring(math.floor((macready_mps - units)*10+0.5)
+    else                              -- UNITS = knots
+        -- for Knots knob will move in 0.5 knot increments to 5.0, then 1 Knot increments to 9.99
+        local maccready_kts
+        if knob < 10.1                          -- i.e. knob = 0..10
+        then
+            maccready_kts = knob / 2
+        elseif knob < 14.1                      -- i.e. knob = 11..14
+        then
+            maccready_kts = knob - 5
+        else                                    -- i.e. knob = 15
+            maccready_kts = 9.9 -- MAX display as 9.9
+        end
+        local whole = math.floor(maccready_kts)
+        maccready_whole = tostring(whole)
+        maccready_decimal = tostring(math.floor((macready_kts - whole)*10+0.5)
+        maccready_mps = maccready_kts * KTS_TO_MPS
+    end
+    maccready_knob_prev = knob -- record knob position so we detect another change
+    print("maccready_mps", maccready_mps, maccready_whole.."."..maccready_decimal) --debug
+end
+
+-- update waypoint info:
+--  wp.distance_m - aircraft distance to waypoint, meters
+--  wp.bearing_deg - true bearing to waypoint from aircraft, degrees
+--  wp.heading_deg - relative directional heading to waypoint from aircraft (e.g. +10 deg = starboard)
 function update_wp_distance_and_bearing()
     if #task ~= 0
     then
-        local aircraft_point = { lat= get(dataref_latitude),
-                                 lng= get(dataref_longitude)
+        aircraft_heading_deg = get(DATAREF_HEADING_DEG)
+
+        local aircraft_point = { lat= get(DATAREF_LATITUDE),
+                                 lng= get(DATAREF_LONGITUDE)
                             }
 
         task[task_index].distance_m = geo.get_distance(aircraft_point, task[task_index].point)
         task[task_index].bearing_deg = geo.get_bearing(aircraft_point, task[task_index].point)
+        task[task_index].heading_deg = aircraft_heading_deg - task[task_index].bearing_deg
 
         if task_index < #task
         then
             task[task_index+1].distance_m = geo.get_distance(aircraft_point, task[task_index+1].point)
             task[task_index+1].bearing_deg = geo.get_bearing(aircraft_point, task[task_index+1].point)
+            task[task_index+1].heading_deg = aircraft_heading_deg - task[task_index+1].bearing_deg
         end
     end
 end
@@ -299,23 +367,20 @@ function draw_task()
     local altitude_x = 150
     local altitude_y = h-60
 
-    local length_units
-    if project_settings.DISTANCE_UNITS == 0 -- (0=mi, 1=km)
+    local length_units_str = "MI"
+    if project_settings.DISTANCE_UNITS == 1 -- (0=mi, 1=km)
     then
-        length_units = "MI"
-    else
-        length_units = "KM"
+        length_units_str = "KM"
     end
-    sasl.gl.drawText(font,length_x,length_y, length_units, 18, true, false, TEXT_ALIGN_RIGHT, black)
 
-    local altitude_units
-    if project_settings.ALTITUDE_UNITS == 0 -- (0=feet, 1=meters)
+    sasl.gl.drawText(font,length_x,length_y, length_units_str, 18, true, false, TEXT_ALIGN_RIGHT, black)
+
+    local altitude_units_str = "FT"
+    if project_settings.ALTITUDE_UNITS == 1 -- (0=feet, 1=meters)
     then
-        altitude_units = "FT"
-    else
-        altitude_units = "M"
+        altitude_units_str = "M"
     end
-    sasl.gl.drawText(font,altitude_x,altitude_y, altitude_units, 18, true, false, TEXT_ALIGN_RIGHT, black)
+    sasl.gl.drawText(font,altitude_x,altitude_y, altitude_units_str, 18, true, false, TEXT_ALIGN_RIGHT, black)
 
     for i = 1, #task
     do
@@ -371,6 +436,7 @@ function draw_no_task()
     sasl.gl.drawTexture(logo_img, 20, h-190, 115, 112, {1.0,1.0,1.0,1.0}) -- draw logo
 end
 
+-- top-level TASK page draw function
 function draw_page_task()
     -- logInfo("navpanel draw called")
     sasl.gl.drawTexture(task_background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
@@ -387,19 +453,87 @@ function draw_page_task()
     draw_task()
 end
 
--- *****************
--- ** NAV PAGE *****
--- *****************
+-- ***************************************************
+-- ** NAV PAGE ***************************************
+-- ***************************************************
 
-function bearing_to_xy(bearing_deg)
+-- draw distance to current and next waypoints on page
+function draw_distance_to_go()
+    local distance_units_str = "MI"
+    if project_settings.DISTANCE_UNITS == 1 -- 0 = MI, 1 = KM
+    then
+        distance_units_str = "KM"
+    end
+    -- draw distance units i.e. "MI" or "KM"
+    sasl.gl.drawText(font,135,104, distance_units_str, 12, true, false, TEXT_ALIGN_LEFT, black)
+
+    local dist = task[task_index].distance_m / 1000 -- initially in KM
+    if project_settings.DISTANCE_UNITS == 0 -- 0 = MI, 1 = KM
+    then
+        dist = dist * KM_TO_MI
+    end
+    -- build the actual distance number string "123" or "6.7"
+    local dist_str = tostring(math.floor(dist))
+    if dist < 10
+    then
+        dist_str = tostring(math.floor(dist * 10)/10)
+    end
+    -- draw distance value e.g. "123" or "6.7"
+    sasl.gl.drawText(font,135,80, dist_str, 20, true, false, TEXT_ALIGN_RIGHT, black)
+
+    -- debug still need to do distance to second waypoint
+end
+
+-- write wind speed in circle graphic and add pointer to circle
+function draw_wind()
+
+    local wind_speed = get(DATAREF_WIND_KTS)
+    -- convert to km/h if necessary
+    if get(DATAREF_UNITS_SPEED) == 1 -- km/h
+    then
+        wind_speed = wind_speed * KTS_TO_KMH
+    end
+
+    -- remove decimals and convert to string
+    local wind_string = tostring(math.floor(wind_speed))
+
+    -- write numeric wind speed (knots or km/h) in circle
+    sasl.gl.drawText(font,64,110, wind_str, 12, true, false, TEXT_ALIGN_LEFT, black)
+
+    --
+    -- now position pointer on wind circle graphic
+    --
+    local wind_heading_deg = aircraft_heading_deg - get(DATAREF_WIND_DEG)
+    local wind_heading_rad = math.rad(wind_heading_deg)
+
+    -- coordinates for wind circle graphic on NAV page
+    local center_x = 77
+    local center_y = 118
+    local radius = 25
+    local px = center_x + math.sin(wind_heading_rad) * radius
+    local py = center_y + math.cos(wind_heading_rad) * radius
+    -- We offset px,py by half the width and the whole height of the pointer, to align point to px,py
+    -- and then we rotate around the point.
+    -- sasl.gl.drawRotatedTextureCenter(d, angle, rx, ry, x, y, width, height, color )
+    sasl.gl.drawRotatedTextureCenter(wind_pointer, wind_heading_deg, 8, 8, px-8, py-8, 15, 8, {1.0,1.0,1.0,1.0})
+
+end
+
+function draw_maccready()
+    sasl.gl.drawText(font,12,63, maccready_whole..".", 20, true, false, TEXT_ALIGN_LEFT, black)
+    sasl.gl.drawText(font,41,77, maccready_decimal, 12, true, false, TEXT_ALIGN_LEFT, black)
+end
+
+-- convert the relative heading of waypoint into px,py on oval graphic
+function heading_to_xy(heading_deg)
     -- x,y coords of center of oval graphic
     local center_x = 78
     local center_y = 133
-    local radius = 55
+    local radius = 50
     local px
     local py
 
-    local a = math.rad(task[task_index].bearing_deg)
+    local a = math.rad(heading_deg)
 
     if a > math.pi / 2 and a < 3 * math.pi / 2
     then
@@ -420,26 +554,29 @@ function bearing_to_xy(bearing_deg)
 end
 
 -- draw the pointers for waypoint bearings on the oval graphic
-function draw_nav_bearings()
+function draw_nav_headings()
 
-    --debug the bearing of the pointer should be RELATIVE to the plane direction!!
-    local bearing_deg = task[task_index].bearing_deg
+    local heading_deg = task[task_index].heading_deg
     -- x,y coords for bearing to current wp
-    local px, py = bearing_to_xy(bearing_deg)
+    local px, py = heading_to_xy(heading_deg)
 
-    --debug we should rotate the pointer about its point.
-    -- draw pointer to current waypoint
-    sasl.gl.drawRotatedTexture(nav_wp_pointer, bearing_deg, px, py, 15,16, {1.0,1.0,1.0,1.0})
+    -- Draw pointer to current waypoint, rotated about point at top center of pointer.
+    -- We offset px,py by half the width and the whole height of the pointer, to align point to px,py
+    -- and then we rotate around the point.
+    -- sasl.gl.drawRotatedTextureCenter(d, angle, rx, ry, x, y, width, height, color )
+    sasl.gl.drawRotatedTextureCenter(nav_wp_pointer, heading_deg, 8, 16, px-8, py-16, 15,16, {1.0,1.0,1.0,1.0})
 
+    -- draw pointer to second waypoint if available
     if task_index < #task
     then
-        bearing_deg = task[task_index+1].bearing_deg
-        px, py = bearing_to_xy(bearing_deg)
+        heading_deg = task[task_index+1].heading_deg
+        px, py = heading_to_xy(heading_deg)
         -- draw pointer to next waypoint
-        sasl.gl.drawRotatedTexture(nav_wp2_pointer, bearing_deg, px, py, 15,8, {1.0,1.0,1.0,1.0})
+        sasl.gl.drawRotatedTextureCenter(nav_wp2_pointer, heading_deg, 8, 8, px-8, py-8, 15, 8, {1.0,1.0,1.0,1.0})
     end
 end
 
+-- top-level NAV page draw function
 function draw_page_nav()
     -- logInfo("navpanel draw called")
     sasl.gl.drawTexture(nav_background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
@@ -456,13 +593,18 @@ function draw_page_nav()
 
     draw_current_wp()
 
-    draw_nav_bearings()
+    draw_nav_headings()
 
+    draw_maccready()
+
+    draw_wind()
 end
 
 -- *****************
 -- ** MAP PAGE *****
 -- *****************
+
+-- top-level MAP page draw function
 function draw_page_map()
     -- logInfo("navpanel draw called")
     sasl.gl.drawTexture(map_background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
@@ -497,8 +639,8 @@ end
 callback = {}
 callback["page"] = button_page_clicked
 callback["load"] = button_load_clicked
-callback["wp_next"] = button_left_clicked
-callback["wp_prev"] = button_right_clicked
+callback["wp_prev"] = button_left_clicked
+callback["wp_next"] = button_right_clicked
 
 function draw()
     if page == 1
@@ -516,6 +658,6 @@ end
 components = {
     panel_button { id="page", position = { 6, 189, 34, 18} },
     panel_button { id="load", position = { 42, 189, 34, 18} },
-    panel_button { id="wp_next", position = { 79, 189, 34, 18} },
-    panel_button { id="wp_prev", position = { 116, 189, 34, 18} }
+    panel_button { id="wp_prev", position = { 79, 189, 34, 18} },
+    panel_button { id="wp_next", position = { 116, 189, 34, 18} }
 }
