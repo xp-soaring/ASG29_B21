@@ -13,13 +13,14 @@ local DATAREF_UNITS_ALTITUDE = globalPropertyi("b21/units_altitude") -- 0 = feet
 local DATAREF_UNITS_SPEED = globalPropertyi("b21/units_speed") -- 0 = knots, 1 = km/h
 
 -- datarefs READ
-local DATAREF_HEADING_DEG = globalPropertyf("sim/flightmodel/position/hpath") -- aircraft ground path
+local DATAREF_TRACK_DEG = globalPropertyf("sim/flightmodel/position/hpath") -- aircraft ground path
 local DATAREF_LATITUDE = globalProperty("sim/flightmodel/position/latitude") -- aircraft latitude
 local DATAREF_LONGITUDE = globalProperty("sim/flightmodel/position/longitude") -- aircraft longitude
 local DATAREF_TIME_S = globalPropertyf("sim/network/misc/network_time_sec") -- time in seconds
 local DATAREF_ONGROUND = globalPropertyi("sim/flightmodel/failures/onground_any") -- =1 when on the ground
 local DATAREF_WIND_DEG = globalPropertyf("sim/weather/wind_direction_degt") -- wind direction (degrees)
-local DATAREF_WIND_KTS = globalPropertyf("sim/weather/wind_speed_kt") -- wind speed (knots)
+-- note X-Plane error has this dataref misnamed (it is not knots, it is meters per second)
+local DATAREF_WIND_MPS = globalPropertyf("sim/weather/wind_speed_kt") -- wind speed (METERS PER SECOND)
 local DATAREF_WEIGHT_TOTAL_KG = globalPropertyf("sim/flightmodel/weight/m_total")
 local DATAREF_ALT_FT = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_pilot") -- 3000
 local DATAREF_AIRSPEED_KTS = globalPropertyf("sim/cockpit2/gauges/indicators/airspeed_kts_pilot")
@@ -192,12 +193,12 @@ sasl.registerCommandHandler(command_right, 1, clicked_right)
 
 -- get the aircraft movement direction in degrees true
 function get_aircraft_heading_deg()
-    if get(DATAREF_ONGROUND)
+    if get(DATAREF_ONGROUND) == 1
     then
         return get(DATAREF_PSI)
     end
 
-    return get(DATAREF_HEADING_DEG)
+    return get(DATAREF_TRACK_DEG)
 end
 
 -- update Maccready value from knob rotation 0..15
@@ -256,9 +257,9 @@ function update_wp_distance_and_bearing()
         task[task_index].heading_deg = task[task_index].bearing_deg - aircraft_heading_deg
 
         --debug_str1 = tostring(math.floor(task[task_index].distance_m))
-        debug_str1 = ">> "..tostring(math.floor(task[task_index].bearing_deg*10+0.5)/10)
+        debug_str1 = "Bearing>> "..tostring(math.floor(task[task_index].bearing_deg*10+0.5)/10)
         --debug_str1 = tostring(math.floor(stf_mps*MPS_TO_KPH*10+0.5)/10)
-        debug_str2 = tostring(math.floor(task[task_index].heading_deg*10+0.5)/10)
+        debug_str2 = "Heading>> "..tostring(math.floor(aircraft_heading_deg*10+0.5)/10)
     
         --debug
         if task_index < #task
@@ -385,7 +386,7 @@ function height_needed_m(distance_m, bearing_deg)
     local theta_radians = math.rad(get(DATAREF_WIND_DEG)) - math.rad(bearing_deg) - math.pi
    
     -- Wind speed
-    local wind_mps = get(DATAREF_WIND_KTS) * KTS_TO_MPS
+    local wind_mps = get(DATAREF_WIND_MPS)
 
     -- x_mps is wind speed along line to waypoint (+ve is a tailwind)
     local x_mps = math.cos(theta_radians) * wind_mps
@@ -647,13 +648,16 @@ end
 -- write wind speed in circle graphic and add pointer to circle
 function draw_wind()
 
-    local wind_speed = get(DATAREF_WIND_KTS)
+    local wind_speed = get(DATAREF_WIND_MPS)
     -- convert to km/h if necessary
-    local units_str = "Kts"
+    local units_str
     if get(DATAREF_UNITS_SPEED) == 1 -- km/h
     then
-        wind_speed = wind_speed * KTS_TO_KPH
+        wind_speed = wind_speed * MPS_TO_KPH
         units_str = "Kmh"
+    else
+        wind_speed = wind_speed * MPS_TO_KTS
+        units_str = "Kts"
     end
 
     -- remove decimals and convert to string
@@ -814,8 +818,8 @@ function draw_page_nav()
     draw_nav_next_wp()
 
     --debug still need arrival height for next waypoint
-    --sasl.gl.drawText(font,13,33, debug_str1, 14, true, false, TEXT_ALIGN_LEFT, black)
-    --sasl.gl.drawText(font,13,13, debug_str2, 14, true, false, TEXT_ALIGN_LEFT, black)
+    sasl.gl.drawText(font,13,33, debug_str1, 14, true, false, TEXT_ALIGN_LEFT, black)
+    sasl.gl.drawText(font,13,13, debug_str2, 14, true, false, TEXT_ALIGN_LEFT, black)
     
 end
 
