@@ -253,12 +253,15 @@ function update_wp_distance_and_bearing()
 
         task[task_index].distance_m = geo.get_distance(aircraft_point, task[task_index].point)
         task[task_index].bearing_deg = geo.get_bearing(aircraft_point, task[task_index].point)
-        task[task_index].heading_deg = aircraft_heading_deg - task[task_index].bearing_deg
+        task[task_index].heading_deg = task[task_index].bearing_deg - aircraft_heading_deg
 
         --debug_str1 = tostring(math.floor(task[task_index].distance_m))
-        --debug_str2 = tostring(task[task_index].bearing_deg)
-
-        if task_index < #task
+        debug_str1 = ">> "..tostring(math.floor(task[task_index].bearing_deg*10+0.5)/10)
+        --debug_str1 = tostring(math.floor(stf_mps*MPS_TO_KPH*10+0.5)/10)
+        debug_str2 = tostring(math.floor(task[task_index].heading_deg*10+0.5)/10)
+    
+        --debug
+        if false --task_index < #task
         then
             task[task_index+1].distance_m = geo.get_distance(aircraft_point, task[task_index+1].point)
             task[task_index+1].bearing_deg = geo.get_bearing(aircraft_point, task[task_index+1].point)
@@ -393,8 +396,8 @@ function update_arrival_height(wp_index)
 
     local stf_mps = maccready_stf_mps(ballast_adjust)
 
-    debug_str1 = tostring(math.floor(stf_mps*MPS_TO_KPH*10+0.5)/10)
-    --debug_str2 = tostring(y_mps)
+    --debug_str1 = tostring(math.floor(stf_mps*MPS_TO_KPH*10+0.5)/10)
+    --debug_str2 = tostring(math.floor(task[task_index].heading_deg*10+0.5)/10)
 
     local vw_mps = math.sqrt(stf_mps^2 - y_mps^2) + x_mps
 
@@ -635,7 +638,7 @@ function draw_arrival_height()
     if arrival_height < 0.0
     then
         arrival_height_str = "-"..arrival_height_str
-        color = {0.3,0.0,0.0,1.0} -- dark red
+        color = {0.3,0.0,0.0,1.0} -- dark red if negative
     else
         arrival_height_str = "+"..arrival_height_str
     end
@@ -643,8 +646,6 @@ function draw_arrival_height()
     sasl.gl.drawText(font,135,63, arrival_height_str, 22, true, false, TEXT_ALIGN_RIGHT, color)
 
     --debug still need arrival height for next waypoint
-    sasl.gl.drawText(font,13,33, debug_str1, 14, true, false, TEXT_ALIGN_LEFT, black)
-    sasl.gl.drawText(font,13,13, debug_str2, 14, true, false, TEXT_ALIGN_LEFT, black)
 end
 
 -- write wind speed in circle graphic and add pointer to circle
@@ -669,7 +670,7 @@ function draw_wind()
 
     --
     -- now position pointer on wind circle graphic
-    local wind_heading_deg = aircraft_heading_deg - get(DATAREF_WIND_DEG)
+    local wind_heading_deg = get(DATAREF_WIND_DEG) - aircraft_heading_deg
     local wind_heading_rad = math.rad(wind_heading_deg)
 
     -- coordinates for wind circle graphic on NAV page
@@ -702,7 +703,7 @@ function heading_to_xy(heading_deg)
     local px
     local py
 
-    local a = math.rad(heading_deg)
+    local a = (math.rad(heading_deg) + 2 * math.pi) % (2 * math.pi) -- normalized to 0..2*pi
 
     if a > math.pi / 2 and a < 3 * math.pi / 2
     then
@@ -734,7 +735,8 @@ function draw_nav_headings()
     sasl.gl.drawRotatedTextureCenter(nav_wp_pointer, heading_deg, px, py, px-10, py-20, 19,20, {1.0,1.0,1.0,1.0})
 
     -- draw pointer to second waypoint if available
-    if task_index < #task
+    --debug
+    if false --task_index < #task
     then
         heading_deg = task[task_index+1].heading_deg
         px, py = heading_to_xy(heading_deg)
@@ -770,6 +772,11 @@ function draw_page_nav()
     draw_distance_to_go()
 
     draw_arrival_height()
+
+    --debug still need arrival height for next waypoint
+    sasl.gl.drawText(font,13,33, debug_str1, 14, true, false, TEXT_ALIGN_LEFT, black)
+    sasl.gl.drawText(font,13,13, debug_str2, 14, true, false, TEXT_ALIGN_LEFT, black)
+    
 end
 
 -- *****************
