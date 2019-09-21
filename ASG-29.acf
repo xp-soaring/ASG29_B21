@@ -104,7 +104,7 @@ P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
 P _gear/0/_scon 2959.263671875
-P _gear/0/_stat_def 0.396451801
+P _gear/0/_stat_def 0.396451831
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
 P _gear/0/_strut_comp -0.100000001
@@ -138,7 +138,7 @@ P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
 P _gear/1/_scon 672.559875488
-P _gear/1/_stat_def 0.222734347
+P _gear/1/_stat_def 0.222734377
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -16427,7 +16427,7 @@ P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.077265665
+P _part/86/_part_y -0.077265635
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -27403,25 +27403,8 @@ PROPERTIES_END
 PANEL_2D_BEGIN
 PANEL_2D_END
 PANEL_3D_BEGIN
-but_jettison but_jettison
-  POS 995.500000 562.500000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-  TOOLTIP this is but_jettison
-
-ins_tailnum ins_tailnum
-  POS 284.000000 483.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-
 gen_rotary vario_302_backgroun
-  POS 257.000000 567.500000
+  POS 264.000000 567.500000
   IMAGE vario_302/vario_302_background
   DATAREF 
   LIGHT_MODE MECHANICAL
@@ -27440,7 +27423,7 @@ gen_rotary vario_302_backgroun
   CLICK_DY 0
 
 gen_annun vario_302_ring
-  POS 256.500000 570.000000
+  POS 263.500000 570.000000
   IMAGE vario_302/ring
   DATAREF 
   SHOW_EQUAL 1.000000 b21/units_vario
@@ -27450,7 +27433,7 @@ gen_annun vario_302_ring
   KEY_FRAME 1.000000 1.000000
 
 gen_LED vario_302_bottom
-  POS 253.500000 542.500000
+  POS 260.500000 542.500000
   IMAGE vario_302/num_bottom
   DATAREF b21/vario_302/number_bottom
   LIGHT_MODE MECHANICAL
@@ -27463,7 +27446,7 @@ gen_LED vario_302_bottom
   LED_ROWS 0
 
 gen_LED vario_302_bottom_s
-  POS 247.500000 542.500000
+  POS 254.500000 542.500000
   IMAGE vario_302/num_sign
   DATAREF b21/vario_302/number_bottom_sign
   LIGHT_MODE MECHANICAL
@@ -27476,7 +27459,7 @@ gen_LED vario_302_bottom_s
   LED_ROWS 0
 
 gen_LED vario_302_number_r
-  POS 274.500000 568.500000
+  POS 281.500000 568.500000
   IMAGE vario_302/num_right
   DATAREF b21/vario_302/number_right
   LIGHT_MODE MECHANICAL
@@ -27489,7 +27472,7 @@ gen_LED vario_302_number_r
   LED_ROWS 0
 
 gen_LED vario_203_number_t
-  POS 254.500000 589.500000
+  POS 261.500000 589.500000
   IMAGE vario_302/num_top
   DATAREF b21/vario_302/number_top
   LIGHT_MODE MECHANICAL
@@ -27502,7 +27485,7 @@ gen_LED vario_203_number_t
   LED_ROWS 0
 
 gen_LED vario_302_num_top_s
-  POS 248.500000 589.500000
+  POS 255.500000 589.500000
   IMAGE vario_302/num_sign
   DATAREF b21/vario_302/number_top_sign
   LIGHT_MODE MECHANICAL
@@ -27515,7 +27498,7 @@ gen_LED vario_302_num_top_s
   LED_ROWS 0
 
 gen_needle vario_302_needle
-  POS 257.000000 568.500000
+  POS 264.000000 568.500000
   IMAGE vario_302/vario_302
   DATAREF b21/vario_302/needle_fpm
   LIGHT_MODE MECHANICAL
@@ -27528,9 +27511,9 @@ gen_needle vario_302_needle
   IS_DRAGGABLE 0
   OFFSET 0.000000
 
-gen_rheostat vario_302_knob
-  POS 197.000000 501.000000
-  IMAGE vario_302/vario_302_knob
+gen_rheostat maccready_knob
+  POS 334.000000 456.000000
+  IMAGE maccready_knob/maccready_knob
   DATAREF b21/maccready_knob
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
@@ -27566,7 +27549,7 @@ gen_rotary vario_302_stf_te_sw
   CLICK_DY 0
 
 gen_annun vario_302_stf_te_in
-  POS 286.000000 556.000000
+  POS 293.000000 556.000000
   IMAGE vario_302/stf_te_ind
   DATAREF 
   SHOW_EQUAL 1.000000 b21/vario_302/stf_te_ind
@@ -27649,7 +27632,7 @@ gen_handle spoiler_indicator
   HAS_DETENTS 0
 
 rad_com1_GA rad_com1_GA.png
-  POS 432.000000 269.500000
+  POS 425.000000 327.500000
   DATAREF 
   SIZE 1.500000
   LIGHT_MODE MECHANICAL
@@ -27757,10 +27740,10 @@ gen_rheostat altimeter_knob
   WRAP 1
 
 gen_pointer trim
-  POS 558.000000 476.000000
+  POS 548.000000 479.000000
   IMAGE trim/trim
   DATAREF sim/cockpit2/controls/elevator_trim
-  SIZE 0.700000
+  SIZE 0.800000
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
   KEY_FRAME -1.000000 45.000000 1.000000
@@ -27873,6 +27856,22 @@ gen_trigger ballast_open
   CLICK_DX 0
   CLICK_DY 0
 
+gen_trigger ballast_open 2
+  POS 996.000000 557.000000
+  IMAGE ballast/gen_trigger
+  COMMAND b21/ballast/open
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  CORNERS 0.000000 -1.000000  0.000000 0.000000  0.000000 0.000000  0.000000 0.000000
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
+  TOOLTIP Ballast open
+  CLICK_RADIUS 30.000000
+  CLICK_RADIUS_DY 0.000000
+  CURSOR BUTTON
+  CLICK_DX 0
+  CLICK_DY 0
+
 gen_trigger ballast_fill
   POS 698.000000 494.000000
   IMAGE ballast/gen_trigger
@@ -27887,5 +27886,38 @@ gen_trigger ballast_fill
   CURSOR DEFAULT
   CLICK_DX 0
   CLICK_DY 0
+
+gen_needle watch_h
+  POS 168.500000 509.000000
+  IMAGE watch/H
+  DATAREF b21/clock/hours
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 12.000000 360.000000
+  IS_DRAGGABLE 0
+  OFFSET 0.000000
+
+gen_needle watch_m
+  POS 167.500000 510.000000
+  IMAGE watch/M
+  DATAREF b21/clock/minutes
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 60.000000 360.000000
+  IS_DRAGGABLE 0
+  OFFSET 0.000000
+
+gen_needle watch_s
+  POS 168.500000 510.000000
+  IMAGE watch/S
+  DATAREF b21/clock/seconds
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 60.000000 360.000000
+  IS_DRAGGABLE 0
+  OFFSET 0.000000
 
 PANEL_3D_END
