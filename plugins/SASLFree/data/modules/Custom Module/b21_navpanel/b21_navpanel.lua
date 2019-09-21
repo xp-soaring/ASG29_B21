@@ -261,11 +261,11 @@ function update_wp_distance_and_bearing()
         debug_str2 = tostring(math.floor(task[task_index].heading_deg*10+0.5)/10)
     
         --debug
-        if false --task_index < #task
+        if task_index < #task
         then
             task[task_index+1].distance_m = geo.get_distance(aircraft_point, task[task_index+1].point)
             task[task_index+1].bearing_deg = geo.get_bearing(aircraft_point, task[task_index+1].point)
-            task[task_index+1].heading_deg = aircraft_heading_deg - task[task_index+1].bearing_deg
+            task[task_index+1].heading_deg = task[task_index+1].bearing_deg - aircraft_heading_deg
         end
     end
 end
@@ -378,53 +378,49 @@ function maccready_stf_mps(ballast_adjust)
     --print("B21_302_mc_stf_mps", B21_302_mc_stf_mps,"(", B21_302_mc_stf_mps * MPS_TO_KPH, "kph)")
 end
 
--- add arrival height to each WP in task
-function update_arrival_height(wp_index)
-    -- get current waypoint
-    local wp = task[wp_index]
-
+-- return height needed to fly distance_m meters on bearing_deg degrees
+-- using current ballast and wind
+function height_needed_m(distance_m, bearing_deg)
     -- Theta is angle between wind and waypoint
-    local theta_radians = math.rad(get(DATAREF_WIND_DEG)) - math.rad(wp.bearing_deg) - math.pi
+    local theta_radians = math.rad(get(DATAREF_WIND_DEG)) - math.rad(bearing_deg) - math.pi
    
-    local wind_velocity_mps = get(DATAREF_WIND_KTS) * KTS_TO_MPS
+    -- Wind speed
+    local wind_mps = get(DATAREF_WIND_KTS) * KTS_TO_MPS
 
-    local x_mps = math.cos(theta_radians) * wind_velocity_mps
+    -- x_mps is wind speed along line to waypoint (+ve is a tailwind)
+    local x_mps = math.cos(theta_radians) * wind_mps
 
-    local y_mps = math.sin(theta_radians) * wind_velocity_mps
+    -- y_mps is wind speed perpendicular to line to waypoint (the sign is irrelevant)
+    local y_mps = math.sin(theta_radians) * wind_mps
 
+    -- get ballast adjustment needed for speed-to-fly calculation
     local ballast_adjust = math.sqrt(get(DATAREF_WEIGHT_TOTAL_KG)/ project_settings.polar_weight_empty_kg)
 
+    -- speed-to-fly meters/second at current maccready setting and ballast
     local stf_mps = maccready_stf_mps(ballast_adjust)
 
-    --debug_str1 = tostring(math.floor(stf_mps*MPS_TO_KPH*10+0.5)/10)
-    --debug_str2 = tostring(math.floor(task[task_index].heading_deg*10+0.5)/10)
-
+    -- speed made good along line to waypoint (i.e. speed-to-fly adjusted for wind)
     local vw_mps = math.sqrt(stf_mps^2 - y_mps^2) + x_mps
 
-    local height_needed_m = wp.distance_m / vw_mps * sink_mps(stf_mps * MPS_TO_KPH, ballast_adjust)
+    -- (distance to waypoint) / (speed to waypoint) = (time to waypoint)
+    -- (time to waypoint) * (sink rate at speed-to-fly) = (height needed)
+    return distance_m / vw_mps * sink_mps(stf_mps * MPS_TO_KPH, ballast_adjust)
 
-    wp.arrival_height_m = get(DATAREF_ALT_FT) * FT_TO_M - height_needed_m - wp.alt_m
-
-    --print("Wind",dataref_read("WIND_RADIANS"),"radians",dataref_read("WIND_MPS"),"mps")
-    --print("B21_302_height_needed_m", B21_302_height_needed_m)
-    --print("B21_302_arrival_height_m", B21_302_arrival_height_m) 
-    -- dataref_write("DEBUG1", math.floor(project_settings.gpsnav_wp_distance_m / 1000))
-    -- dataref_write("DEBUG2", math.floor(project_settings.gpsnav_wp_heading_deg))
 end
 
+-- update the arrival heights for the current and next waypoints
 function update_arrival_heights()
     if #task == 0
     then
         return
     end
 
-    update_arrival_height(task_index)
+    local wp = task[task_index]
 
-    --debug
-    if false --task_index < #task
-    then
-        update_arrival_height(task_index+1)
-    end
+    local height_m = height_needed_m(wp.distance_m, wp.bearing_deg)
+
+    wp.arrival_height_m = get(DATAREF_ALT_FT) * FT_TO_M - height_m - wp.alt_m
+
 end
 
 
@@ -709,9 +705,9 @@ function heading_to_xy(heading_deg)
     then
         if a < math.pi
         then
-            px = 0.75 + math.sin(a)*0.25
+            px = 0.4 + math.sin(a)*0.6
         else
-            px = -0.75 + math.sin(a)*0.25
+            px = -0.4 + math.sin(a)*0.6
         end
         py = math.cos(a)*0.25
     else
@@ -736,7 +732,7 @@ function draw_nav_headings()
 
     -- draw pointer to second waypoint if available
     --debug
-    if false --task_index < #task
+    if task_index < #task
     then
         heading_deg = task[task_index+1].heading_deg
         px, py = heading_to_xy(heading_deg)
@@ -744,6 +740,48 @@ function draw_nav_headings()
         sasl.gl.drawRotatedTextureCenter(nav_wp2_pointer, heading_deg, px, py, px-8, py-8, 15, 8, {1.0,1.0,1.0,1.0})
         --sasl.gl.drawRotatedTextureCenter(nav_wp2_pointer, heading_deg, 8, 8, px-8, py-8, 15, 8, {1.0,1.0,1.0,1.0})
     end
+end
+
+function draw_nav_next_wp()
+    if #task == 0 or task_index == #task
+    then
+        return
+    end
+
+    local color = {0.1, 0.1, 0.1, 1.0}
+
+    local wp = task[task_index + 1]
+
+    local wp_string = "NEXT: " .. wp.ref
+
+    --  WP STRING                          size isBold isItalic
+    sasl.gl.drawText(font,10,45, wp_string, 14, true, false, TEXT_ALIGN_LEFT, color)
+
+    -- DISTANCE TO GO (= distance to current WP + length of next leg)
+    local distance_units_str = "MI"
+    if project_settings.DISTANCE_UNITS == 1 -- 0 = MI, 1 = KM
+    then
+        distance_units_str = "KM"
+    end
+    -- draw distance units i.e. "MI" or "KM"
+    sasl.gl.drawText(font,130,33, distance_units_str, 12, true, false, TEXT_ALIGN_LEFT, color)
+
+    -- initially in KM
+    local dist = (task[task_index].distance_m + task[task_index+1].length_m)/ 1000
+
+    if project_settings.DISTANCE_UNITS == 0 -- 0 = MI, 1 = KM
+    then
+        dist = dist * KM_TO_MI
+    end
+    -- build the actual distance number string "123" or "6.7"
+    local dist_str = tostring(math.floor(dist+0.5))
+    if dist < 10
+    then
+        dist_str = tostring(math.floor(dist * 10+0.5)/10)
+    end
+    -- draw distance value e.g. "123" or "6.7"
+    sasl.gl.drawText(font_num,125,33, dist_str, 14, true, false, TEXT_ALIGN_RIGHT, color)
+
 end
 
 -- top-level NAV page draw function
@@ -773,9 +811,11 @@ function draw_page_nav()
 
     draw_arrival_height()
 
+    draw_nav_next_wp()
+
     --debug still need arrival height for next waypoint
-    sasl.gl.drawText(font,13,33, debug_str1, 14, true, false, TEXT_ALIGN_LEFT, black)
-    sasl.gl.drawText(font,13,13, debug_str2, 14, true, false, TEXT_ALIGN_LEFT, black)
+    --sasl.gl.drawText(font,13,33, debug_str1, 14, true, false, TEXT_ALIGN_LEFT, black)
+    --sasl.gl.drawText(font,13,13, debug_str2, 14, true, false, TEXT_ALIGN_LEFT, black)
     
 end
 
