@@ -12,7 +12,10 @@ local DATAREF_UNITS_VARIO = globalPropertyi("b21/units_vario") -- 0 = knots, 1 =
 local DATAREF_UNITS_ALTITUDE = globalPropertyi("b21/units_altitude") -- 0 = feet, 1 = meters
 local DATAREF_UNITS_SPEED = globalPropertyi("b21/units_speed") -- 0 = knots, 1 = km/h
 
--- datarefs READ
+-- datarefs READ from other B21 modules
+DATAREF_TE_MPS = globalProperty("b21/total_energy_mps")
+
+-- datarefs READ from X-Plane
 local DATAREF_TRACK_DEG = globalPropertyf("sim/flightmodel/position/hpath") -- aircraft ground path
 local DATAREF_LATITUDE = globalProperty("sim/flightmodel/position/latitude") -- aircraft latitude
 local DATAREF_LONGITUDE = globalProperty("sim/flightmodel/position/longitude") -- aircraft longitude
@@ -25,12 +28,18 @@ local DATAREF_WEIGHT_TOTAL_KG = globalPropertyf("sim/flightmodel/weight/m_total"
 local DATAREF_ALT_FT = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_pilot") -- 3000
 local DATAREF_AIRSPEED_KTS = globalPropertyf("sim/cockpit2/gauges/indicators/airspeed_kts_pilot")
 local DATAREF_PSI = globalPropertyf("sim/flightmodel/position/true_psi") -- degrees (true) aircraft is pointing
+local DATAREF_PAYLOAD_WEIGHT_KG = globalPropertyf("sim/flightmodel/weight/m_fixed") -- we zero this
 
 -- datarefs for aircraft panel
 local DATAREF_MACCREADY_KNOB = createGlobalPropertyi("b21/maccready_knob") -- 1..N = Maccready steps in knots or m/s
 
+-- datarefs WRITTEN
+local DATAREF_STF_KTS = createGlobalPropertyf("b21/stf_kts",0.0,false,true,false) -- current speed to fly (knots)
+local DATAREF_STF_MC_KTS = createGlobalPropertyf("b21/stf_mc_kts",0.0,false,true,false) -- maccready stf (knots)
+local DATAREF_NETTO_FPM = createGlobalPropertyf("b21/netto_fpm", 0.0, false, true, true) -- netto vario (fpm)
+
+-- FONTS
 local font = sasl.gl.loadFont( "fonts/OpenSans-Regular.ttf" )
-local font_num = sasl.gl.loadFont( "fonts/OpenSans-Regular.ttf" )
 
 -- debug display strings
 local debug_str1 = "DEBUG"
@@ -51,8 +60,8 @@ KM_TO_MI = 0.621371
 FT_TO_M = 0.3048
 M_TO_FT = 1.0 / FT_TO_M
 DEG_TO_RAD = 0.0174533
-KPH_TO_KTS = 1.852
-KTS_TO_KPH = 1.0 / KPH_TO_KTS
+KTS_TO_KPH = 1.852
+KPH_TO_KTS = 1.0 / KTS_TO_KPH
 KTS_TO_MPS = 0.514444
 MPS_TO_FPM = 196.85
 MPS_TO_KTS = 1.0 / KTS_TO_MPS
@@ -68,11 +77,11 @@ local white = { 1.0, 1.0, 1.0, 1.0 }
 local wp_color = { 0.0, 0.2, 0.0, 1.0 } -- muddy green
 
 -- Pages:
--- 1 : TASK (load task button, display task)
--- 2 : NAV (direction arrow, arrival height)
--- 3 : MAP (lat/long view of task)
+-- 1 : NAV (direction arrow, arrival height)
+-- 2 : TASK (load task button, display task)
+-- 3 : (future) MAP (lat/long view of task)
 local page = 1
-local page_count = 3
+local page_count = 2
 
 -- task contains the list [1..N] of waypoints
 local task = { }
@@ -104,6 +113,11 @@ local maccready_knob_prev = 0 -- history of knob value so we can efficiently det
 local maccready_mps = 0.0 -- meters/second Maccready value used in the calculations
 
 local aircraft_track_deg = 0.0 -- current aircraft heading degrees true
+
+local netto_mps = 0.0 -- current vario netto (meters per second)
+local ballast_adjust = 0.0 -- polar shift factor in speed & sink due to ballast
+local stf_mps = 0.0    -- current Speed-to-fly, given lift/sink, Maccready & ballast
+local stf_mc_mps = 0.0 -- Speed-to-fly in still air at current Maccready & ballast
 
 -- command callbacks from navpanel buttons
 
@@ -209,7 +223,7 @@ end
 --     maccready_decimal
 --     maccready_mps
 --     maccready_knob_prev
-function update_maccready()
+function update_maccready_knob()
     local knob = get(DATAREF_MACCREADY_KNOB) -- 0..15
     if knob == maccready_knob_prev -- only update if knob position changes
     then
@@ -345,7 +359,7 @@ function update_fms()
 end
 
 -- calcular polar sink in m/s for given airspeed in km/h
-function sink_mps(speed_kph, ballast_adjust)
+function sink_mps(speed_kph)
     local prev_point = { 0, 2 } -- arbitrary starting polar point (for speed < polar[1][SPEED])
     for i, point in pairs(project_settings.polar) -- each point is { speed_kph, sink_mps }
     do
@@ -367,16 +381,99 @@ function interp(speed, p1, p2)
     return p1[2] + ratio * (p2[2]-p1[2])
 end
 
--- calculate speed-to-fly in still air for current maccready setting
-function maccready_stf_mps(ballast_adjust)
+-- CALCULATE NETTO (sink is negative)
+--Inputs:
+--    dataref(b21_total_energy_mps) from b21_total_energy.lua
+--    B21_302_polar_sink_mps
+--Outputs:
+--    L:B21_302_netto_mps
+--
+--Simply add the calculated polar sink (+ve) back onto the TE reading
+--E.g. TE says airplane sinking at 2.5 m/s (te = -2.5)
+-- Polar says aircraft should be sinking at 1 m/s (polar_sink = +1)
+-- Netto = te + netto = (-2.5) + 1 = -1.5 m/s
+-- Updates global:
+--    netto_mps
+function update_netto()
+    local airspeed_kts = get(DATAREF_AIRSPEED_KTS)
+
+    netto_mps = get(DATAREF_TE_MPS) + sink_mps(airspeed_kts * KTS_TO_KPH)
+
+    -- correct for low airspeed when instrument would not be fully working
+    -- i.e.
+    -- at 0 mps airspeed, netto will be forced to zero
+    -- at 0..20 mps, value will be scaled from x0 .. x1 using square of airspeed
+    -- 20+ mps (~40 knots) value will be 100% of calculated value
+    local airspeed_mps = airspeed_kts * KTS_TO_MPS
+
+    if airspeed_mps < 20
+    then
+        netto_mps = netto_mps * (airspeed_mps^2 / 400)
+    end
+    -- write the netto value to our global dataref so it can be used directly in other gauges
+    set(DATAREF_NETTO_FPM, netto_mps * MPS_TO_FPM)
+end
+
+-- Update STF and ballast values
+--
+--    Vstf = sqrt(R*(maccready-netto) + sqr(stf_best))*sqrt(polar_adjust)
+--
+--    if in high lift area then this formula has error calculating negative speeds, so adjust:
+--    if R*(maccready-netto)+sqr(Vbest) is below a threshold (v2stfx) instead use:
+--    1 / ((v2stfx - [above calculation])/z + 1/v2stfx)
+--    this formula decreases to zero at -infinity instead of going negative
+-- writes globals:
+--    ballast_adjust
+--    stf_mps
+--    stf_mc_mps
+-- writes datarefs:
+--    DATAREF_STF_KTS
+--    DATAREF_STF_MC_KTS
+function update_stf_ballast()
+
+    -- BALLAST CALCULATION
+    --
+    -- write global ballast adjustment needed for speed-to-fly calculations
+    ballast_adjust = math.sqrt(get(DATAREF_WEIGHT_TOTAL_KG)/ project_settings.polar_weight_empty_kg)
+
+    -- STF CALCULATION FOR STILL AIR
+    --
+    -- Calculate speed-to-fly in still air for current maccready setting
     -- some constants derived from polar to use in the speed-to-fly calculation
     local polar_stf_2_mps = project_settings.polar_stf_2_kph * KPH_TO_MPS
     local polar_stf_best_mps = project_settings.polar_stf_best_kph * KPH_TO_MPS
     local polar_const_r = (polar_stf_2_mps^2 - polar_stf_best_mps^2) / 2
 
-    return math.sqrt(maccready_mps * polar_const_r + polar_stf_best_mps^2) *
+    -- write global (speed-to-fly in still air)
+    stf_mc_mps = math.sqrt(maccready_mps * polar_const_r + polar_stf_best_mps^2) *
                          math.sqrt(ballast_adjust)
-    --print("B21_302_mc_stf_mps", B21_302_mc_stf_mps,"(", B21_302_mc_stf_mps * MPS_TO_KPH, "kph)")
+    -- update the DATAREF
+    set(DATAREF_STF_MC_KTS, stf_mc_mps * MPS_TO_KTS)
+
+    -- STF CALCULATION USING CURRENT LIFT/SINK
+    --
+    -- stf_temp_a is the initial speed-squared value representing the speed to fly
+    -- it will be adjusted if it's below (25 m/s)^2 i.e. vario is proposing a very slow stf (=> strong lift)
+    -- finally it will be adjusted according to the ballast ratio
+    local stf_temp_a =  polar_const_r * (maccready_mps - netto_mps) + polar_stf_best_mps^2
+
+    -- threshold speed-squared (m/s) figure to adjust speed-to-fly if below this (i.e. 25 m/s)
+    local polar_const_v2stfx = 625
+    local polar_const_z = 300000
+
+    if stf_temp_a < polar_const_v2stfx
+    then
+        stf_temp_a = 1.0 / ((polar_const_v2stfx - stf_temp_a) / polar_const_z + (1.0 / polar_const_v2stfx))
+    end
+
+    -- write global (speed-to-fly in current lift/sink)
+    stf_mps = math.sqrt(stf_temp_a) * math.sqrt(ballast_adjust)
+    -- update the DATAREF
+    set(DATAREF_STF_KTS, stf_mps * MPS_TO_KTS)
+
+    debug_str1 = "STF:"..get(DATAREF_STF_KTS)
+    debug_str2 = "Airspeed:"..get(DATAREF_AIRSPEED_KTS)
+
 end
 
 -- return height needed to fly distance_m meters on bearing_deg degrees
@@ -394,18 +491,12 @@ function height_needed_m(distance_m, bearing_deg)
     -- y_mps is wind speed perpendicular to line to waypoint (the sign is irrelevant)
     local y_mps = math.sin(theta_radians) * wind_mps
 
-    -- get ballast adjustment needed for speed-to-fly calculation
-    local ballast_adjust = math.sqrt(get(DATAREF_WEIGHT_TOTAL_KG)/ project_settings.polar_weight_empty_kg)
-
-    -- speed-to-fly meters/second at current maccready setting and ballast
-    local stf_mps = maccready_stf_mps(ballast_adjust)
-
     -- speed made good along line to waypoint (i.e. speed-to-fly adjusted for wind)
-    local vw_mps = math.sqrt(stf_mps^2 - y_mps^2) + x_mps
+    local vw_mps = math.sqrt(stf_mc_mps^2 - y_mps^2) + x_mps
 
     -- (distance to waypoint) / (speed to waypoint) = (time to waypoint)
     -- (time to waypoint) * (sink rate at speed-to-fly) = (height needed)
-    return distance_m / vw_mps * sink_mps(stf_mps * MPS_TO_KPH, ballast_adjust)
+    return distance_m / vw_mps * sink_mps(stf_mc_mps * MPS_TO_KPH)
 
 end
 
@@ -446,15 +537,28 @@ function update_arrival_heights()
     --   (height needed on next leg) minus
     --   (elevation of next waypoint)
     next_wp.arrival_height_m = aircraft_alt_m - height_m - next_height_m - next_wp.elevation_m
-    -- debug_str1 = "NEXT Arr Ht M:"..task[task_index+1].arrival_height_m
+end
+
+-- Aircraft load init code
+local init_complete = false
+
+function init()
+    set(DATAREF_PAYLOAD_WEIGHT_KG, 0.0)
 end
 
 -- called by SASL on X-Plane update loop
 function update()
-    aircraft_track_deg = get_aircraft_track_deg()
-    update_wp_distance_and_bearing()
-    update_fms()
-    update_maccready()
+    if not init_complete
+    then
+        init()
+        init_complete = true
+    end
+    aircraft_track_deg = get_aircraft_track_deg() -- get aircraft track over ground (=heading @ 0 kts)
+    update_netto() -- update netto_mps global
+    update_stf_ballast() -- update globals for ballast & speed-to-fly
+    update_wp_distance_and_bearing() -- add aircraft distance and bearing info to waypoints
+    update_fms() -- detect if flightplan has been loaded and update waypoints in 'task' global
+    update_maccready_knob() -- detect if maccready knob turned, if so update setting
     update_arrival_heights()
 end --update
 
@@ -475,13 +579,13 @@ function button_load_clicked()
     load_fms()
 end
 
-function button_left_clicked()
-    print("b21_navpanel","button LEFT clicked")
+function button_prev_wp_clicked()
+    print("b21_navpanel","button WP- clicked")
     prev_wp()
 end
 
-function button_right_clicked()
-    print("b21_navpanel","button RIGHT clicked")
+function button_next_wp_clicked()
+    print("b21_navpanel","button WP+ clicked")
     next_wp()
 end
 
@@ -634,7 +738,7 @@ function draw_distance_to_go()
         dist_str = tostring(math.floor(dist * 10+0.5)/10)
     end
     -- draw distance value e.g. "123" or "6.7"
-    sasl.gl.drawText(font_num,150,90, dist_str, 20, true, false, TEXT_ALIGN_RIGHT, black)
+    sasl.gl.drawText(font,150,90, dist_str, 20, true, false, TEXT_ALIGN_RIGHT, black)
 
     -- debug still need to do distance to second waypoint
 end
@@ -810,7 +914,7 @@ function draw_nav_next_wp()
         dist_str = tostring(math.floor(dist * 10+0.5)/10)
     end
     -- draw distance value e.g. "123" or "6.7"
-    sasl.gl.drawText(font_num,95,29, dist_str, 18, true, false, TEXT_ALIGN_RIGHT, color)
+    sasl.gl.drawText(font,95,29, dist_str, 18, true, false, TEXT_ALIGN_RIGHT, color)
 
     -- ARRIVAL HEIGHT
     local altitude_units_str = "FT"
@@ -841,6 +945,28 @@ function draw_nav_next_wp()
 
 end
 
+-- When no task, display "BALLAST: 100%"
+function draw_ballast()
+    -- draw "BALLAST:" text
+    sasl.gl.drawText(font,111,82, "BALLAST:", 10, true, false, TEXT_ALIGN_RIGHT, black)
+    -- get ballast ratio 0.0 = empty, 1.0 = full
+    local ballast_ratio = (get(DATAREF_WEIGHT_TOTAL_KG) - project_settings.polar_weight_empty_kg) /
+        (project_settings.polar_weight_full_kg - project_settings.polar_weight_empty_kg)
+
+    local ballast_str = math.floor(100 * ballast_ratio + 0.5).."%"
+
+    -- draw e.g. "100%" ballast amount text
+    sasl.gl.drawText(font,110,82, ballast_str, 14, true, false, TEXT_ALIGN_LEFT, black)
+end
+
+-- When no task, draw the 'base' STF and current STF
+function draw_speed_to_fly()
+end
+
+-- When no task, draw the glide (i.e. L/D) ratio
+function draw_ld()
+end
+
 -- top-level NAV page draw function
 function draw_page_nav()
     -- logInfo("navpanel draw called")
@@ -848,25 +974,34 @@ function draw_page_nav()
     -- sasl.gl.drawLine(0,0,100,100,green)
 
     --debug
-    --sasl.gl.drawText(font,13,33, debug_str1, 14, true, false, TEXT_ALIGN_LEFT, black)
-    --sasl.gl.drawText(font,13,13, debug_str2, 14, true, false, TEXT_ALIGN_LEFT, black)
+    sasl.gl.drawText(font,13,33, debug_str1, 14, true, false, TEXT_ALIGN_LEFT, black)
+    sasl.gl.drawText(font,13,13, debug_str2, 14, true, false, TEXT_ALIGN_LEFT, black)
 
-    -- "1/5: 1N7"
-    local top_string
+    draw_maccready()
+
+    draw_wind()
+
+    -- if NO task loaded
     if #task == 0
     then
-        top_string = "LOAD TASK"
+        local top_string = "LOAD TASK"
         sasl.gl.drawText(font,35,h-40, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
+
+        -- draw % ballast
+        draw_ballast()
+
+        -- draw STF speed @ Mccready and with current lift/sink
+        draw_speed_to_fly()
+
+        -- draw glide (i.e. L/D) ratio
+        draw_ld()
+
         return
     end
 
     draw_current_wp()
 
     draw_nav_headings()
-
-    draw_maccready()
-
-    draw_wind()
 
     draw_distance_to_go()
 
@@ -876,57 +1011,19 @@ function draw_page_nav()
 
 end
 
--- *****************
--- ** MAP PAGE *****
--- *****************
-
--- top-level MAP page draw function
-function draw_page_map()
-    -- logInfo("navpanel draw called")
-    sasl.gl.drawTexture(map_background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
-    -- sasl.gl.drawLine(0,0,100,100,green)
-
-    -- "1/5: 1N7"
-    local top_string
-    if #task == 0
-    then
-        top_string = "LOAD TASK"
-        sasl.gl.drawText(font,5,h-50, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
-        return
-    end
-
-    top_string = "MAP "..task_index .. "/" .. #task .. ":" .. task[task_index].ref
-
-    local mid_string = "This is the Map page"
-
-    local bottom_string = "-*-*-*-"
-
-    --  TOP STRING                         size isBold isItalic
-    sasl.gl.drawText(font,5,h-30, top_string, 16, true, false, TEXT_ALIGN_LEFT, black)
-
-    -- MIDDLE STRING
-    sasl.gl.drawText(font,5,h-75, mid_string, 18, true, false, TEXT_ALIGN_LEFT, black)
-
-    -- BOTTOM STRING
-    sasl.gl.drawText(font,5,55, bottom_string, 18, true, false, TEXT_ALIGN_LEFT, black)
-
-end
-
 callback = {}
 callback["page"] = button_page_clicked
 callback["load"] = button_load_clicked
-callback["wp_prev"] = button_left_clicked
-callback["wp_next"] = button_right_clicked
+callback["wp_prev"] = button_prev_wp_clicked
+callback["wp_next"] = button_next_wp_clicked
 
 function draw()
     if page == 1
     then
-        draw_page_task()
+        draw_page_nav()
     elseif page == 2
     then
-        draw_page_nav()
-    else
-        draw_page_map()
+        draw_page_task()
     end
     drawAll(components)
 end

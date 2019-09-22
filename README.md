@@ -50,3 +50,5 @@
 * create navpanel TASK page
 * create navpanel NAV page
 * create navpanel MAP page
+* remove arrival height / stf from vario_302 (make vario_301)
+* create electronic ASI with STF bug

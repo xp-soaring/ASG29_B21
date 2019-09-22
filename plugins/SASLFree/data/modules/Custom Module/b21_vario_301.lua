@@ -36,7 +36,8 @@ local geo = require "b21_geo"
 DATAREF = {}
 
 -- datarefs from other B21 modules
-DATAREF.TE_MPS = globalProperty("b21/total_energy_mps")
+DATAREF.TE_MPS = globalPropertyf("b21/total_energy_mps")
+DATAREF.STF_KTS = globalPropertyf("b21/stf_kts")
 
 -- datarefs updated by panel:
 DATAREF.KNOB = createGlobalPropertyf("b21/vario_302/knob", 0, false, true, false) -- 2.0
@@ -60,7 +61,7 @@ DATAREF.UNITS_ALTITUDE = globalProperty("b21/units_altitude") -- 0 = feet, 1 = m
 DATAREF.UNITS_SPEED = globalProperty("b21/units_speed") -- 0 = knots, 1 = km/h (from settings.lua)
 
 -- create global DataRefs we will WRITE (name, default, isNotPublished, isShared, isReadOnly)
-DATAREF.NETTO = createGlobalPropertyf("b21/netto_fpm", 0.0, false, true, true)
+--DATAREF.NETTO = createGlobalPropertyf("b21/netto_fpm", 0.0, false, true, true)
 DATAREF.PULL = createGlobalPropertyi("b21/vario_302/pull", 0, false, true, true)
 DATAREF.PUSH = createGlobalPropertyi("b21/vario_302/push", 0, false, true, true)
 DATAREF.NEEDLE_FPM = createGlobalPropertyf("b21/vario_302/needle_fpm", 0.0, false, true, true)
@@ -230,46 +231,6 @@ sasl.registerCommandHandler(command_mode_te, 0, mode_te)
 
 -- #################################################################################################
 
--- Calculate B21_302_ballast_adjust which is:
---  the square root of the proportion glider weight is above polar_weight_empty, i.e.
---  ballast = 0.0 (zero ballast, glider at empty weight) => polar_adjust = 1
---  ballast = 1.0 (full ballast, glider at full weight) => polar_adjust = sqrt(weight_full/weight_empty)
-function update_ballast()
-    B21_302_ballast_ratio = (dataref_read("WEIGHT_TOTAL_KG") - project_settings.polar_weight_empty_kg) /
-                            (project_settings.polar_weight_full_kg - project_settings.polar_weight_empty_kg)
-
-    B21_302_ballast_adjust = math.sqrt(dataref_read("WEIGHT_TOTAL_KG")/ project_settings.polar_weight_empty_kg)
-    --print("B21_302_ballast_ratio",B21_302_ballast_ratio) --debug
-    --print("B21_302_ballast_adjust",B21_302_ballast_adjust) --debug
-end
-
--- update Maccready value from knob rotation 0..15
--- note we update differently for mps / knots so display moves 0.5 units in each units setting.
-function update_maccready()
-    local knob = dataref_read("KNOB") -- 0..15
-    if knob ~= prev_knob -- only update if knob position changes
-    then
-        --debug read knob on cockpit panel
-        if dataref_read("UNITS_VARIO") == 1 -- meters per second
-        then
-            B21_302_maccready_mps = knob / 2
-        else                                -- knots
-            -- for Knots knob will move in 0.5 knot increments to 5.0, then 1 Knot increments to 9.99
-            if knob < 10.1                          -- i.e. knob = 0..10
-            then
-                B21_302_maccready_kts = knob / 2
-            elseif knob < 14.1                      -- i.e. knob = 11..14
-            then
-                B21_302_maccready_kts = knob - 5
-            else                                    -- i.e. knob = 15
-                B21_302_maccready_kts = 9.9 -- display as 9.9
-            end
-            B21_302_maccready_mps = B21_302_maccready_kts * KTS_TO_MPS
-        end
-        prev_knob = knob -- record knob position so we detect another change
-    end
-    --print("B21_302_maccready_kts", B21_302_maccready_kts) --debug
-end
 
 -- update STF/TE mode based on switch setting or AUTO calculation
 function update_stf_te_mode()
@@ -324,187 +285,6 @@ function update_stf_te_mode()
     end
 end
 
--- calcular polar sink in m/s for given airspeed in km/h
-function sink_mps(speed_kph, ballast_adjust)
-    local prev_point = { 0, 2 } -- arbitrary starting polar point (for speed < polar[1][SPEED])
-    for i, point in pairs(project_settings.polar) -- each point is { speed_kph, sink_mps }
-    do
-        -- adjust this polar point to account for ballast carried
-        local adjusted_point = { point[1] * ballast_adjust, point[2] * ballast_adjust }
-        if ( speed_kph < adjusted_point[1])
-        then
-            return interp(speed_kph, prev_point, adjusted_point )
-        end
-        prev_point = adjusted_point
-    end
-    return 10 -- we fell off the end of the polar, so guess sink value (10 m/s)
-end
-
--- interpolate sink for speed between between points p1 and p2 on the polar
--- p1 and p2 are { speed_kph, sink_mps } where sink is positive
-function interp(speed, p1, p2)
-    local ratio = (speed - p1[1]) / (p2[1] - p1[1])
-    return p1[2] + ratio * (p2[2]-p1[2])
-end
-
-function update_polar_sink()
-    local airspeed_kph = dataref_read("AIRSPEED_KTS") * KTS_TO_KPH
-    B21_302_polar_sink_mps = sink_mps(airspeed_kph, B21_302_ballast_adjust)
-    --print("B21_302_polar_sink_mps",B21_302_polar_sink_mps) --debug
-end
-
---[[ *******************************************************
-CALCULATE NETTO (sink is negative)
-Inputs:
-    dataref(b21_total_energy_mps) from b21_total_energy.lua
-    B21_302_polar_sink_mps
-Outputs:
-    L:B21_302_netto_mps
-
-Simply add the calculated polar sink (+ve) back onto the TE reading
-E.g. TE says airplane sinking at 2.5 m/s (te = -2.5)
- Polar says aircraft should be sinking at 1 m/s (polar_sink = +1)
- Netto = te + netto = (-2.5) + 1 = -1.5 m/s
-]]
-
-function update_netto()
-    B21_302_netto_mps = dataref_read("TE_MPS") + B21_302_polar_sink_mps
-
-    local airspeed_mps = dataref_read("AIRSPEED_KTS") * KTS_TO_MPS
-
-    -- correct for low airspeed when instrument would not be fully working
-    -- i.e.
-    -- at 0 mps airspeed, netto will be forced to zero
-    -- at 0..20 mps, value will be scaled from x0 .. x1 using square of airspeed
-    -- 20+ mps (~40 knots) value will be 100% of calculated value
-    if airspeed_mps < 20
-    then
-        B21_302_netto_mps = B21_302_netto_mps * (airspeed_mps^2 / 400)
-    end
-    -- write the netto value to our global dataref so it can be used directly in other gauges
-    dataref_write("NETTO",B21_302_netto_mps * MPS_TO_FPM)
-    --print("B21_302_netto_mps",B21_302_netto_mps) --debug
-end
-
---[[
-                    CALCULATE STF
-                    Outputs:
-                        (L:B21_302_stf, meters per second)
-                    Inputs:
-                        (L:B21_302_polar_const_r, number)
-                        (L:B21_302_polar_const_v2stfx, number) = if temp_a is less than this, then tweak stf (high lift)
-                        (L:B21_302_polar_const_z, number)
-                        (L:B21_302_netto, meters per second)
-                        (L:B21_302_maccready, meters per second)
-                        (L:B21_302_ballast_adjust, number)
-
-                     Vstf = sqrt(R*(maccready-netto) + sqr(stf_best))*sqrt(polar_adjust)
-
-                     if in high lift area then this formula has error calculating negative speeds, so adjust:
-                     if R*(maccready-netto)+sqr(Vbest) is below a threshold (v2stfx) instead use:
-                        1 / ((v2stfx - [above calculation])/z + 1/v2stfx)
-                     this formula decreases to zero at -infinity instead of going negative
-]]
-
--- writes B21_302_stf_mps (speed to fly in m/s)
-function update_stf()
-    -- stf_temp_a is the initial speed-squared value representing the speed to fly
-    -- it will be adjusted if it's below (25 m/s)^2 i.e. vario is proposing a very slow stf (=> strong lift)
-    -- finally it will be adjusted according to the ballast ratio
-    local B21_302_stf_temp_a =  B21_302_polar_const_r * (B21_302_maccready_mps - B21_302_netto_mps) + B21_polar_stf_best_mps^2
-    if B21_302_stf_temp_a < B21_302_polar_const_v2stfx
-    then
-        B21_302_stf_temp_a = 1.0 / ((B21_302_polar_const_v2stfx - B21_302_stf_temp_a) / B21_302_polar_const_z + (1.0 / B21_302_polar_const_v2stfx))
-    end
-    B21_302_stf_mps = math.sqrt(B21_302_stf_temp_a) * math.sqrt(B21_302_ballast_adjust)
-    --print("B21_302_stf_mps",B21_302_stf_mps, "(",B21_302_stf_mps * MPS_TO_KPH,"kph)") -- debug
-end
-
---[[
-                    CALCULATE STF FOR CURRENT MACCREADY (FOR ARRIVAL HEIGHT)
-                    Outputs:
-                        (L:B21_302_mc_stf, meters per second)
-]]
-
--- calculate speed-to-fly in still air for current maccready setting
-function update_maccready_stf()
-    B21_302_mc_stf_mps = math.sqrt(B21_302_maccready_mps * B21_302_polar_const_r + B21_polar_stf_best_mps^2) *
-                         math.sqrt(B21_302_ballast_adjust)
-    --print("B21_302_mc_stf_mps", B21_302_mc_stf_mps,"(", B21_302_mc_stf_mps * MPS_TO_KPH, "kph)") --debug
-end
-
---[[
-                    CALCULATE POLAR SINK RATE AT MACCREADY STF (SINK RATE IS +ve)
-                    (FOR ARRIVAL HEIGHT)
-                    Outputs:
-                        (L:B21_302_mc_sink, meters per second)
-                    Inputs:
-                        (L:B21_302_mc_stf, meters per second)
-                        (L:B21_302_ballast_adjust, number)
-]]
-
-function update_maccready_sink()
-    B21_302_mc_sink_mps = sink_mps(B21_302_mc_stf_mps * MPS_TO_KPH, B21_302_ballast_adjust)
-    --print("B21_302_mc_sink_mps", B21_302_mc_sink_mps,"(", B21_302_mc_stf_mps / B21_302_mc_sink_mps,"mc L/D)") --debug
-end
-
---[[                    CALCULATE ARRIVAL HEIGHT
-                Outputs:
-                    (L:B21_302_arrival_height, meters)
-                    (L:B21_302_height_needed, meters)
-                Inputs:
-                    (A:AMBIENT WIND DIRECTION, radians)
-                    (A:AMBIENT WIND VELOCITY, meters per second)
-                    (A:PLANE ALTITUDE, meters)
-                    (L:B21_302_mc_stf, meters per second)
-                    (L:B21_302_mc_sink, meters per second)
-                    (L:B21_302_wp_bearing, radians)
-                    (L:B21_302_distance_to_go, meters)
-                    (L:B21_302_wp_msl, meters)
-                    <Script>
-                        (A:AMBIENT WIND DIRECTION, radians) (L:B21_302_wp_bearing, radians) - pi - (&gt;L:B21_theta, radians)
-                        (A:AMBIENT WIND VELOCITY, meters per second) (&gt;L:B21_wind_velocity, meters per second)
-                        (L:B21_theta, radians) cos (L:B21_wind_velocity, meters per second) * (&gt;L:B21_x, meters per second)
-                        (L:B21_theta, radians) sin (L:B21_wind_velocity, meters per second) * (&gt;L:B21_y, meters per second)
-                        (L:B21_302_mc_stf, meters per second) sqr (L:B21_y, meters per second) sqr - sqrt
-                        (L:B21_x, meters per second) + (&gt;L:B21_vw, meters per second)
-                        (L:B21_302_distance_to_go, meters) (L:B21_vw, meters per second) /
-                        (L:B21_302_mc_sink, meters per second) * (&gt;L:B21_302_height_needed, meters)
-
-                        (A:PLANE ALTITUDE, meters) (L:B21_302_height_needed, meters) -
-                        (L:B21_302_wp_msl, meters) -
-                        (&gt;L:B21_302_arrival_height, meters)
-]]
-
-function update_arrival_height()
-    --debug
-    if true then return end
-    -- READ shared vars set by gpsnav for waypoint altitude, distance and heading
-    local wp_alt_m = project_settings.gpsnav_wp_altitude_m
-
-    local wp_distance_m = project_settings.gpsnav_wp_distance_m
-
-    local wp_bearing_rad = project_settings.gpsnav_wp_heading_deg * DEG_TO_RAD
-
-    local theta_radians = dataref_read("WIND_DEG") * DEG_TO_RAD - wp_bearing_rad - math.pi
-
-    local wind_velocity_mps = dataref_read("WIND_KTS") * KTS_TO_MPS
-
-    local x_mps = math.cos(theta_radians) * wind_velocity_mps
-
-    local y_mps = math.sin(theta_radians) * wind_velocity_mps
-
-    local vw_mps = math.sqrt(B21_302_mc_stf_mps^2 - y_mps^2) + x_mps
-
-    B21_302_height_needed_m = wp_distance_m / vw_mps * B21_302_mc_sink_mps
-
-    B21_302_arrival_height_m = dataref_read("ALT_FT") * FT_TO_M - B21_302_height_needed_m - wp_alt_m
-    --print("Wind",dataref_read("WIND_RADIANS"),"radians",dataref_read("WIND_MPS"),"mps") --debug
-    --print("B21_302_height_needed_m", B21_302_height_needed_m) --debug
-    --print("B21_302_arrival_height_m", B21_302_arrival_height_m) --debug
-    -- dataref_write("DEBUG1", math.floor(project_settings.gpsnav_wp_distance_m / 1000))
-    -- dataref_write("DEBUG2", math.floor(project_settings.gpsnav_wp_heading_deg))
-end
 
 --[[                    CALCULATE ACTUAL GLIDE RATIO
                     <Script>
@@ -590,7 +370,7 @@ function update_needle()
     local needle_mps
     if B21_302_mode_stf
     then
-        needle_mps = (dataref_read("AIRSPEED_KTS") * KTS_TO_MPS - B21_302_stf_mps)/ 7
+        needle_mps = (dataref_read("AIRSPEED_KTS") * KTS_TO_MPS - dataref_read("STF_KTS") * KTS_TO_MPS)/ 7
     else
         needle_mps = dataref_read("TE_MPS")
     end
@@ -645,14 +425,7 @@ function update_top_number()
         return
     end
 
-    local reading -- numerical value to display, feet or meters
-
-    if dataref_read("UNITS_ALTITUDE") == 1 -- 0=feet, 1=meters
-    then -- write meters
-        reading = B21_302_arrival_height_m -- dataref_read("ALT_FT") * FT_TO_M
-    else -- write feet
-        reading = B21_302_arrival_height_m * M_TO_FT --dataref_read("ALT_FT")
-    end
+    local reading = B21_302_glide_ratio -- numerical value to display, feet or meters
 
     -- limit reading to 4 digits
     if reading < -9999
@@ -751,26 +524,13 @@ end
 
 --update right number of 302 vario with maccready setting
 function update_right_number()
-    if dataref_read("UNITS_VARIO") == 1 -- meters per second
-    then
-        dataref_write("NUMBER_RIGHT", math.floor(B21_302_maccready_mps * 10.0 + 0.5) / 10.0)
-    else                                -- knots
-        dataref_write("NUMBER_RIGHT", math.floor(B21_302_maccready_kts * 10.0 + 0.5) / 10.0)
+        dataref_write("NUMBER_RIGHT", 1.2)
     end
 end
 
 -- Finally, here's the per-frame update() callabck
 function update()
-    update_ballast()
-    update_maccready()
     update_stf_te_mode()
-
-    update_polar_sink()
-    update_netto()
-    update_stf()
-    update_maccready_stf()
-    update_maccready_sink()
-    update_arrival_height()
     update_glide_ratio()
     update_climb_average()
     update_needle()
@@ -779,5 +539,5 @@ function update()
     update_push()
     update_top_number()
     update_bottom_number()
-    update_right_number()
+    --update_right_number()
 end

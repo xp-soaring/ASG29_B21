@@ -38,12 +38,12 @@ components = {
                 b21_wings_level {}, -- load before b21_controls_commands
                 b21_total_energy {}, -- load before variometers
                 b21_sounds {}, -- load before variometers
-                b21_vario_302 {},
                 b21_vario_57 {},
                 b21_airbrakes {},
 	            b21_navpanel { -- digital nav panel
                     position = { 348, 637, 155, 210}
                 },
+                b21_vario_301 {},
                 b21_clock {}, -- moves hands of watch on panel
                 b21_trim {}, -- provides trigger trim command and gradual movement of trim
                 b21_altimeter {}, -- moves needles of altimeter, supports imperial/metric units
