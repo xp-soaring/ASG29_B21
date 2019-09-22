@@ -80,10 +80,11 @@ local task = { }
              -- loaded from FMS
              type = 1,
              ref = "X1N7",
-             alt_m = 375.0, (note METERS),
+             elevation_m = 375.0, (note METERS),
              point = { lat=40.971146, lng=-74.997475 },
              -- added during FMS load
-             length_m = 123456.7, (task leg length in meters)
+             leg_distance_m = 123456.7, (task leg length in meters TO this wp)
+             leg_bearing_deg = 66.3 (bearing (degrees) of leg TO this wp )
              -- updated during update():
              distance_m (aircraft distance to waypoint, meters)
              bearing_deg (true bearing to waypoint from aircraft position, degrees)
@@ -102,7 +103,7 @@ local maccready_decimal = "0" -- display value for Maccready 'decimal' (e.g. "5"
 local maccready_knob_prev = 0 -- history of knob value so we can efficiently detect change
 local maccready_mps = 0.0 -- meters/second Maccready value used in the calculations
 
-local aircraft_heading_deg = 0.0 -- current aircraft heading degrees true
+local aircraft_track_deg = 0.0 -- current aircraft heading degrees true
 
 -- command callbacks from navpanel buttons
 
@@ -192,7 +193,7 @@ sasl.registerCommandHandler(command_right, 1, clicked_right)
 -- **********************************************************************************************
 
 -- get the aircraft movement direction in degrees true
-function get_aircraft_heading_deg()
+function get_aircraft_track_deg()
     if get(DATAREF_ONGROUND) == 1
     then
         return get(DATAREF_PSI)
@@ -254,19 +255,13 @@ function update_wp_distance_and_bearing()
 
         task[task_index].distance_m = geo.get_distance(aircraft_point, task[task_index].point)
         task[task_index].bearing_deg = geo.get_bearing(aircraft_point, task[task_index].point)
-        task[task_index].heading_deg = task[task_index].bearing_deg - aircraft_heading_deg
+        task[task_index].heading_deg = task[task_index].bearing_deg - aircraft_track_deg
 
-        --debug_str1 = tostring(math.floor(task[task_index].distance_m))
-        debug_str1 = "Bearing>> "..tostring(math.floor(task[task_index].bearing_deg*10+0.5)/10)
-        --debug_str1 = tostring(math.floor(stf_mps*MPS_TO_KPH*10+0.5)/10)
-        debug_str2 = "Heading>> "..tostring(math.floor(aircraft_heading_deg*10+0.5)/10)
-    
-        --debug
         if task_index < #task
         then
             task[task_index+1].distance_m = geo.get_distance(aircraft_point, task[task_index+1].point)
             task[task_index+1].bearing_deg = geo.get_bearing(aircraft_point, task[task_index+1].point)
-            task[task_index+1].heading_deg = task[task_index+1].bearing_deg - aircraft_heading_deg
+            task[task_index+1].heading_deg = task[task_index+1].bearing_deg - aircraft_track_deg
         end
     end
 end
@@ -302,10 +297,10 @@ function update_fms()
 
     task_length_m = 0.0 -- we will accumulate total task length
 
-    for i=0, fms_count-1
+    for fms_index=0, fms_count-1
     do
         -- get next waypoint from X-Plane flight plan
-        local fms_type, fms_name, fms_id, fms_altitude_ft, fms_latitude, fms_longitude = sasl.getFMSEntryInfo(i)
+        local fms_type, fms_name, fms_id, fms_altitude_ft, fms_latitude, fms_longitude = sasl.getFMSEntryInfo(fms_index)
 
         local wp_point = { lat = fms_latitude, lng = fms_longitude }
 
@@ -316,31 +311,36 @@ function update_fms()
             wp_elevation_m = fms_altitude_ft * FT_TO_M
         end
 
-        local leg_length_m = 0.0 -- distance from previous wp
+        local leg_distance_m = 0.0 -- distance from previous wp to this one
+        local leg_bearing_deg = 0.0 -- bearing from previous wp to this one
 
-        if i > 0
+        if fms_index > 0
         then
             -- note first WP in task is task[1] as Lua arrays start from 1
-            leg_length_m = geo.get_distance(task[i].point, wp_point)
+            -- so waypoint before this one is task[fms_index]
+            leg_distance_m = geo.get_distance(task[fms_index].point, wp_point)
+            leg_bearing_deg = geo.get_bearing(task[fms_index].point, wp_point)
         end
 
-        task_length_m = task_length_m + leg_length_m
+        task_length_m = task_length_m + leg_distance_m
 
-        print("navpanel["..i.."] "..fms_name,
+        print("navpanel["..fms_index.."] "..fms_name,
                                  fms_latitude,
                                  fms_longitude,
                                  fms_altitude_ft,
                                  wp_elevation_m * M_TO_FT)
         table.insert(task,{ type = fms_type,
                             ref =  fms_name,
-                            alt_m = wp_elevation_m,
+                            elevation_m = wp_elevation_m,
                             point = wp_point,
-                            length_m = leg_length_m
+                            leg_distance_m = leg_distance_m,
+                            leg_bearing_deg = leg_bearing_deg
                         })
     end
 
-    -- will set task_index = 1
+    -- set task_index = 1
     set_waypoint(1)
+    -- update data for aircraft distance and bearing to these waypoints
     update_wp_distance_and_bearing()
 end
 
@@ -409,24 +409,49 @@ function height_needed_m(distance_m, bearing_deg)
 
 end
 
--- update the arrival heights for the current and next waypoints
+-- Update the arrival heights for the current and next waypoints.
+-- Writes task[task_index].arrival_height_m
+-- and same for task[task_index+1] if it exists
 function update_arrival_heights()
+    -- if no task loaded then return now
     if #task == 0
     then
         return
     end
 
+    -- update arrival_height_m for current waypoint
     local wp = task[task_index]
+
+    local aircraft_alt_m = get(DATAREF_ALT_FT) * FT_TO_M
 
     local height_m = height_needed_m(wp.distance_m, wp.bearing_deg)
 
-    wp.arrival_height_m = get(DATAREF_ALT_FT) * FT_TO_M - height_m - wp.alt_m
+    wp.arrival_height_m = aircraft_alt_m - height_m - wp.elevation_m
 
+    -- if on the final waypoint then return now
+    if task_index == #task
+    then
+        return
+    end
+
+    -- update arrival_height_m for next waypoint
+    local next_wp = task[task_index+1]
+
+    -- find height needed for distance and bearing of next leg
+    local next_height_m = height_needed_m(next_wp.leg_distance_m, next_wp.leg_bearing_deg)
+
+    -- arrival height at next waypoint = 
+    --   (current aircraft altitude) minus
+    --   (height needed to current waypoint) minus
+    --   (height needed on next leg) minus
+    --   (elevation of next waypoint)
+    next_wp.arrival_height_m = aircraft_alt_m - height_m - next_height_m - next_wp.elevation_m
+    -- debug_str1 = "NEXT Arr Ht M:"..task[task_index+1].arrival_height_m
 end
 
-
+-- called by SASL on X-Plane update loop
 function update()
-    aircraft_heading_deg = get_aircraft_heading_deg()
+    aircraft_track_deg = get_aircraft_track_deg()
     update_wp_distance_and_bearing()
     update_fms()
     update_maccready()
@@ -517,17 +542,17 @@ function draw_task()
         local length_string
         if project_settings.DISTANCE_UNITS == 0 -- (0=mi, 1=km)
         then
-            length_string = tostring(math.floor(wp.length_m * M_TO_MI+0.5))
+            length_string = tostring(math.floor(wp.leg_distance_m * M_TO_MI+0.5))
         else
-            length_string = tostring(math.floor(wp.length_m / 1000.0 + 0.5))
+            length_string = tostring(math.floor(wp.leg_distance_m / 1000.0 + 0.5))
         end
 
         local altitude_string
         if project_settings.ALTITUDE_UNITS == 0 -- (0=feet, 1=meters)
         then
-            altitude_string = tostring(math.floor(wp.alt_m * M_TO_FT + 0.5))
+            altitude_string = tostring(math.floor(wp.elevation_m * M_TO_FT + 0.5))
         else
-            altitude_string = tostring(math.floor(wp.alt_m + 0.5))
+            altitude_string = tostring(math.floor(wp.elevation_m + 0.5))
         end
 
         --  wp.ref                                        size isBold isItalic
@@ -642,7 +667,6 @@ function draw_arrival_height()
     -- draw arrival_height value e.g. "123"
     sasl.gl.drawText(font,135,63, arrival_height_str, 22, true, false, TEXT_ALIGN_RIGHT, color)
 
-    --debug still need arrival height for next waypoint
 end
 
 -- write wind speed in circle graphic and add pointer to circle
@@ -670,7 +694,7 @@ function draw_wind()
 
     --
     -- now position pointer on wind circle graphic
-    local wind_heading_deg = get(DATAREF_WIND_DEG) - aircraft_heading_deg
+    local wind_heading_deg = get(DATAREF_WIND_DEG) - aircraft_track_deg
     local wind_heading_rad = math.rad(wind_heading_deg)
 
     -- coordinates for wind circle graphic on NAV page
@@ -746,6 +770,8 @@ function draw_nav_headings()
     end
 end
 
+-- Add info to bottom of navpanel for NEXT waypoint
+-- i.e. name, distance-to-go, arrival height
 function draw_nav_next_wp()
     if #task == 0 or task_index == #task
     then
@@ -768,10 +794,10 @@ function draw_nav_next_wp()
         distance_units_str = "KM"
     end
     -- draw distance units i.e. "MI" or "KM"
-    sasl.gl.drawText(font,130,33, distance_units_str, 12, true, false, TEXT_ALIGN_LEFT, color)
+    sasl.gl.drawText(font,100,33, distance_units_str, 12, true, false, TEXT_ALIGN_LEFT, color)
 
     -- initially in KM
-    local dist = (task[task_index].distance_m + task[task_index+1].length_m)/ 1000
+    local dist = (task[task_index].distance_m + wp.leg_distance_m)/ 1000
 
     if project_settings.DISTANCE_UNITS == 0 -- 0 = MI, 1 = KM
     then
@@ -784,7 +810,34 @@ function draw_nav_next_wp()
         dist_str = tostring(math.floor(dist * 10+0.5)/10)
     end
     -- draw distance value e.g. "123" or "6.7"
-    sasl.gl.drawText(font_num,125,33, dist_str, 14, true, false, TEXT_ALIGN_RIGHT, color)
+    sasl.gl.drawText(font_num,95,29, dist_str, 18, true, false, TEXT_ALIGN_RIGHT, color)
+
+    -- ARRIVAL HEIGHT
+    local altitude_units_str = "FT"
+    if project_settings.ALTITUDE_UNITS == 1 -- 0 = FT, 1 = M
+    then
+        altitude_units_str = "M"
+    end
+    -- draw altitude units i.e. "FT" or "M"
+    sasl.gl.drawText(font,100,15, altitude_units_str, 12, true, false, TEXT_ALIGN_LEFT, color)
+    
+    local arrival_height = wp.arrival_height_m -- meters
+    if project_settings.ALTITUDE_UNITS == 0 -- 0 = FT, 1 = M
+    then
+        arrival_height = wp.arrival_height_m * M_TO_FT
+    end
+    -- build the actual arrival height number string "123" or "6.7"
+    local arrival_height_str = tostring(math.floor(math.abs(arrival_height)))
+
+    if arrival_height < 0.0
+    then
+        arrival_height_str = "-"..arrival_height_str
+    else
+        arrival_height_str = "+"..arrival_height_str
+        color = {0.0,0.15,0.0,1.0} -- green if positive
+    end
+    -- draw arrival_height value e.g. "123"
+    sasl.gl.drawText(font,95,10, arrival_height_str, 20, true, false, TEXT_ALIGN_RIGHT, color)
 
 end
 
@@ -793,6 +846,10 @@ function draw_page_nav()
     -- logInfo("navpanel draw called")
     sasl.gl.drawTexture(nav_background_img, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
     -- sasl.gl.drawLine(0,0,100,100,green)
+
+    --debug
+    --sasl.gl.drawText(font,13,33, debug_str1, 14, true, false, TEXT_ALIGN_LEFT, black)
+    --sasl.gl.drawText(font,13,13, debug_str2, 14, true, false, TEXT_ALIGN_LEFT, black)
 
     -- "1/5: 1N7"
     local top_string
@@ -817,10 +874,6 @@ function draw_page_nav()
 
     draw_nav_next_wp()
 
-    --debug still need arrival height for next waypoint
-    sasl.gl.drawText(font,13,33, debug_str1, 14, true, false, TEXT_ALIGN_LEFT, black)
-    sasl.gl.drawText(font,13,13, debug_str2, 14, true, false, TEXT_ALIGN_LEFT, black)
-    
 end
 
 -- *****************

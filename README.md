@@ -46,4 +46,7 @@
 * add 'Flaps' label to indicator on panel
 * tidy up bezel highlight/shadow for ballast gauge
 * check Win CE tablet in cockpit properly disabled
-
+* add pilot model for external view
+* create navpanel TASK page
+* create navpanel NAV page
+* create navpanel MAP page
