@@ -525,7 +525,6 @@ end
 --update right number of 302 vario with maccready setting
 function update_right_number()
         dataref_write("NUMBER_RIGHT", 1.2)
-    end
 end
 
 -- Finally, here's the per-frame update() callabck

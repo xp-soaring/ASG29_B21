@@ -119,6 +119,9 @@ local ballast_adjust = 0.0 -- polar shift factor in speed & sink due to ballast
 local stf_mps = 0.0    -- current Speed-to-fly, given lift/sink, Maccready & ballast
 local stf_mc_mps = 0.0 -- Speed-to-fly in still air at current Maccready & ballast
 
+local glide_ratio = 99 -- L/D
+local glide_ratio_display -- updated with 'glide_ratio' on slower cycle
+
 -- command callbacks from navpanel buttons
 
 local command_load = sasl.createCommand("b21/nav/load_task",
@@ -356,6 +359,9 @@ function update_fms()
     set_waypoint(1)
     -- update data for aircraft distance and bearing to these waypoints
     update_wp_distance_and_bearing()
+
+    -- move user to TASK page
+    page = 2
 end
 
 -- calcular polar sink in m/s for given airspeed in km/h
@@ -394,10 +400,23 @@ end
 -- Netto = te + netto = (-2.5) + 1 = -1.5 m/s
 -- Updates global:
 --    netto_mps
-function update_netto()
+--    glide_ratio
+-- Writes dataref:
+--    DATAREF_NETTO_FPM
+local update_netto_ld_time_s = 0 -- to manage display period
+function update_netto_ld()
     local airspeed_kts = get(DATAREF_AIRSPEED_KTS)
 
-    netto_mps = get(DATAREF_TE_MPS) + sink_mps(airspeed_kts * KTS_TO_KPH)
+    local total_energy_mps = get(DATAREF_TE_MPS)
+
+    glide_ratio = airspeed_kts / (-total_energy_mps * MPS_TO_KTS)
+    if glide_ratio < 0 or glide_ratio > 99
+    then
+        glide_ratio = 99
+    end
+
+    -- netto is we ADD back in the polar sink (+ve) to the TE (-ve)
+    netto_mps = total_energy_mps + sink_mps(airspeed_kts * KTS_TO_KPH)
 
     -- correct for low airspeed when instrument would not be fully working
     -- i.e.
@@ -412,6 +431,17 @@ function update_netto()
     end
     -- write the netto value to our global dataref so it can be used directly in other gauges
     set(DATAREF_NETTO_FPM, netto_mps * MPS_TO_FPM)
+
+    -- manage update period for glide_ratio_display
+    local now = get(DATAREF_TIME_S)
+    if now < update_netto_ld_time_s + 2 -- 2 second update cycle
+    then
+        return
+    end
+    update_netto_ld_time_s = now
+    -- ok, continue
+    glide_ratio_display = glide_ratio
+    
 end
 
 -- Update STF and ballast values
@@ -429,6 +459,7 @@ end
 -- writes datarefs:
 --    DATAREF_STF_KTS
 --    DATAREF_STF_MC_KTS
+
 function update_stf_ballast()
 
     -- BALLAST CALCULATION
@@ -471,8 +502,8 @@ function update_stf_ballast()
     -- update the DATAREF
     set(DATAREF_STF_KTS, stf_mps * MPS_TO_KTS)
 
-    debug_str1 = "STF:"..get(DATAREF_STF_KTS)
-    debug_str2 = "Airspeed:"..get(DATAREF_AIRSPEED_KTS)
+    --debug_str1 = "STF:"..get(DATAREF_STF_KTS)
+    --debug_str2 = "Airspeed:"..get(DATAREF_AIRSPEED_KTS)
 
 end
 
@@ -554,7 +585,7 @@ function update()
         init_complete = true
     end
     aircraft_track_deg = get_aircraft_track_deg() -- get aircraft track over ground (=heading @ 0 kts)
-    update_netto() -- update netto_mps global
+    update_netto_ld() -- update netto_mps, glide_ratio globals
     update_stf_ballast() -- update globals for ballast & speed-to-fly
     update_wp_distance_and_bearing() -- add aircraft distance and bearing info to waypoints
     update_fms() -- detect if flightplan has been loaded and update waypoints in 'task' global
@@ -777,41 +808,46 @@ end
 function draw_wind()
 
     local wind_speed = get(DATAREF_WIND_MPS)
-    -- convert to km/h if necessary
-    local units_str
-    if get(DATAREF_UNITS_SPEED) == 1 -- km/h
+    if wind_speed < 0.5
     then
-        wind_speed = wind_speed * MPS_TO_KPH
-        units_str = "Kmh"
+        -- no wind
+        sasl.gl.drawText(font,89,122, "NO", 12, true, false, TEXT_ALIGN_RIGHT, black)
+        sasl.gl.drawText(font,96,109, "WIND", 12, true, false, TEXT_ALIGN_RIGHT, black)
     else
-        wind_speed = wind_speed * MPS_TO_KTS
-        units_str = "Kts"
+        -- convert to km/h if necessary
+        local units_str
+        if get(DATAREF_UNITS_SPEED) == 1 -- km/h
+        then
+            wind_speed = wind_speed * MPS_TO_KPH
+            units_str = "Kmh"
+        else
+            wind_speed = wind_speed * MPS_TO_KTS
+            units_str = "Kts"
+        end
+
+        -- remove decimals and convert to string
+        local wind_str = tostring(math.floor(wind_speed))
+
+        -- write numeric wind speed (knots or km/h) in circle
+        sasl.gl.drawText(font,89,114, wind_str, 20, true, false, TEXT_ALIGN_RIGHT, black)
+        -- and units string
+        sasl.gl.drawText(font,88,104, units_str, 12, true, false, TEXT_ALIGN_RIGHT, black)
+        --
+        -- now position pointer on wind circle graphic
+        local wind_heading_deg = get(DATAREF_WIND_DEG) - aircraft_track_deg
+        local wind_heading_rad = math.rad(wind_heading_deg)
+
+        -- coordinates for wind circle graphic on NAV page
+        local center_x = 78
+        local center_y = 118
+        local radius = 22
+        local px = center_x + math.sin(wind_heading_rad) * radius
+        local py = center_y + math.cos(wind_heading_rad) * radius
+        -- We offset px,py by half the width and the whole height of the pointer, to align point to px,py
+        -- and then we rotate around the point.
+        -- sasl.gl.drawRotatedTextureCenter(d, angle, rx, ry, x, y, width, height, color )
+        sasl.gl.drawRotatedTextureCenter(wind_pointer, wind_heading_deg, px, py, px-8, py-8, 15, 8, {1.0,1.0,1.0,1.0})
     end
-
-    -- remove decimals and convert to string
-    local wind_str = tostring(math.floor(wind_speed))
-
-    -- write numeric wind speed (knots or km/h) in circle
-    sasl.gl.drawText(font,89,114, wind_str, 20, true, false, TEXT_ALIGN_RIGHT, black)
-    -- and units string
-    sasl.gl.drawText(font,88,104, units_str, 12, true, false, TEXT_ALIGN_RIGHT, black)
-
-    --
-    -- now position pointer on wind circle graphic
-    local wind_heading_deg = get(DATAREF_WIND_DEG) - aircraft_track_deg
-    local wind_heading_rad = math.rad(wind_heading_deg)
-
-    -- coordinates for wind circle graphic on NAV page
-    local center_x = 78
-    local center_y = 118
-    local radius = 22
-    local px = center_x + math.sin(wind_heading_rad) * radius
-    local py = center_y + math.cos(wind_heading_rad) * radius
-    -- We offset px,py by half the width and the whole height of the pointer, to align point to px,py
-    -- and then we rotate around the point.
-    -- sasl.gl.drawRotatedTextureCenter(d, angle, rx, ry, x, y, width, height, color )
-    sasl.gl.drawRotatedTextureCenter(wind_pointer, wind_heading_deg, px, py, px-8, py-8, 15, 8, {1.0,1.0,1.0,1.0})
-
 end
 
 function draw_maccready()
@@ -960,11 +996,35 @@ function draw_ballast()
 end
 
 -- When no task, draw the 'base' STF and current STF
-function draw_speed_to_fly()
-end
+function draw_stf_ld()
+    local speed_units_str = "KTS"
+    local speed_factor = MPS_TO_KTS
+    if project_settings.SPEED_UNITS == 1   --(0=knots, 1=km/h)
+    then
+        speed_units_str = "KPH"
+        speed_factor = MPS_TO_KPH
+    end
+    sasl.gl.drawText(font,83,60, speed_units_str, 12, true, false, TEXT_ALIGN_RIGHT, black)
+    
+    sasl.gl.drawText(font,46,49, "STF", 10, true, false, TEXT_ALIGN_RIGHT, black)
+    sasl.gl.drawText(font,46,37, "BASE", 10, true, false, TEXT_ALIGN_RIGHT, black)
+    
+    sasl.gl.drawText(font,46,20, "STF", 10, true, false, TEXT_ALIGN_RIGHT, black)
+    sasl.gl.drawText(font,46,8, "NOW", 10, true, false, TEXT_ALIGN_RIGHT, black)
+    
+    -- draw STF_MC (Maccready speed to fly with zero sink)
+    local speed_str = tostring(math.floor(stf_mc_mps * speed_factor + 0.5))
+    sasl.gl.drawText(font,83,40, speed_str, 20, true, false, TEXT_ALIGN_RIGHT, black)
 
--- When no task, draw the glide (i.e. L/D) ratio
-function draw_ld()
+    -- draw STF (Speed-to-fly with current sink/lift)
+    speed_str = tostring(math.floor(stf_mps * speed_factor + 0.5))
+    sasl.gl.drawText(font,83,11, speed_str, 20, true, false, TEXT_ALIGN_RIGHT, black)
+
+    --draw L/D
+    local ld_str = tostring(math.floor(glide_ratio_display+0.5))
+
+    sasl.gl.drawText(font,135,60, "L/D", 12, true, false, TEXT_ALIGN_RIGHT, black)
+    sasl.gl.drawText(font,145,23, ld_str, 40, true, false, TEXT_ALIGN_RIGHT, black)
 end
 
 -- top-level NAV page draw function
@@ -974,8 +1034,8 @@ function draw_page_nav()
     -- sasl.gl.drawLine(0,0,100,100,green)
 
     --debug
-    sasl.gl.drawText(font,13,33, debug_str1, 14, true, false, TEXT_ALIGN_LEFT, black)
-    sasl.gl.drawText(font,13,13, debug_str2, 14, true, false, TEXT_ALIGN_LEFT, black)
+    --sasl.gl.drawText(font,13,33, debug_str1, 14, true, false, TEXT_ALIGN_LEFT, black)
+    --sasl.gl.drawText(font,13,13, debug_str2, 14, true, false, TEXT_ALIGN_LEFT, black)
 
     draw_maccready()
 
@@ -991,10 +1051,7 @@ function draw_page_nav()
         draw_ballast()
 
         -- draw STF speed @ Mccready and with current lift/sink
-        draw_speed_to_fly()
-
-        -- draw glide (i.e. L/D) ratio
-        draw_ld()
+        draw_stf_ld()
 
         return
     end
