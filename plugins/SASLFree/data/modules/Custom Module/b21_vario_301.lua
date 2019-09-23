@@ -29,9 +29,6 @@
 
 ]]
 
--- include generally useful lat/long functions
-local geo = require "b21_geo"
-
 -- the datarefs we will READ to get time, altitude and speed from the sim
 DATAREF = {}
 
@@ -49,10 +46,6 @@ DATAREF.TIME_S = globalPropertyf("sim/network/misc/network_time_sec") -- 100
 DATAREF.ALT_FT = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_pilot") -- 3000
 -- (for calibration) local sim_alt_m = globalPropertyf("sim/flightmodel/position/elevation")
 DATAREF.AIRSPEED_KTS = globalPropertyf("sim/cockpit2/gauges/indicators/airspeed_kts_pilot") -- 60
--- (for calibration) local sim_speed_mps = globalPropertyf("sim/flightmodel/position/true_airspeed")
-DATAREF.WEIGHT_TOTAL_KG = globalPropertyf("sim/flightmodel/weight/m_total") -- 430
-DATAREF.WIND_DEG = globalPropertyf("sim/weather/wind_direction_degt", 0.0, false, true, true)
-DATAREF.WIND_KTS = globalPropertyf("sim/weather/wind_speed_kt", 0.0, false, true, true)
 DATAREF.TURN_RATE_DEG = globalProperty("sim/cockpit2/gauges/indicators/turn_rate_heading_deg_pilot")
 
 -- datarefs from USER_SETTINGS.lua
@@ -61,7 +54,6 @@ DATAREF.UNITS_ALTITUDE = globalProperty("b21/units_altitude") -- 0 = feet, 1 = m
 DATAREF.UNITS_SPEED = globalProperty("b21/units_speed") -- 0 = knots, 1 = km/h (from settings.lua)
 
 -- create global DataRefs we will WRITE (name, default, isNotPublished, isShared, isReadOnly)
---DATAREF.NETTO = createGlobalPropertyf("b21/netto_fpm", 0.0, false, true, true)
 DATAREF.PULL = createGlobalPropertyi("b21/vario_302/pull", 0, false, true, true)
 DATAREF.PUSH = createGlobalPropertyi("b21/vario_302/push", 0, false, true, true)
 DATAREF.NEEDLE_FPM = createGlobalPropertyf("b21/vario_302/needle_fpm", 0.0, false, true, true)
@@ -73,16 +65,6 @@ DATAREF.NUMBER_RIGHT = createGlobalPropertyf("b21/vario_302/number_right",34.5,f
 DATAREF.NUMBER_TOP = createGlobalPropertyi("b21/vario_302/number_top",123,false,true,true)
 DATAREF.NUMBER_TOP_SIGN = createGlobalPropertyi("b21/vario_302/number_top_sign",0,false,true,true)
 DATAREF.STF_TE_IND = createGlobalPropertyi("b21/vario_302/stf_te_ind",0,false,true,true) -- stf/te indicator on lcd
-
---debug waypoint for arrival height testing approx 26nm East of 1N7 (Blairstown)
-local debug_wp_lat = 41.0
-local debug_wp_lng = -74.5
-local debug_wp_alt_m = 100.0
-
--- some development debug values for testing
-DATAREF.DEBUG1 = globalPropertyf("b21/debug/1")
-DATAREF.DEBUG2 = globalPropertyf("b21/debug/2")
-DATAREF.DEBUG3 = globalPropertyf("b21/debug/3")
 
 --shim functions to help testing in desktop Lua
 function dataref_read(x)
@@ -113,40 +95,14 @@ B21_302_climb_average_mps = 0 -- calculated climb average
 B21_polar_stf_best_mps = project_settings.polar_stf_best_kph * KPH_TO_MPS
 B21_polar_stf_2_mps = project_settings.polar_stf_2_kph * KPH_TO_MPS
 
--- some constants derived from polar to use in the speed-to-fly calculation
-B21_302_polar_const_r = (B21_polar_stf_2_mps^2 - B21_polar_stf_best_mps^2) / 2
-B21_302_polar_const_v2stfx = 625 -- threshold speed-squared (m/s) figure to adjust speed-to-fly if below this (i.e. 25 m/s)
-B21_302_polar_const_z = 300000
-
-B21_302_ballast_ratio = 0.0 -- proportion of ballast carried 0..1
-B21_302_ballast_adjust = 1.0 -- adjustment factor for ballast, shifts polar by sqrt of total_weight / weight_empty
-
 -- vario modes
 B21_302_mode_stf = project_settings.VARIO_302_MODE  -- 0 = speed to fly, 1 = TE, 2 = AUTO
-
--- netto
-B21_302_polar_sink_mps = 0.0
-B21_302_netto_mps = 0.0
-
--- Maccready speed-to-fly and polar sink value at that speed
-B21_302_mc_stf_mps = 0.0
-B21_302_mc_sink_mps = 0.0
-
--- height needed and arrivial height at next waypoint
-B21_302_height_needed_m = 0.0
-B21_302_arrival_height_m = 0.0
 
 -- debug glide ratio
 B21_302_glide_ratio = 0.0
 
 -- vario needle value
 B21_302_needle_fpm = 0.0
-
-
--- #############################################################
--- vars used by routines to track changes between update() calls
-
-prev_ballast = 0.0
 
 -- Maccready knob, so we can detect when it changes
 prev_knob = 0
@@ -351,20 +307,6 @@ function update_climb_average()
     --print("B21_302_climb_average_mps",B21_302_climb_average_mps) --debug
 end
 
---[[                    CALCULATE STF NEEDLE VALUE (m/s)
-                    STF:
-                            (A:AIRSPEED INDICATED, meters per second)
-                            (L:B21_302_stf, meters per second) -
-                            7 /
-                            (&gt;L:B21_302_stf_needle, meters per second)
-                    NEEDLE:
-                        (L:B21_302_mode_stf, number) 0 == if{
-                            (L:B21_302_te, meters per second) (&gt;L:B21_302_needle, meters per second)
-                        } els{
-                            (L:B21_302_stf_needle, meters per second) (&gt;L:B21_302_needle, meters per second)
-                        }
-]]
-
 -- write value to B21_302_needle_fpm
 function update_needle()
     local needle_mps
@@ -538,5 +480,5 @@ function update()
     update_push()
     update_top_number()
     update_bottom_number()
-    --update_right_number()
+    update_right_number()
 end
