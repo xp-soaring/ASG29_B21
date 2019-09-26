@@ -119,8 +119,8 @@ local ballast_adjust = 0.0 -- polar shift factor in speed & sink due to ballast
 local stf_mps = 0.0    -- current Speed-to-fly, given lift/sink, Maccready & ballast
 local stf_mc_mps = 0.0 -- Speed-to-fly in still air at current Maccready & ballast
 
-local glide_ratio = 99 -- L/D
-local glide_ratio_display -- updated with 'glide_ratio' on slower cycle
+local glide_ratio = 50 -- L/D
+local glide_ratio_display = 50 -- updated with 'glide_ratio' on slower cycle
 
 -- command callbacks from navpanel buttons
 
@@ -410,9 +410,10 @@ function update_netto_ld()
     local total_energy_mps = get(DATAREF_TE_MPS)
 
     glide_ratio = airspeed_kts / (-total_energy_mps * MPS_TO_KTS)
-    if glide_ratio < 0 or glide_ratio > 99
+    -- check in case glide_ratio is not-a-number
+    if glide_ratio ~= glide_ratio or glide_ratio < 0 or glide_ratio > 99
     then
-        glide_ratio = 99
+        glide_ratio = 50
     end
 
     -- netto is we ADD back in the polar sink (+ve) to the TE (-ve)
@@ -434,13 +435,13 @@ function update_netto_ld()
 
     -- manage update period for glide_ratio_display
     local now = get(DATAREF_TIME_S)
-    if now < update_netto_ld_time_s + 2 -- 2 second update cycle
+    if now < update_netto_ld_time_s + 0.5 -- 2/second update cycle
     then
         return
     end
     update_netto_ld_time_s = now
-    -- ok, continue
-    glide_ratio_display = glide_ratio
+    -- ok, continue to update glide_ratio_display, including prev value for smoothing
+    glide_ratio_display = glide_ratio_display * 0.7 + glide_ratio * 0.3
     
 end
 

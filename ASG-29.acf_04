@@ -7,12 +7,12 @@ P _cgpt/0/_name empty craft
 P _cgpt/0/_w_max 850.0
 P _cgpt/0/_w_now 850.0
 P _cgpt/0/_w_test 850.0
-P _cgpt/0/_z_ref 7.329999924
+P _cgpt/0/_z_ref 6.500000000
 P _cgpt/1/_name fuel tank #1
 P _cgpt/1/_w_max 0.0
 P _cgpt/1/_w_now 1.0
 P _cgpt/1/_w_test 0.0
-P _cgpt/1/_z_ref -21474836.0
+P _cgpt/1/_z_ref 0.0
 P _cgpt/2/_name fuel tank #2
 P _cgpt/2/_w_max 0.0
 P _cgpt/2/_w_now 1.0
@@ -138,7 +138,7 @@ P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
 P _gear/1/_scon 672.559875488
-P _gear/1/_stat_def 0.222734302
+P _gear/1/_stat_def 0.222734332
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -16427,7 +16427,7 @@ P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.077265710
+P _part/86/_part_y -0.077265680
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -24240,9 +24240,9 @@ P acf/_HUD_del_x 240.0
 P acf/_HUD_del_y 120.0
 P acf/_ICAO ASG29 B21
 P acf/_ITT_is_C 1
-P acf/_Jxx_unitmass 1.0
-P acf/_Jyy_unitmass 4.199999809
-P acf/_Jzz_unitmass 8.399999619
+P acf/_Jxx_unitmass 0.0
+P acf/_Jyy_unitmass 0.0
+P acf/_Jzz_unitmass 0.0
 P acf/_Mmo 0.0
 P acf/_RSC_idlespeed_ENGN 0.0
 P acf/_RSC_maxgreen_ENGN 1.0
@@ -26671,7 +26671,7 @@ P acf/_m_max 1323.0
 P acf/_m_shift 0.0
 P acf/_m_shift_dx 0.0
 P acf/_m_shift_dz 0.0
-P acf/_manual_rad_gyr 1
+P acf/_manual_rad_gyr 0
 P acf/_manual_reversion_rat 0.0
 P acf/_manufacturer Schleicher
 P acf/_mast_bump_cyclic_ailn 0.0
@@ -26947,11 +26947,11 @@ P acf/_rrpm_trim_rpm_slow 0.0
 P acf/_rrpm_trim_time 5.0
 P acf/_rudd1_cratR 0.300000012
 P acf/_rudd1_cratT 0.300000012
-P acf/_rudd1_lf 20.0
+P acf/_rudd1_lf 29.0
 P acf/_rudd1_max_sweep_rat 1.0
 P acf/_rudd1_rat1 1.0
 P acf/_rudd1_rat2 1.0
-P acf/_rudd1_rt 20.0
+P acf/_rudd1_rt 33.0
 P acf/_rudd1_v1 0.0
 P acf/_rudd1_v2 999.0
 P acf/_rudd2_cratR 0.0
@@ -27315,7 +27315,7 @@ P acf/_wheel_tire_t2/count 2
 P acf/_windshield_scratchy 1
 P acf/_wing_damp_rat 1.0
 P acf/_wing_frac_mass 0.250000000
-P acf/_wing_mid_dihed_per_g 0.0
+P acf/_wing_mid_dihed_per_g 1.0
 P acf/_wing_tilt_ptch 0.0
 P acf/_wing_tilt_roll 0.0
 P acf/_wiper_ang1/0 0.0
