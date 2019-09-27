@@ -435,13 +435,13 @@ function update_netto_ld()
 
     -- manage update period for glide_ratio_display
     local now = get(DATAREF_TIME_S)
-    if now < update_netto_ld_time_s + 0.5 -- 2/second update cycle
+    if now < update_netto_ld_time_s + 0.25 -- 4/second update cycle
     then
         return
     end
     update_netto_ld_time_s = now
     -- ok, continue to update glide_ratio_display, including prev value for smoothing
-    glide_ratio_display = glide_ratio_display * 0.7 + glide_ratio * 0.3
+    glide_ratio_display = glide_ratio_display * 0.9 + glide_ratio * 0.1
     
 end
 

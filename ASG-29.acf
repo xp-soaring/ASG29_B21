@@ -104,7 +104,7 @@ P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
 P _gear/0/_scon 2959.263671875
-P _gear/0/_stat_def 0.396451801
+P _gear/0/_stat_def 0.396451771
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
 P _gear/0/_strut_comp -0.100000001
@@ -138,7 +138,7 @@ P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
 P _gear/1/_scon 672.559875488
-P _gear/1/_stat_def 0.222734302
+P _gear/1/_stat_def 0.222734287
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -14958,7 +14958,7 @@ P _part/85/_part_specs_invis 1
 P _part/85/_part_tex 0
 P _part/85/_part_the 0.0
 P _part/85/_part_x 0.0
-P _part/85/_part_y -0.773548007
+P _part/85/_part_y -0.773548067
 P _part/85/_part_z 5.840000153
 P _part/85/_patt_con 0
 P _part/85/_patt_prt 0
@@ -16427,7 +16427,7 @@ P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.077265710
+P _part/86/_part_y -0.077265725
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -27651,7 +27651,7 @@ rad_CDU739_2d CDU739_2d.png
 
 gen_annun asi
   POS 630.500000 556.500000
-  IMAGE asi/asi_background
+  IMAGE asi_lcd/asi_background
   DATAREF 
   SHOW_EQUAL 1.000000 b21/units_speed
   LIGHT_MODE MECHANICAL
@@ -27661,7 +27661,7 @@ gen_annun asi
 
 gen_needle asi_needle
   POS 630.000000 557.500000
-  IMAGE asi/asi_needle
+  IMAGE asi_lcd/asi_needle
   DATAREF sim/cockpit2/gauges/indicators/airspeed_kts_pilot
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
@@ -27673,8 +27673,36 @@ gen_needle asi_needle
   IS_DRAGGABLE 0
   OFFSET 0.000000
 
+gen_needle asi_stf_mc_bug
+  POS 630.000000 556.500000
+  IMAGE asi_lcd/asi_stf_mc_bug
+  DATAREF b21/stf_mc_kts
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 -180.000000 1.000000
+  KEY_FRAME 40.000000 -149.000000 1.000000
+  KEY_FRAME 50.000000 -118.000000 1.000000
+  KEY_FRAME 100.000000 12.000000 1.000000
+  KEY_FRAME 150.000000 139.000000
+  IS_DRAGGABLE 0
+  OFFSET 0.000000
+
+gen_needle asi_stf_bug
+  POS 630.000000 556.500000
+  IMAGE asi_lcd/asi_stf_bug
+  DATAREF b21/stf_kts
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 -180.000000 1.000000
+  KEY_FRAME 40.000000 -149.000000 1.000000
+  KEY_FRAME 50.000000 -118.000000 1.000000
+  KEY_FRAME 100.000000 12.000000 1.000000
+  KEY_FRAME 150.000000 139.000000
+  IS_DRAGGABLE 0
+  OFFSET 0.000000
+
 gen_needle altimeter_ft
-  POS 532.000000 662.000000
+  POS 527.000000 666.000000
   IMAGE altimeter/altimeter_ft
   DATAREF b21/altimeter/needle_3_deg
   SHOW_EQUAL 0.000000 b21/units_altitude
@@ -27686,7 +27714,7 @@ gen_needle altimeter_ft
   OFFSET 0.000000
 
 gen_needle altimeter_m
-  POS 532.000000 662.000000
+  POS 527.000000 666.000000
   IMAGE altimeter/altimeter_m
   DATAREF b21/altimeter/needle_3_deg
   SHOW_EQUAL 1.000000 b21/units_altitude
@@ -27698,7 +27726,7 @@ gen_needle altimeter_m
   OFFSET 0.000000
 
 gen_needle altimeter_needle_2
-  POS 532.000000 661.000000
+  POS 527.000000 665.000000
   IMAGE altimeter/needle_small
   DATAREF b21/altimeter/needle_2_deg
   LIGHT_MODE MECHANICAL
@@ -27709,7 +27737,7 @@ gen_needle altimeter_needle_2
   OFFSET 0.000000
 
 gen_needle altimeter_needle_1
-  POS 532.000000 661.000000
+  POS 527.000000 665.000000
   IMAGE altimeter/needle_large
   DATAREF b21/altimeter/needle_1_deg
   LIGHT_MODE MECHANICAL
@@ -27720,7 +27748,7 @@ gen_needle altimeter_needle_1
   OFFSET 0.000000
 
 gen_rheostat altimeter_knob
-  POS 491.000000 617.000000
+  POS 486.000000 621.000000
   IMAGE altimeter/knob
   DATAREF b21/altimeter/knob
   KF_WRAP_BOTTOM
