@@ -83,7 +83,7 @@ P _engn/count 8
 P _gear/0/_axiE 0.0
 P _gear/0/_axiN 0.0
 P _gear/0/_axiR 0.0
-P _gear/0/_cyc_time 1.0
+P _gear/0/_cyc_time 0.500000000
 P _gear/0/_damp 295.926361084
 P _gear/0/_eagle_claw_deg 0.0
 P _gear/0/_gear_brakes 1
@@ -91,7 +91,7 @@ P _gear/0/_gear_can_retract 1
 P _gear/0/_gear_castors 0
 P _gear/0/_gear_def_empty 0.0
 P _gear/0/_gear_def_gross 0.0
-P _gear/0/_gear_load_fraction 0.886771500
+P _gear/0/_gear_load_fraction 0.886771441
 P _gear/0/_gear_type 2
 P _gear/0/_gear_x 0.0
 P _gear/0/_gear_y -1.169999957
@@ -104,7 +104,7 @@ P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
 P _gear/0/_scon 2959.263671875
-P _gear/0/_stat_def 0.396451771
+P _gear/0/_stat_def 0.396451831
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
 P _gear/0/_strut_comp -0.100000001
@@ -125,7 +125,7 @@ P _gear/1/_gear_can_retract 1
 P _gear/1/_gear_castors 0
 P _gear/1/_gear_def_empty 0.0
 P _gear/1/_gear_def_gross 0.0
-P _gear/1/_gear_load_fraction 0.113228507
+P _gear/1/_gear_load_fraction 0.113228597
 P _gear/1/_gear_type 2
 P _gear/1/_gear_x 0.0
 P _gear/1/_gear_y -0.300000012
@@ -138,7 +138,7 @@ P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
 P _gear/1/_scon 672.559875488
-P _gear/1/_stat_def 0.222734287
+P _gear/1/_stat_def 0.222734556
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -6160,23 +6160,23 @@ P _part/16/_bot_s2 1.0
 P _part/16/_bot_t1 0.509999990
 P _part/16/_bot_t2 0.754000008
 P _part/16/_geo_xyz/0,0,0 0.0
-P _part/16/_geo_xyz/0,0,1 3.643841505
-P _part/16/_geo_xyz/0,0,2 19.025913239
+P _part/16/_geo_xyz/0,0,1 3.650374174
+P _part/16/_geo_xyz/0,0,2 19.025512695
 P _part/16/_geo_xyz/0,1,0 0.0
-P _part/16/_geo_xyz/0,1,1 3.664936543
-P _part/16/_geo_xyz/0,1,2 19.069547653
+P _part/16/_geo_xyz/0,1,1 3.688679934
+P _part/16/_geo_xyz/0,1,2 19.068567276
 P _part/16/_geo_xyz/0,10,0 0.0
-P _part/16/_geo_xyz/0,10,1 3.625109673
-P _part/16/_geo_xyz/0,10,2 19.403139114
+P _part/16/_geo_xyz/0,10,1 3.580123425
+P _part/16/_geo_xyz/0,10,2 19.404710770
 P _part/16/_geo_xyz/0,11,0 0.0
-P _part/16/_geo_xyz/0,11,1 3.618392467
-P _part/16/_geo_xyz/0,11,2 19.178058624
+P _part/16/_geo_xyz/0,11,1 3.586323261
+P _part/16/_geo_xyz/0,11,2 19.179075241
 P _part/16/_geo_xyz/0,12,0 0.0
-P _part/16/_geo_xyz/0,12,1 3.629024267
-P _part/16/_geo_xyz/0,12,2 19.072059631
+P _part/16/_geo_xyz/0,12,1 3.616778612
+P _part/16/_geo_xyz/0,12,2 19.072336197
 P _part/16/_geo_xyz/0,13,0 0.0
-P _part/16/_geo_xyz/0,13,1 3.643841505
-P _part/16/_geo_xyz/0,13,2 19.025913239
+P _part/16/_geo_xyz/0,13,1 3.650374174
+P _part/16/_geo_xyz/0,13,2 19.025512695
 P _part/16/_geo_xyz/0,14,0 0.0
 P _part/16/_geo_xyz/0,14,1 0.0
 P _part/16/_geo_xyz/0,14,2 0.0
@@ -6190,47 +6190,47 @@ P _part/16/_geo_xyz/0,17,0 0.0
 P _part/16/_geo_xyz/0,17,1 0.0
 P _part/16/_geo_xyz/0,17,2 0.0
 P _part/16/_geo_xyz/0,2,0 0.0
-P _part/16/_geo_xyz/0,2,1 3.690217257
-P _part/16/_geo_xyz/0,2,2 19.173036575
+P _part/16/_geo_xyz/0,2,1 3.730125904
+P _part/16/_geo_xyz/0,2,2 19.171539307
 P _part/16/_geo_xyz/0,3,0 0.0
-P _part/16/_geo_xyz/0,3,1 3.714890480
-P _part/16/_geo_xyz/0,3,2 19.396860123
+P _part/16/_geo_xyz/0,3,1 3.759876728
+P _part/16/_geo_xyz/0,3,2 19.395288467
 P _part/16/_geo_xyz/0,4,0 0.0
-P _part/16/_geo_xyz/0,4,1 3.735817432
-P _part/16/_geo_xyz/0,4,2 19.696128845
+P _part/16/_geo_xyz/0,4,1 3.775577545
+P _part/16/_geo_xyz/0,4,2 19.694877625
 P _part/16/_geo_xyz/0,5,0 0.0
-P _part/16/_geo_xyz/0,5,1 3.741571426
-P _part/16/_geo_xyz/0,5,2 20.071643829
+P _part/16/_geo_xyz/0,5,1 3.754350424
+P _part/16/_geo_xyz/0,5,2 20.071504593
 P _part/16/_geo_xyz/0,6,0 0.0
-P _part/16/_geo_xyz/0,6,1 3.748476028
-P _part/16/_geo_xyz/0,6,2 20.522258759
+P _part/16/_geo_xyz/0,6,1 3.728878021
+P _part/16/_geo_xyz/0,6,2 20.523458481
 P _part/16/_geo_xyz/0,7,0 0.0
-P _part/16/_geo_xyz/0,7,1 3.748476028
-P _part/16/_geo_xyz/0,7,2 20.522258759
+P _part/16/_geo_xyz/0,7,1 3.728878021
+P _part/16/_geo_xyz/0,7,2 20.523458481
 P _part/16/_geo_xyz/0,8,0 0.0
-P _part/16/_geo_xyz/0,8,1 3.692600012
-P _part/16/_geo_xyz/0,8,2 20.075067520
+P _part/16/_geo_xyz/0,8,1 3.656303167
+P _part/16/_geo_xyz/0,8,2 20.076642990
 P _part/16/_geo_xyz/0,9,0 0.0
-P _part/16/_geo_xyz/0,9,1 3.646036625
-P _part/16/_geo_xyz/0,9,2 19.702407837
+P _part/16/_geo_xyz/0,9,1 3.595824242
+P _part/16/_geo_xyz/0,9,2 19.704298019
 P _part/16/_geo_xyz/1,0,0 -3.770792246
-P _part/16/_geo_xyz/1,0,1 3.657269478
-P _part/16/_geo_xyz/1,0,2 19.481624603
+P _part/16/_geo_xyz/1,0,1 3.660448790
+P _part/16/_geo_xyz/1,0,2 19.481430054
 P _part/16/_geo_xyz/1,1,0 -3.770792246
-P _part/16/_geo_xyz/1,1,1 3.667535782
-P _part/16/_geo_xyz/1,1,2 19.502859116
+P _part/16/_geo_xyz/1,1,1 3.674716949
+P _part/16/_geo_xyz/1,1,2 19.502611160
 P _part/16/_geo_xyz/1,10,0 -3.770792246
-P _part/16/_geo_xyz/1,10,1 3.648153305
-P _part/16/_geo_xyz/1,10,2 19.665206909
+P _part/16/_geo_xyz/1,10,1 3.637195110
+P _part/16/_geo_xyz/1,10,2 19.665397644
 P _part/16/_geo_xyz/1,11,0 -3.770792246
-P _part/16/_geo_xyz/1,11,1 3.644884348
-P _part/16/_geo_xyz/1,11,2 19.555667877
+P _part/16/_geo_xyz/1,11,1 3.638025284
+P _part/16/_geo_xyz/1,11,2 19.555704117
 P _part/16/_geo_xyz/1,12,0 -3.770792246
-P _part/16/_geo_xyz/1,12,1 3.650058508
-P _part/16/_geo_xyz/1,12,2 19.504081726
+P _part/16/_geo_xyz/1,12,1 3.648473024
+P _part/16/_geo_xyz/1,12,2 19.503986359
 P _part/16/_geo_xyz/1,13,0 -3.770792246
-P _part/16/_geo_xyz/1,13,1 3.657269478
-P _part/16/_geo_xyz/1,13,2 19.481624603
+P _part/16/_geo_xyz/1,13,1 3.660448790
+P _part/16/_geo_xyz/1,13,2 19.481430054
 P _part/16/_geo_xyz/1,14,0 0.0
 P _part/16/_geo_xyz/1,14,1 0.0
 P _part/16/_geo_xyz/1,14,2 0.0
@@ -6244,29 +6244,29 @@ P _part/16/_geo_xyz/1,17,0 0.0
 P _part/16/_geo_xyz/1,17,1 0.0
 P _part/16/_geo_xyz/1,17,2 0.0
 P _part/16/_geo_xyz/1,2,0 -3.770792246
-P _part/16/_geo_xyz/1,2,1 3.679839134
-P _part/16/_geo_xyz/1,2,2 19.553224564
+P _part/16/_geo_xyz/1,2,1 3.690513372
+P _part/16/_geo_xyz/1,2,2 19.552953720
 P _part/16/_geo_xyz/1,3,0 -3.770792246
-P _part/16/_geo_xyz/1,3,1 3.691846848
-P _part/16/_geo_xyz/1,3,2 19.662151337
+P _part/16/_geo_xyz/1,3,1 3.702805042
+P _part/16/_geo_xyz/1,3,2 19.661960602
 P _part/16/_geo_xyz/1,4,0 -3.770792246
-P _part/16/_geo_xyz/1,4,1 3.702031136
-P _part/16/_geo_xyz/1,4,2 19.807796478
+P _part/16/_geo_xyz/1,4,1 3.710446119
+P _part/16/_geo_xyz/1,4,2 19.807760239
 P _part/16/_geo_xyz/1,5,0 -3.770792246
-P _part/16/_geo_xyz/1,5,1 3.704831362
-P _part/16/_geo_xyz/1,5,2 19.990545273
+P _part/16/_geo_xyz/1,5,1 3.705085993
+P _part/16/_geo_xyz/1,5,2 19.990791321
 P _part/16/_geo_xyz/1,6,0 -3.770792246
-P _part/16/_geo_xyz/1,6,1 3.708191633
-P _part/16/_geo_xyz/1,6,2 20.209844589
+P _part/16/_geo_xyz/1,6,1 3.698653936
+P _part/16/_geo_xyz/1,6,2 20.210428238
 P _part/16/_geo_xyz/1,7,0 -3.770792246
-P _part/16/_geo_xyz/1,7,1 3.708191633
-P _part/16/_geo_xyz/1,7,2 20.209844589
+P _part/16/_geo_xyz/1,7,1 3.698653936
+P _part/16/_geo_xyz/1,7,2 20.210428238
 P _part/16/_geo_xyz/1,8,0 -3.770792246
-P _part/16/_geo_xyz/1,8,1 3.680998802
-P _part/16/_geo_xyz/1,8,2 19.992212296
+P _part/16/_geo_xyz/1,8,1 3.669298887
+P _part/16/_geo_xyz/1,8,2 19.992666245
 P _part/16/_geo_xyz/1,9,0 -3.770792246
-P _part/16/_geo_xyz/1,9,1 3.658337831
-P _part/16/_geo_xyz/1,9,2 19.810852051
+P _part/16/_geo_xyz/1,9,1 3.644836187
+P _part/16/_geo_xyz/1,9,2 19.811199188
 P _part/16/_geo_xyz/10,0,0 0.0
 P _part/16/_geo_xyz/10,0,1 0.0
 P _part/16/_geo_xyz/10,0,2 0.0
@@ -7629,23 +7629,23 @@ P _part/17/_bot_s2 1.0
 P _part/17/_bot_t1 0.509999990
 P _part/17/_bot_t2 0.754000008
 P _part/17/_geo_xyz/0,0,0 0.0
-P _part/17/_geo_xyz/0,0,1 3.643841505
-P _part/17/_geo_xyz/0,0,2 19.025913239
+P _part/17/_geo_xyz/0,0,1 3.650374174
+P _part/17/_geo_xyz/0,0,2 19.025512695
 P _part/17/_geo_xyz/0,1,0 0.0
-P _part/17/_geo_xyz/0,1,1 3.664936543
-P _part/17/_geo_xyz/0,1,2 19.069547653
+P _part/17/_geo_xyz/0,1,1 3.688679934
+P _part/17/_geo_xyz/0,1,2 19.068567276
 P _part/17/_geo_xyz/0,10,0 0.0
-P _part/17/_geo_xyz/0,10,1 3.625109673
-P _part/17/_geo_xyz/0,10,2 19.403139114
+P _part/17/_geo_xyz/0,10,1 3.580123425
+P _part/17/_geo_xyz/0,10,2 19.404710770
 P _part/17/_geo_xyz/0,11,0 0.0
-P _part/17/_geo_xyz/0,11,1 3.618392467
-P _part/17/_geo_xyz/0,11,2 19.178058624
+P _part/17/_geo_xyz/0,11,1 3.586323261
+P _part/17/_geo_xyz/0,11,2 19.179075241
 P _part/17/_geo_xyz/0,12,0 0.0
-P _part/17/_geo_xyz/0,12,1 3.629024267
-P _part/17/_geo_xyz/0,12,2 19.072059631
+P _part/17/_geo_xyz/0,12,1 3.616778612
+P _part/17/_geo_xyz/0,12,2 19.072336197
 P _part/17/_geo_xyz/0,13,0 0.0
-P _part/17/_geo_xyz/0,13,1 3.643841505
-P _part/17/_geo_xyz/0,13,2 19.025913239
+P _part/17/_geo_xyz/0,13,1 3.650374174
+P _part/17/_geo_xyz/0,13,2 19.025512695
 P _part/17/_geo_xyz/0,14,0 0.0
 P _part/17/_geo_xyz/0,14,1 0.0
 P _part/17/_geo_xyz/0,14,2 0.0
@@ -7659,47 +7659,47 @@ P _part/17/_geo_xyz/0,17,0 0.0
 P _part/17/_geo_xyz/0,17,1 0.0
 P _part/17/_geo_xyz/0,17,2 0.0
 P _part/17/_geo_xyz/0,2,0 0.0
-P _part/17/_geo_xyz/0,2,1 3.690217257
-P _part/17/_geo_xyz/0,2,2 19.173036575
+P _part/17/_geo_xyz/0,2,1 3.730125904
+P _part/17/_geo_xyz/0,2,2 19.171539307
 P _part/17/_geo_xyz/0,3,0 0.0
-P _part/17/_geo_xyz/0,3,1 3.714890480
-P _part/17/_geo_xyz/0,3,2 19.396860123
+P _part/17/_geo_xyz/0,3,1 3.759876728
+P _part/17/_geo_xyz/0,3,2 19.395288467
 P _part/17/_geo_xyz/0,4,0 0.0
-P _part/17/_geo_xyz/0,4,1 3.735817432
-P _part/17/_geo_xyz/0,4,2 19.696128845
+P _part/17/_geo_xyz/0,4,1 3.775577545
+P _part/17/_geo_xyz/0,4,2 19.694877625
 P _part/17/_geo_xyz/0,5,0 0.0
-P _part/17/_geo_xyz/0,5,1 3.741571426
-P _part/17/_geo_xyz/0,5,2 20.071643829
+P _part/17/_geo_xyz/0,5,1 3.754350424
+P _part/17/_geo_xyz/0,5,2 20.071504593
 P _part/17/_geo_xyz/0,6,0 0.0
-P _part/17/_geo_xyz/0,6,1 3.748476028
-P _part/17/_geo_xyz/0,6,2 20.522258759
+P _part/17/_geo_xyz/0,6,1 3.728878021
+P _part/17/_geo_xyz/0,6,2 20.523458481
 P _part/17/_geo_xyz/0,7,0 0.0
-P _part/17/_geo_xyz/0,7,1 3.748476028
-P _part/17/_geo_xyz/0,7,2 20.522258759
+P _part/17/_geo_xyz/0,7,1 3.728878021
+P _part/17/_geo_xyz/0,7,2 20.523458481
 P _part/17/_geo_xyz/0,8,0 0.0
-P _part/17/_geo_xyz/0,8,1 3.692600012
-P _part/17/_geo_xyz/0,8,2 20.075067520
+P _part/17/_geo_xyz/0,8,1 3.656303167
+P _part/17/_geo_xyz/0,8,2 20.076642990
 P _part/17/_geo_xyz/0,9,0 0.0
-P _part/17/_geo_xyz/0,9,1 3.646036625
-P _part/17/_geo_xyz/0,9,2 19.702407837
+P _part/17/_geo_xyz/0,9,1 3.595824242
+P _part/17/_geo_xyz/0,9,2 19.704298019
 P _part/17/_geo_xyz/1,0,0 3.770792246
-P _part/17/_geo_xyz/1,0,1 3.657269478
-P _part/17/_geo_xyz/1,0,2 19.481624603
+P _part/17/_geo_xyz/1,0,1 3.660448790
+P _part/17/_geo_xyz/1,0,2 19.481430054
 P _part/17/_geo_xyz/1,1,0 3.770792246
-P _part/17/_geo_xyz/1,1,1 3.667535782
-P _part/17/_geo_xyz/1,1,2 19.502859116
+P _part/17/_geo_xyz/1,1,1 3.674716949
+P _part/17/_geo_xyz/1,1,2 19.502611160
 P _part/17/_geo_xyz/1,10,0 3.770792246
-P _part/17/_geo_xyz/1,10,1 3.648153305
-P _part/17/_geo_xyz/1,10,2 19.665206909
+P _part/17/_geo_xyz/1,10,1 3.637195110
+P _part/17/_geo_xyz/1,10,2 19.665397644
 P _part/17/_geo_xyz/1,11,0 3.770792246
-P _part/17/_geo_xyz/1,11,1 3.644884348
-P _part/17/_geo_xyz/1,11,2 19.555667877
+P _part/17/_geo_xyz/1,11,1 3.638025284
+P _part/17/_geo_xyz/1,11,2 19.555704117
 P _part/17/_geo_xyz/1,12,0 3.770792246
-P _part/17/_geo_xyz/1,12,1 3.650058508
-P _part/17/_geo_xyz/1,12,2 19.504081726
+P _part/17/_geo_xyz/1,12,1 3.648473024
+P _part/17/_geo_xyz/1,12,2 19.503986359
 P _part/17/_geo_xyz/1,13,0 3.770792246
-P _part/17/_geo_xyz/1,13,1 3.657269478
-P _part/17/_geo_xyz/1,13,2 19.481624603
+P _part/17/_geo_xyz/1,13,1 3.660448790
+P _part/17/_geo_xyz/1,13,2 19.481430054
 P _part/17/_geo_xyz/1,14,0 0.0
 P _part/17/_geo_xyz/1,14,1 0.0
 P _part/17/_geo_xyz/1,14,2 0.0
@@ -7713,29 +7713,29 @@ P _part/17/_geo_xyz/1,17,0 0.0
 P _part/17/_geo_xyz/1,17,1 0.0
 P _part/17/_geo_xyz/1,17,2 0.0
 P _part/17/_geo_xyz/1,2,0 3.770792246
-P _part/17/_geo_xyz/1,2,1 3.679839134
-P _part/17/_geo_xyz/1,2,2 19.553224564
+P _part/17/_geo_xyz/1,2,1 3.690513372
+P _part/17/_geo_xyz/1,2,2 19.552953720
 P _part/17/_geo_xyz/1,3,0 3.770792246
-P _part/17/_geo_xyz/1,3,1 3.691846848
-P _part/17/_geo_xyz/1,3,2 19.662151337
+P _part/17/_geo_xyz/1,3,1 3.702805042
+P _part/17/_geo_xyz/1,3,2 19.661960602
 P _part/17/_geo_xyz/1,4,0 3.770792246
-P _part/17/_geo_xyz/1,4,1 3.702031136
-P _part/17/_geo_xyz/1,4,2 19.807796478
+P _part/17/_geo_xyz/1,4,1 3.710446119
+P _part/17/_geo_xyz/1,4,2 19.807760239
 P _part/17/_geo_xyz/1,5,0 3.770792246
-P _part/17/_geo_xyz/1,5,1 3.704831362
-P _part/17/_geo_xyz/1,5,2 19.990545273
+P _part/17/_geo_xyz/1,5,1 3.705085993
+P _part/17/_geo_xyz/1,5,2 19.990791321
 P _part/17/_geo_xyz/1,6,0 3.770792246
-P _part/17/_geo_xyz/1,6,1 3.708191633
-P _part/17/_geo_xyz/1,6,2 20.209844589
+P _part/17/_geo_xyz/1,6,1 3.698653936
+P _part/17/_geo_xyz/1,6,2 20.210428238
 P _part/17/_geo_xyz/1,7,0 3.770792246
-P _part/17/_geo_xyz/1,7,1 3.708191633
-P _part/17/_geo_xyz/1,7,2 20.209844589
+P _part/17/_geo_xyz/1,7,1 3.698653936
+P _part/17/_geo_xyz/1,7,2 20.210428238
 P _part/17/_geo_xyz/1,8,0 3.770792246
-P _part/17/_geo_xyz/1,8,1 3.680998802
-P _part/17/_geo_xyz/1,8,2 19.992212296
+P _part/17/_geo_xyz/1,8,1 3.669298887
+P _part/17/_geo_xyz/1,8,2 19.992666245
 P _part/17/_geo_xyz/1,9,0 3.770792246
-P _part/17/_geo_xyz/1,9,1 3.658337831
-P _part/17/_geo_xyz/1,9,2 19.810852051
+P _part/17/_geo_xyz/1,9,1 3.644836187
+P _part/17/_geo_xyz/1,9,2 19.811199188
 P _part/17/_geo_xyz/10,0,0 0.0
 P _part/17/_geo_xyz/10,0,1 0.0
 P _part/17/_geo_xyz/10,0,2 0.0
@@ -9100,18 +9100,18 @@ P _part/18/_bot_t2 0.252999991
 P _part/18/_geo_xyz/0,0,0 0.0
 P _part/18/_geo_xyz/0,0,1 -0.289999992
 P _part/18/_geo_xyz/0,0,2 18.157499313
-P _part/18/_geo_xyz/0,1,0 -0.036600001
+P _part/18/_geo_xyz/0,1,0 -0.066145353
 P _part/18/_geo_xyz/0,1,1 -0.289999992
-P _part/18/_geo_xyz/0,1,2 18.249000549
-P _part/18/_geo_xyz/0,10,0 0.091499999
-P _part/18/_geo_xyz/0,10,1 -0.289999992
-P _part/18/_geo_xyz/0,10,2 18.920000076
-P _part/18/_geo_xyz/0,11,0 0.073200002
+P _part/18/_geo_xyz/0,1,2 18.215236664
+P _part/18/_geo_xyz/0,10,0 0.224499837
+P _part/18/_geo_xyz/0,10,1 -0.290000021
+P _part/18/_geo_xyz/0,10,2 19.071523666
+P _part/18/_geo_xyz/0,11,0 0.150334492
 P _part/18/_geo_xyz/0,11,1 -0.289999992
-P _part/18/_geo_xyz/0,11,2 18.462499619
-P _part/18/_geo_xyz/0,12,0 0.036600001
+P _part/18/_geo_xyz/0,11,2 18.518314362
+P _part/18/_geo_xyz/0,12,0 0.054122251
 P _part/18/_geo_xyz/0,12,1 -0.289999992
-P _part/18/_geo_xyz/0,12,2 18.249000549
+P _part/18/_geo_xyz/0,12,2 18.210416794
 P _part/18/_geo_xyz/0,13,0 0.0
 P _part/18/_geo_xyz/0,13,1 -0.289999992
 P _part/18/_geo_xyz/0,13,2 18.157499313
@@ -9127,16 +9127,16 @@ P _part/18/_geo_xyz/0,16,2 0.0
 P _part/18/_geo_xyz/0,17,0 0.0
 P _part/18/_geo_xyz/0,17,1 0.0
 P _part/18/_geo_xyz/0,17,2 0.0
-P _part/18/_geo_xyz/0,2,0 -0.073200002
+P _part/18/_geo_xyz/0,2,0 -0.168373734
 P _part/18/_geo_xyz/0,2,1 -0.289999992
-P _part/18/_geo_xyz/0,2,2 18.462499619
-P _part/18/_geo_xyz/0,3,0 -0.091499999
-P _part/18/_geo_xyz/0,3,1 -0.289999992
-P _part/18/_geo_xyz/0,3,2 18.920000076
-P _part/18/_geo_xyz/0,4,0 -0.091499999
-P _part/18/_geo_xyz/0,4,1 -0.289999992
-P _part/18/_geo_xyz/0,4,2 19.530000687
-P _part/18/_geo_xyz/0,5,0 -0.049909096
+P _part/18/_geo_xyz/0,2,2 18.527921677
+P _part/18/_geo_xyz/0,3,0 -0.240535200
+P _part/18/_geo_xyz/0,3,1 -0.289999962
+P _part/18/_geo_xyz/0,3,2 19.076343536
+P _part/18/_geo_xyz/0,4,0 -0.222495988
+P _part/18/_geo_xyz/0,4,1 -0.289999962
+P _part/18/_geo_xyz/0,4,2 19.538173676
+P _part/18/_geo_xyz/0,5,0 -0.121955715
 P _part/18/_geo_xyz/0,5,1 -0.289999992
 P _part/18/_geo_xyz/0,5,2 20.292499542
 P _part/18/_geo_xyz/0,6,0 0.0
@@ -9145,30 +9145,30 @@ P _part/18/_geo_xyz/0,6,2 21.207500458
 P _part/18/_geo_xyz/0,7,0 0.0
 P _part/18/_geo_xyz/0,7,1 -0.289999992
 P _part/18/_geo_xyz/0,7,2 21.207500458
-P _part/18/_geo_xyz/0,8,0 0.049909096
+P _part/18/_geo_xyz/0,8,0 0.111426644
 P _part/18/_geo_xyz/0,8,1 -0.289999992
 P _part/18/_geo_xyz/0,8,2 20.292499542
-P _part/18/_geo_xyz/0,9,0 0.091499999
-P _part/18/_geo_xyz/0,9,1 -0.289999992
-P _part/18/_geo_xyz/0,9,2 19.530000687
+P _part/18/_geo_xyz/0,9,0 0.204456761
+P _part/18/_geo_xyz/0,9,1 -0.290000021
+P _part/18/_geo_xyz/0,9,2 19.528566360
 P _part/18/_geo_xyz/1,0,0 -0.000000643
 P _part/18/_geo_xyz/1,0,1 3.659079313
-P _part/18/_geo_xyz/1,0,2 19.043828964
-P _part/18/_geo_xyz/1,1,0 -0.027480641
+P _part/18/_geo_xyz/1,0,2 19.068828583
+P _part/18/_geo_xyz/1,1,0 -0.047495179
 P _part/18/_geo_xyz/1,1,1 3.659079313
-P _part/18/_geo_xyz/1,1,2 19.112529755
-P _part/18/_geo_xyz/1,10,0 0.068699360
+P _part/18/_geo_xyz/1,1,2 19.110286713
+P _part/18/_geo_xyz/1,10,0 0.161197603
 P _part/18/_geo_xyz/1,10,1 3.659079313
-P _part/18/_geo_xyz/1,10,2 19.616329193
-P _part/18/_geo_xyz/1,11,0 0.054959353
+P _part/18/_geo_xyz/1,10,2 19.725128174
+P _part/18/_geo_xyz/1,11,0 0.107944466
 P _part/18/_geo_xyz/1,11,1 3.659079313
-P _part/18/_geo_xyz/1,11,2 19.272829056
-P _part/18/_geo_xyz/1,12,0 0.027479356
+P _part/18/_geo_xyz/1,11,2 19.327905655
+P _part/18/_geo_xyz/1,12,0 0.038860910
 P _part/18/_geo_xyz/1,12,1 3.659079313
-P _part/18/_geo_xyz/1,12,2 19.112529755
+P _part/18/_geo_xyz/1,12,2 19.106824875
 P _part/18/_geo_xyz/1,13,0 -0.000000643
 P _part/18/_geo_xyz/1,13,1 3.659079313
-P _part/18/_geo_xyz/1,13,2 19.043828964
+P _part/18/_geo_xyz/1,13,2 19.068828583
 P _part/18/_geo_xyz/1,14,0 0.0
 P _part/18/_geo_xyz/1,14,1 0.0
 P _part/18/_geo_xyz/1,14,2 0.0
@@ -9181,30 +9181,30 @@ P _part/18/_geo_xyz/1,16,2 0.0
 P _part/18/_geo_xyz/1,17,0 0.0
 P _part/18/_geo_xyz/1,17,1 0.0
 P _part/18/_geo_xyz/1,17,2 0.0
-P _part/18/_geo_xyz/1,2,0 -0.054960642
+P _part/18/_geo_xyz/1,2,0 -0.120898508
 P _part/18/_geo_xyz/1,2,1 3.659079313
-P _part/18/_geo_xyz/1,2,2 19.272829056
-P _part/18/_geo_xyz/1,3,0 -0.068700641
+P _part/18/_geo_xyz/1,2,2 19.334804535
+P _part/18/_geo_xyz/1,3,0 -0.172712803
 P _part/18/_geo_xyz/1,3,1 3.659079313
-P _part/18/_geo_xyz/1,3,2 19.616329193
-P _part/18/_geo_xyz/1,4,0 -0.068700641
+P _part/18/_geo_xyz/1,3,2 19.728588104
+P _part/18/_geo_xyz/1,4,0 -0.159760058
 P _part/18/_geo_xyz/1,4,1 3.659079313
-P _part/18/_geo_xyz/1,4,2 20.074329376
-P _part/18/_geo_xyz/1,5,0 -0.037473373
+P _part/18/_geo_xyz/1,4,2 20.060197830
+P _part/18/_geo_xyz/1,5,0 -0.087568842
 P _part/18/_geo_xyz/1,5,1 3.659079313
-P _part/18/_geo_xyz/1,5,2 20.646829605
+P _part/18/_geo_xyz/1,5,2 20.601829529
 P _part/18/_geo_xyz/1,6,0 -0.000000643
 P _part/18/_geo_xyz/1,6,1 3.659079313
-P _part/18/_geo_xyz/1,6,2 21.333829880
+P _part/18/_geo_xyz/1,6,2 21.258829117
 P _part/18/_geo_xyz/1,7,0 -0.000000643
 P _part/18/_geo_xyz/1,7,1 3.659079313
-P _part/18/_geo_xyz/1,7,2 21.333829880
-P _part/18/_geo_xyz/1,8,0 0.037472084
+P _part/18/_geo_xyz/1,7,2 21.258829117
+P _part/18/_geo_xyz/1,8,0 0.080007352
 P _part/18/_geo_xyz/1,8,1 3.659079313
-P _part/18/_geo_xyz/1,8,2 20.646829605
-P _part/18/_geo_xyz/1,9,0 0.068699360
+P _part/18/_geo_xyz/1,8,2 20.601829529
+P _part/18/_geo_xyz/1,9,0 0.146806031
 P _part/18/_geo_xyz/1,9,1 3.659079313
-P _part/18/_geo_xyz/1,9,2 20.074329376
+P _part/18/_geo_xyz/1,9,2 20.053298950
 P _part/18/_geo_xyz/10,0,0 0.0
 P _part/18/_geo_xyz/10,0,1 0.0
 P _part/18/_geo_xyz/10,0,2 0.0
@@ -14958,7 +14958,7 @@ P _part/85/_part_specs_invis 1
 P _part/85/_part_tex 0
 P _part/85/_part_the 0.0
 P _part/85/_part_x 0.0
-P _part/85/_part_y -0.773548067
+P _part/85/_part_y -0.773548007
 P _part/85/_part_z 5.840000153
 P _part/85/_patt_con 0
 P _part/85/_patt_prt 0
@@ -16427,7 +16427,7 @@ P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.077265725
+P _part/86/_part_y -0.077265456
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -22367,10 +22367,10 @@ P _wing/13/_yawbr/9 0
 P _wing/13/_yawbr/count 10
 P _wing/16/_Croot 1.500000000
 P _wing/16/_Ctip 0.730000019
-P _wing/16/_afl_file_R0 B21_symmetrical.afl
-P _wing/16/_afl_file_R1 B21_symmetrical.afl
-P _wing/16/_afl_file_T0 B21_symmetrical.afl
-P _wing/16/_afl_file_T1 B21_symmetrical.afl
+P _wing/16/_afl_file_R0 NACA 0012 (symmetrical).afl
+P _wing/16/_afl_file_R1 NACA 0012 (symmetrical).afl
+P _wing/16/_afl_file_T0 NACA 0009 (symmetrical).afl
+P _wing/16/_afl_file_T1 NACA 0009 (symmetrical).afl
 P _wing/16/_ailn1/0 0
 P _wing/16/_ailn1/1 0
 P _wing/16/_ailn1/2 0
@@ -22603,7 +22603,7 @@ P _wing/16/_inc_vect/9 0
 P _wing/16/_inc_vect/count 10
 P _wing/16/_incid_chrd_inc 0.0
 P _wing/16/_incid_full_up 0.0
-P _wing/16/_incidence/0 -4.0
+P _wing/16/_incidence/0 -3.0
 P _wing/16/_incidence/1 -4.0
 P _wing/16/_incidence/2 0.0
 P _wing/16/_incidence/3 0.0
@@ -22727,10 +22727,10 @@ P _wing/16/_yawbr/9 0
 P _wing/16/_yawbr/count 10
 P _wing/17/_Croot 1.500000000
 P _wing/17/_Ctip 0.730000019
-P _wing/17/_afl_file_R0 B21_symmetrical.afl
-P _wing/17/_afl_file_R1 B21_symmetrical.afl
-P _wing/17/_afl_file_T0 B21_symmetrical.afl
-P _wing/17/_afl_file_T1 B21_symmetrical.afl
+P _wing/17/_afl_file_R0 NACA 0012 (symmetrical).afl
+P _wing/17/_afl_file_R1 NACA 0012 (symmetrical).afl
+P _wing/17/_afl_file_T0 NACA 0009 (symmetrical).afl
+P _wing/17/_afl_file_T1 NACA 0009 (symmetrical).afl
 P _wing/17/_ailn1/0 0
 P _wing/17/_ailn1/1 0
 P _wing/17/_ailn1/2 0
@@ -22963,7 +22963,7 @@ P _wing/17/_inc_vect/9 0
 P _wing/17/_inc_vect/count 10
 P _wing/17/_incid_chrd_inc 0.0
 P _wing/17/_incid_full_up 0.0
-P _wing/17/_incidence/0 -4.0
+P _wing/17/_incidence/0 -3.0
 P _wing/17/_incidence/1 -4.0
 P _wing/17/_incidence/2 0.0
 P _wing/17/_incidence/3 0.0
@@ -23086,11 +23086,11 @@ P _wing/17/_yawbr/8 0
 P _wing/17/_yawbr/9 0
 P _wing/17/_yawbr/count 10
 P _wing/18/_Croot 3.049999952
-P _wing/18/_Ctip 2.289999962
-P _wing/18/_afl_file_R0 B21_symmetrical.afl
-P _wing/18/_afl_file_R1 B21_symmetrical.afl
-P _wing/18/_afl_file_T0 B21_symmetrical.afl
-P _wing/18/_afl_file_T1 B21_symmetrical.afl
+P _wing/18/_Ctip 2.190000057
+P _wing/18/_afl_file_R0 NACA 64(2)-015_3m.afl
+P _wing/18/_afl_file_R1 NACA 64(2)-015_9m.afl
+P _wing/18/_afl_file_T0 NACA 64(2)-015_3m.afl
+P _wing/18/_afl_file_T1 NACA 64(2)-015_9m.afl
 P _wing/18/_ailn1/0 0
 P _wing/18/_ailn1/1 0
 P _wing/18/_ailn1/2 0
@@ -23138,7 +23138,7 @@ P _wing/18/_c_rat_for_RIB/8 1.0
 P _wing/18/_c_rat_for_RIB/9 1.0
 P _wing/18/_c_rat_for_RIB/count 11
 P _wing/18/_chord_for_RIB/0 3.049999952
-P _wing/18/_chord_for_RIB/1 2.289999962
+P _wing/18/_chord_for_RIB/1 2.190000057
 P _wing/18/_chord_for_RIB/10 0.0
 P _wing/18/_chord_for_RIB/2 2.289999962
 P _wing/18/_chord_for_RIB/3 0.0
@@ -24241,7 +24241,7 @@ P acf/_HUD_del_y 120.0
 P acf/_ICAO ASG29 B21
 P acf/_ITT_is_C 1
 P acf/_Jxx_unitmass 1.0
-P acf/_Jyy_unitmass 4.199999809
+P acf/_Jyy_unitmass 2.500000000
 P acf/_Jzz_unitmass 8.399999619
 P acf/_Mmo 0.0
 P acf/_RSC_idlespeed_ENGN 0.0
@@ -24278,14 +24278,14 @@ P acf/_additonal_gear_flatplate 0.0
 P acf/_ai_can_fly 0
 P acf/_ailn1_cratR 0.150000006
 P acf/_ailn1_cratT 0.150000006
-P acf/_ailn1_dn 25.0
+P acf/_ailn1_dn 30.0
 P acf/_ailn1_flaps 0.0
 P acf/_ailn1_max_sweep_rat 1.0
 P acf/_ailn1_pitch 0.0
 P acf/_ailn1_rat1 1.0
 P acf/_ailn1_rat2 1.0
 P acf/_ailn1_sbrk 0.0
-P acf/_ailn1_up 25.0
+P acf/_ailn1_up 30.0
 P acf/_ailn1_v1 0.0
 P acf/_ailn1_v2 999.0
 P acf/_ailn2_cratR 0.0
@@ -25967,7 +25967,7 @@ P acf/_elec_fuelP 30.0
 P acf/_elec_regen_eta 0.0
 P acf/_elev1_cratR 0.300000012
 P acf/_elev1_cratT 0.300000012
-P acf/_elev1_dn 16.0
+P acf/_elev1_dn 13.0
 P acf/_elev1_max_sweep_rat 1.0
 P acf/_elev1_rat1 1.0
 P acf/_elev1_rat2 1.0
@@ -26367,7 +26367,7 @@ P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_file_writer_version 113601
 P acf/_flap1_cd 0.010000000
 P acf/_flap1_cl 0.300000012
-P acf/_flap1_cm -0.300000012
+P acf/_flap1_cm -0.500000000
 P acf/_flap1_cratR 0.140000001
 P acf/_flap1_cratT 0.140000001
 P acf/_flap1_dn/0 0.0
@@ -26947,11 +26947,11 @@ P acf/_rrpm_trim_rpm_slow 0.0
 P acf/_rrpm_trim_time 5.0
 P acf/_rudd1_cratR 0.300000012
 P acf/_rudd1_cratT 0.300000012
-P acf/_rudd1_lf 20.0
+P acf/_rudd1_lf 25.0
 P acf/_rudd1_max_sweep_rat 1.0
 P acf/_rudd1_rat1 1.0
 P acf/_rudd1_rat2 1.0
-P acf/_rudd1_rt 20.0
+P acf/_rudd1_rt 25.0
 P acf/_rudd1_v1 0.0
 P acf/_rudd1_v2 999.0
 P acf/_rudd2_cratR 0.0
@@ -26963,7 +26963,7 @@ P acf/_rudd2_rat2 1.0
 P acf/_rudd2_rt 0.0
 P acf/_rudd2_v1 0.0
 P acf/_rudd2_v2 999.0
-P acf/_rudd_def_time 0.0
+P acf/_rudd_def_time 1.0
 P acf/_rudd_lf_trim 7.300000191
 P acf/_rudd_rt_trim 8.300000191
 P acf/_rudd_tab 0.0
@@ -27233,7 +27233,7 @@ P acf/_tank_xyz_full/8,1 0.0
 P acf/_tank_xyz_full/8,2 0.0
 P acf/_tank_xyz_full/i_count 9
 P acf/_tank_xyz_full/j_count 3
-P acf/_the_eqlbm 4.083415985
+P acf/_the_eqlbm 4.083416462
 P acf/_thro_non_vect_props_at_sin_vect 0
 P acf/_thro_x_ctr 0.0
 P acf/_throt_max_fwd_emr 0.699999988
@@ -27404,7 +27404,7 @@ PANEL_2D_BEGIN
 PANEL_2D_END
 PANEL_3D_BEGIN
 gen_rotary vario_302_backgroun
-  POS 264.000000 567.500000
+  POS 267.000000 573.500000
   IMAGE vario_302/vario_302_background
   DATAREF 
   LIGHT_MODE MECHANICAL
@@ -27423,7 +27423,7 @@ gen_rotary vario_302_backgroun
   CLICK_DY 0
 
 gen_annun vario_302_ring
-  POS 263.500000 570.000000
+  POS 266.500000 576.000000
   IMAGE vario_302/ring
   DATAREF 
   SHOW_EQUAL 1.000000 b21/units_vario
@@ -27433,7 +27433,7 @@ gen_annun vario_302_ring
   KEY_FRAME 1.000000 1.000000
 
 gen_LED vario_302_bottom
-  POS 260.500000 542.500000
+  POS 263.500000 548.500000
   IMAGE vario_302/num_bottom
   DATAREF b21/vario_302/number_bottom
   LIGHT_MODE MECHANICAL
@@ -27446,7 +27446,7 @@ gen_LED vario_302_bottom
   LED_ROWS 0
 
 gen_LED vario_302_bottom_s
-  POS 254.500000 542.500000
+  POS 257.500000 548.500000
   IMAGE vario_302/num_sign
   DATAREF b21/vario_302/number_bottom_sign
   LIGHT_MODE MECHANICAL
@@ -27459,7 +27459,7 @@ gen_LED vario_302_bottom_s
   LED_ROWS 0
 
 gen_LED vario_302_number_r
-  POS 281.500000 568.500000
+  POS 284.500000 574.500000
   IMAGE vario_302/num_right
   DATAREF b21/vario_302/number_right
   LIGHT_MODE MECHANICAL
@@ -27472,7 +27472,7 @@ gen_LED vario_302_number_r
   LED_ROWS 0
 
 gen_LED vario_203_number_t
-  POS 261.500000 589.500000
+  POS 264.500000 595.500000
   IMAGE vario_302/num_top
   DATAREF b21/vario_302/number_top
   LIGHT_MODE MECHANICAL
@@ -27485,7 +27485,7 @@ gen_LED vario_203_number_t
   LED_ROWS 0
 
 gen_LED vario_302_num_top_s
-  POS 255.500000 589.500000
+  POS 258.500000 595.500000
   IMAGE vario_302/num_sign
   DATAREF b21/vario_302/number_top_sign
   LIGHT_MODE MECHANICAL
@@ -27498,7 +27498,7 @@ gen_LED vario_302_num_top_s
   LED_ROWS 0
 
 gen_needle vario_302_needle
-  POS 264.000000 568.500000
+  POS 267.000000 574.500000
   IMAGE vario_302/vario_302
   DATAREF b21/vario_302/needle_fpm
   LIGHT_MODE MECHANICAL
@@ -27549,7 +27549,7 @@ gen_rotary vario_302_stf_te_sw
   CLICK_DY 0
 
 gen_annun vario_302_stf_te_in
-  POS 293.000000 556.000000
+  POS 296.000000 562.000000
   IMAGE vario_302/stf_te_ind
   DATAREF 
   SHOW_EQUAL 1.000000 b21/vario_302/stf_te_ind
@@ -27559,7 +27559,7 @@ gen_annun vario_302_stf_te_in
   KEY_FRAME 1.000000 1.000000
 
 gen_annun vario_57_background
-  POS 323.000000 685.000000
+  POS 329.000000 686.000000
   IMAGE vario_57/vario_57_background
   DATAREF 
   SHOW_EQUAL 1.000000 b21/units_vario
@@ -27569,7 +27569,7 @@ gen_annun vario_57_background
   KEY_FRAME 1.000000 1.000000
 
 gen_needle vario_57_needle
-  POS 321.000000 689.000000
+  POS 327.000000 690.000000
   IMAGE vario_57/vario_57_needle
   DATAREF b21/vario_57/needle_fpm
   LIGHT_MODE MECHANICAL
@@ -27584,7 +27584,7 @@ gen_needle vario_57_needle
   NEEDLE_OFFSET_Y -5.000000
 
 gen_rotary vario_57_center
-  POS 322.500000 683.500000
+  POS 328.500000 684.500000
   IMAGE vario_57/vario_57_center
   DATAREF 
   LIGHT_MODE MECHANICAL
@@ -27631,6 +27631,19 @@ gen_handle spoiler_indicator
   CLICK_RADIUS 10.000000
   HAS_DETENTS 0
 
+gen_handle spoilers_closed
+  POS 803.500000 407.000000
+  IMAGE spoiler_indicator/spoilers_closed
+  DATAREF sim/cockpit2/controls/speedbrake_ratio
+  SHOW_LESS 0.000000 sim/cockpit2/controls/speedbrake_ratio
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 -25.000000 1.000000
+  KEY_FRAME 1.000000 25.000000
+  TOOLTIP Spoilers
+  CLICK_RADIUS 10.000000
+  HAS_DETENTS 0
+
 rad_com1_GA rad_com1_GA.png
   POS 425.000000 327.500000
   DATAREF 
@@ -27650,7 +27663,7 @@ rad_CDU739_2d CDU739_2d.png
   KEY_FRAME 1.000000 1.000000
 
 gen_annun asi
-  POS 630.500000 556.500000
+  POS 628.500000 558.500000
   IMAGE asi_lcd/asi_background
   DATAREF 
   SHOW_EQUAL 1.000000 b21/units_speed
@@ -27660,7 +27673,7 @@ gen_annun asi
   KEY_FRAME 1.000000 1.000000
 
 gen_needle asi_needle
-  POS 630.000000 557.500000
+  POS 628.000000 559.500000
   IMAGE asi_lcd/asi_needle
   DATAREF sim/cockpit2/gauges/indicators/airspeed_kts_pilot
   LIGHT_MODE MECHANICAL
@@ -27674,7 +27687,7 @@ gen_needle asi_needle
   OFFSET 0.000000
 
 gen_needle asi_stf_mc_bug
-  POS 630.000000 556.500000
+  POS 628.000000 558.500000
   IMAGE asi_lcd/asi_stf_mc_bug
   DATAREF b21/stf_mc_kts
   LIGHT_MODE MECHANICAL
@@ -27688,7 +27701,7 @@ gen_needle asi_stf_mc_bug
   OFFSET 0.000000
 
 gen_needle asi_stf_bug
-  POS 630.000000 556.500000
+  POS 628.000000 558.500000
   IMAGE asi_lcd/asi_stf_bug
   DATAREF b21/stf_kts
   LIGHT_MODE MECHANICAL
@@ -27702,7 +27715,7 @@ gen_needle asi_stf_bug
   OFFSET 0.000000
 
 gen_needle altimeter_ft
-  POS 527.000000 666.000000
+  POS 526.000000 667.000000
   IMAGE altimeter/altimeter_ft
   DATAREF b21/altimeter/needle_3_deg
   SHOW_EQUAL 0.000000 b21/units_altitude
@@ -27714,7 +27727,7 @@ gen_needle altimeter_ft
   OFFSET 0.000000
 
 gen_needle altimeter_m
-  POS 527.000000 666.000000
+  POS 526.000000 667.000000
   IMAGE altimeter/altimeter_m
   DATAREF b21/altimeter/needle_3_deg
   SHOW_EQUAL 1.000000 b21/units_altitude
@@ -27726,7 +27739,7 @@ gen_needle altimeter_m
   OFFSET 0.000000
 
 gen_needle altimeter_needle_2
-  POS 527.000000 665.000000
+  POS 526.000000 666.000000
   IMAGE altimeter/needle_small
   DATAREF b21/altimeter/needle_2_deg
   LIGHT_MODE MECHANICAL
@@ -27737,7 +27750,7 @@ gen_needle altimeter_needle_2
   OFFSET 0.000000
 
 gen_needle altimeter_needle_1
-  POS 527.000000 665.000000
+  POS 526.000000 666.000000
   IMAGE altimeter/needle_large
   DATAREF b21/altimeter/needle_1_deg
   LIGHT_MODE MECHANICAL
@@ -27748,7 +27761,7 @@ gen_needle altimeter_needle_1
   OFFSET 0.000000
 
 gen_rheostat altimeter_knob
-  POS 486.000000 621.000000
+  POS 485.000000 622.000000
   IMAGE altimeter/knob
   DATAREF b21/altimeter/knob
   KF_WRAP_BOTTOM
@@ -27768,7 +27781,7 @@ gen_rheostat altimeter_knob
   WRAP 1
 
 gen_pointer trim
-  POS 548.000000 479.000000
+  POS 283.000000 487.000000
   IMAGE trim/trim
   DATAREF sim/cockpit2/controls/elevator_trim
   SIZE 0.800000
@@ -27823,12 +27836,15 @@ gen_trigger canopy_toggle
 gen_rotary flap_indicator
   POS 421.000000 650.500000
   IMAGE flap_indicator/flap_indicator
-  DATAREF sim/flightmodel/controls/flaprqst
+  DATAREF b21/flap_indicator
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
   KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 6.000000
-  DIGITS 7
+  KEY_FRAME 1.000000 6.000000 1.000000
+  KEY_FRAME 1.900000 7.000000 1.000000
+  KEY_FRAME 2.900000 8.000000 1.000000
+  KEY_FRAME 3.900000 9.000000
+  DIGITS 10
   ROTARY_TYPE ROTARY
   CLICK_RADIUS 10.000000
   CLICK_RADIUS_DY 0.000000
@@ -27840,7 +27856,7 @@ gen_rotary flap_indicator
   CLICK_DY 0
 
 gen_LED ballast
-  POS 722.000000 490.000000
+  POS 719.000000 490.000000
   IMAGE ballast/ballast
   DATAREF sim/flightmodel/weight/m_jettison
   LIGHT_MODE MECHANICAL
@@ -27901,7 +27917,7 @@ gen_trigger ballast_open 2
   CLICK_DY 0
 
 gen_trigger ballast_fill
-  POS 698.000000 494.000000
+  POS 695.000000 490.000000
   IMAGE ballast/gen_trigger
   COMMAND b21/ballast/fill
   LIGHT_MODE MECHANICAL
@@ -27916,7 +27932,7 @@ gen_trigger ballast_fill
   CLICK_DY 0
 
 gen_needle watch_h
-  POS 168.500000 509.000000
+  POS 176.500000 512.000000
   IMAGE watch/H
   DATAREF b21/clock/hours
   LIGHT_MODE MECHANICAL
@@ -27927,7 +27943,7 @@ gen_needle watch_h
   OFFSET 0.000000
 
 gen_needle watch_m
-  POS 167.500000 510.000000
+  POS 175.500000 513.000000
   IMAGE watch/M
   DATAREF b21/clock/minutes
   LIGHT_MODE MECHANICAL
@@ -27938,7 +27954,7 @@ gen_needle watch_m
   OFFSET 0.000000
 
 gen_needle watch_s
-  POS 168.500000 510.000000
+  POS 176.500000 513.000000
   IMAGE watch/S
   DATAREF b21/clock/seconds
   LIGHT_MODE MECHANICAL

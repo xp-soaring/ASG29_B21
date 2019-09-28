@@ -49,6 +49,7 @@ components = {
                 b21_altimeter {}, -- moves needles of altimeter, supports imperial/metric units
                 b21_yawstring {}, -- moves yawstring
                 b21_ballast {}, -- provides ballast % indicator and "b21/ballast/[open,close,fill]"
+                b21_flap_indicator {},
                 b21_controls_commands {}
              }
 
