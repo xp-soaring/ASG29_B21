@@ -435,7 +435,7 @@ function update_netto_ld()
 
     -- manage update period for glide_ratio_display
     local now = get(DATAREF_TIME_S)
-    if now < update_netto_ld_time_s + 0.25 -- 4/second update cycle
+    if now < update_netto_ld_time_s + 1 -- 1/second update cycle
     then
         return
     end
