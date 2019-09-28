@@ -4,7 +4,7 @@
 print("b21_ballast starting")
 
 local BALLAST_MAX_KG = 200       -- Max ballast capacity in Kg
-local BALLAST_DUMP_RATE = 4.0 -- Ballast dump rate in Kg/s
+local BALLAST_DUMP_RATE = 2.22 -- Ballast dump rate in Kg/s => 90 second dump
 
 -- WRITE datarefs
 local DATAREF_BALLAST_KG = globalPropertyf("sim/flightmodel/weight/m_jettison") -- Kg water ballast
@@ -13,6 +13,8 @@ local DATAREF_BALLAST_CONTROL = globalPropertyi("sim/cockpit/weapons/missiles_ar
 
 -- READ datarefs
 local DATAREF_TIME_S = globalPropertyf("sim/network/misc/network_time_sec")
+local DATAREF_ONGROUND = globalPropertyi("sim/flightmodel/failures/onground_any") -- =1 when on the ground
+
 --
 
 local command_fill = sasl.createCommand("b21/ballast/fill",
@@ -28,14 +30,23 @@ local ballast_dumping = false
 -- track time as only need update once per sec
 local prev_time_s
 
+function fill()
+    set(DATAREF_BALLAST_KG, BALLAST_MAX_KG)
+    ballast_dumping = false
+    set(DATAREF_BALLAST_CONTROL, 0) -- set ballast dump particles to 'off'
+end
 
 function ballast_fill(phase)
     if phase == SASL_COMMAND_BEGIN
     then
         print("BALLAST_FILL COMMAND")
-        set(DATAREF_BALLAST_KG, BALLAST_MAX_KG)
-        ballast_dumping = false
-        set(DATAREF_BALLAST_CONTROL, 0) -- set ballast dump particles to 'off'
+        -- only fill on the ground
+        if get(DATAREF_ONGROUND) == 1
+        then
+            fill()
+        else
+            print("BALLAST_FILL NOT ON GROUND")
+        end
     end
     return 1
 end
@@ -80,7 +91,7 @@ function update()
     if init_required
     then
         prev_time_s = get(DATAREF_TIME_S)
-        ballast_fill(SASL_COMMAND_BEGIN)
+        fill()
         -- init complete, so prevent re-init of future update() calls
         init_required = false
     end
