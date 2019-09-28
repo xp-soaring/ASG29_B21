@@ -49,6 +49,14 @@ local debug_str2 = "DEBUG"
 local task_background_img = sasl.gl.loadImage("page_task.png")
 local nav_background_img = sasl.gl.loadImage("page_nav.png")
 local map_background_img = sasl.gl.loadImage("page_map.png")
+local page_checklist_1
+if project_settings.SPEED_UNITS == 0
+then
+    page_checklist_1 = sasl.gl.loadImage("page_checklist_1_knots.png")
+else
+    page_checklist_1 = sasl.gl.loadImage("page_checklist_1_kph.png")
+end
+local page_checklist_2 = sasl.gl.loadImage("page_checklist_2.png")
 local logo_img = sasl.gl.loadImage("navpanel_logo.png")
 local nav_wp_pointer = sasl.gl.loadImage("nav_wp_pointer.png")
 local nav_wp2_pointer = sasl.gl.loadImage("nav_wp2_pointer.png")
@@ -81,7 +89,7 @@ local wp_color = { 0.0, 0.2, 0.0, 1.0 } -- muddy green
 -- 2 : TASK (load task button, display task)
 -- 3 : (future) MAP (lat/long view of task)
 local page = 1
-local page_count = 2
+local page_count = 4
 
 -- task contains the list [1..N] of waypoints
 local task = { }
@@ -1069,6 +1077,14 @@ function draw_page_nav()
 
 end
 
+function draw_page_checklist_1()
+    sasl.gl.drawTexture(page_checklist_1, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
+end
+
+function draw_page_checklist_2()
+    sasl.gl.drawTexture(page_checklist_2, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
+end
+
 callback = {}
 callback["page"] = button_page_clicked
 callback["load"] = button_load_clicked
@@ -1082,6 +1098,12 @@ function draw()
     elseif page == 2
     then
         draw_page_task()
+    elseif page == 3
+    then
+        draw_page_checklist_1()
+    elseif page == 4
+    then
+        draw_page_checklist_2()
     end
     drawAll(components)
 end
