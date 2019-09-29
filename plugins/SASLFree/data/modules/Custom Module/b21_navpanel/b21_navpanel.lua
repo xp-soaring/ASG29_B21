@@ -4,6 +4,7 @@ local w = size[1]
 local h = size[2]
 
 print("b21_navpanel.lua starting v2.07 ",w,'x',h)
+local BALLAST_MAX_KG = 200       -- Max ballast capacity in Kg
 
 local geo = require "b21_geo" -- contains useful geographic function like distance between lat/longs
 
@@ -25,6 +26,7 @@ local DATAREF_WIND_DEG = globalPropertyf("sim/weather/wind_direction_degt") -- w
 -- note X-Plane error has this dataref misnamed (it is not knots, it is meters per second)
 local DATAREF_WIND_MPS = globalPropertyf("sim/weather/wind_speed_kt") -- wind speed (METERS PER SECOND)
 local DATAREF_WEIGHT_TOTAL_KG = globalPropertyf("sim/flightmodel/weight/m_total")
+local DATAREF_BALLAST_KG = globalPropertyf("sim/flightmodel/weight/m_jettison") -- Kg water ballast
 local DATAREF_ALT_FT = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_pilot") -- 3000
 local DATAREF_AIRSPEED_KTS = globalPropertyf("sim/cockpit2/gauges/indicators/airspeed_kts_pilot")
 local DATAREF_PSI = globalPropertyf("sim/flightmodel/position/true_psi") -- degrees (true) aircraft is pointing
@@ -995,8 +997,7 @@ function draw_ballast()
     -- draw "BALLAST:" text
     sasl.gl.drawText(font,111,82, "BALLAST:", 10, true, false, TEXT_ALIGN_RIGHT, black)
     -- get ballast ratio 0.0 = empty, 1.0 = full
-    local ballast_ratio = (get(DATAREF_WEIGHT_TOTAL_KG) - project_settings.polar_weight_empty_kg) /
-        (project_settings.polar_weight_full_kg - project_settings.polar_weight_empty_kg)
+    local ballast_ratio = get(DATAREF_BALLAST_KG) / BALLAST_MAX_KG
 
     local ballast_str = math.floor(100 * ballast_ratio + 0.5).."%"
 
