@@ -21,6 +21,7 @@ local MAX_WARNING_DURATION_S = 5 -- only leave warning on indicator for max time
 local warning_time_s = 0.0 -- record time of issuing warning
 local warning_gear_up = false
 local warning_gear_down = false
+local warning_ballast = false
 
 -- X-PLANE per-frame update
 function update()
@@ -29,8 +30,11 @@ function update()
 
     local gear_down = get(DATAREF_GEAR) == 1
 
+    local carrying_ballast = get(DATAREF_BALLAST_KG) > 20
+
     local time_now_s = get(DATAREF_TIME_S)
 
+    -- SPOILERS / GEAR UP WARNING
     if spoilers_out and not gear_down
     then
         if not warning_gear_up
@@ -46,6 +50,7 @@ function update()
 
     local alt_agl_ft = get(DATAREF_ALT_AGL_FT)
 
+    -- AT HEIGHT / GEAR DOWN WARNING
     if gear_down and alt_agl_ft > WHEEL_DOWN_ALT_LIMIT_FT
     then
         if not warning_gear_down
@@ -59,9 +64,25 @@ function update()
         warning_gear_down = false
     end
 
+    -- SPOILERS / BALLAST WARNING
+    if (spoilers_out or gear_down) and carrying_ballast
+    then
+        if not warning_ballast
+        then
+            set(DATAREF_FLAP_INDICATOR, 4) -- SPOILERS / BALLAST warning
+            print("warning - ballast")
+            warning_time_s = time_now_s
+        end
+        warning_ballast = true
+    else
+        warning_ballast = false
+    end
+    
     local warning_expired = time_now_s > warning_time_s + MAX_WARNING_DURATION_S
 
-    if not warning_gear_down and not warning_gear_up or warning_expired
+    local no_warning = not warning_gear_down and not warning_gear_up and not warning_ballast
+
+    if no_warning or warning_expired
     then
         -- All seems fine, so set flap_indicator to flaprqst
         local flaprqst = get(DATAREF_FLAPRQST)

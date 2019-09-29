@@ -34,7 +34,7 @@
 * DONE remove 'dihedral' handle hack patches used for canopy open/close
 * add canopy toggle command to under-panel button (for close)
 * DONE add ballast indicator and open/close/fill commands
-* update polar calibration data for ASG29
+* DONE update polar calibration data for ASG29
 * have netto include ballast
 * have gpsnav calculations include ballast
 * DONE add particle emitter for water ballast
@@ -47,8 +47,23 @@
 * tidy up bezel highlight/shadow for ballast gauge
 * check Win CE tablet in cockpit properly disabled
 * add pilot model for external view
-* create navpanel TASK page
-* create navpanel NAV page
-* create navpanel MAP page
+* DONE create navpanel TASK page
+* DONE create navpanel NAV page
+* DEFERRED create navpanel MAP page
+* DONE create navpanel CHECKLIST page
 * remove arrival height / stf from vario_302 (make vario_301)
-* create electronic ASI with STF bug
+* DONE create electronic ASI with STF bug
+* fix negative alpha, negative G (inverted loop) instability
+* correct yaw stability
+* correct pitch stability
+* adjust ailerons for correct roll rate
+* change ailerons to plugin control to animate droop with flaps
+* adjust Center of Mass and place ballast slightly forward
+* adjust trim max-min effect
+* add NO LANDING warning to ballast checklist
+* add GEAR UP warning to flaps_indicator
+* add GEAR DOWN warning to flaps_indicator
+* add DUMP BALLAST warning to flaps_indicator
+* tune elevator movement speed
+* set time for gear up/down animations
+* confirm STF adjustment should use netto or te

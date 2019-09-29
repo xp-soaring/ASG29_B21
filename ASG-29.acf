@@ -104,7 +104,7 @@ P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
 P _gear/0/_scon 2959.263671875
-P _gear/0/_stat_def 0.396451831
+P _gear/0/_stat_def 0.396451682
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
 P _gear/0/_strut_comp -0.100000001
@@ -138,7 +138,7 @@ P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
 P _gear/1/_scon 672.559875488
-P _gear/1/_stat_def 0.222734556
+P _gear/1/_stat_def 0.222734526
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -6199,8 +6199,8 @@ P _part/16/_geo_xyz/0,4,0 0.0
 P _part/16/_geo_xyz/0,4,1 3.775577545
 P _part/16/_geo_xyz/0,4,2 19.694877625
 P _part/16/_geo_xyz/0,5,0 0.0
-P _part/16/_geo_xyz/0,5,1 3.754350424
-P _part/16/_geo_xyz/0,5,2 20.071504593
+P _part/16/_geo_xyz/0,5,1 3.762841225
+P _part/16/_geo_xyz/0,5,2 19.920854568
 P _part/16/_geo_xyz/0,6,0 0.0
 P _part/16/_geo_xyz/0,6,1 3.728878021
 P _part/16/_geo_xyz/0,6,2 20.523458481
@@ -6208,8 +6208,8 @@ P _part/16/_geo_xyz/0,7,0 0.0
 P _part/16/_geo_xyz/0,7,1 3.728878021
 P _part/16/_geo_xyz/0,7,2 20.523458481
 P _part/16/_geo_xyz/0,8,0 0.0
-P _part/16/_geo_xyz/0,8,1 3.656303167
-P _part/16/_geo_xyz/0,8,2 20.076642990
+P _part/16/_geo_xyz/0,8,1 3.632111549
+P _part/16/_geo_xyz/0,8,2 19.927705765
 P _part/16/_geo_xyz/0,9,0 0.0
 P _part/16/_geo_xyz/0,9,1 3.595824242
 P _part/16/_geo_xyz/0,9,2 19.704298019
@@ -7668,8 +7668,8 @@ P _part/17/_geo_xyz/0,4,0 0.0
 P _part/17/_geo_xyz/0,4,1 3.775577545
 P _part/17/_geo_xyz/0,4,2 19.694877625
 P _part/17/_geo_xyz/0,5,0 0.0
-P _part/17/_geo_xyz/0,5,1 3.754350424
-P _part/17/_geo_xyz/0,5,2 20.071504593
+P _part/17/_geo_xyz/0,5,1 3.762841225
+P _part/17/_geo_xyz/0,5,2 19.920854568
 P _part/17/_geo_xyz/0,6,0 0.0
 P _part/17/_geo_xyz/0,6,1 3.728878021
 P _part/17/_geo_xyz/0,6,2 20.523458481
@@ -7677,8 +7677,8 @@ P _part/17/_geo_xyz/0,7,0 0.0
 P _part/17/_geo_xyz/0,7,1 3.728878021
 P _part/17/_geo_xyz/0,7,2 20.523458481
 P _part/17/_geo_xyz/0,8,0 0.0
-P _part/17/_geo_xyz/0,8,1 3.656303167
-P _part/17/_geo_xyz/0,8,2 20.076642990
+P _part/17/_geo_xyz/0,8,1 3.632111549
+P _part/17/_geo_xyz/0,8,2 19.927705765
 P _part/17/_geo_xyz/0,9,0 0.0
 P _part/17/_geo_xyz/0,9,1 3.595824242
 P _part/17/_geo_xyz/0,9,2 19.704298019
@@ -14958,7 +14958,7 @@ P _part/85/_part_specs_invis 1
 P _part/85/_part_tex 0
 P _part/85/_part_the 0.0
 P _part/85/_part_x 0.0
-P _part/85/_part_y -0.773548007
+P _part/85/_part_y -0.773548126
 P _part/85/_part_z 5.840000153
 P _part/85/_patt_con 0
 P _part/85/_patt_prt 0
@@ -16427,7 +16427,7 @@ P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.077265456
+P _part/86/_part_y -0.077265486
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -24899,7 +24899,7 @@ P acf/_ann_wav_file/count 197
 P acf/_ap_crs_src 0
 P acf/_apt_req_plane 0
 P acf/_asi_is_kts 1
-P acf/_author Laurent Baron & Manu Glemot. WINDSOCKS, rhb, B21
+P acf/_author Windsocks, rhb, B21
 P acf/_auto_cowl_flaps_EQ 1092605706
 P acf/_auto_engage_BC_deg 0.0
 P acf/_auto_omega_fire 2.0
@@ -25965,13 +25965,13 @@ P acf/_dump_press_wow 0
 P acf/_elec_drive_eta 1.0
 P acf/_elec_fuelP 30.0
 P acf/_elec_regen_eta 0.0
-P acf/_elev1_cratR 0.300000012
+P acf/_elev1_cratR 0.400000006
 P acf/_elev1_cratT 0.300000012
-P acf/_elev1_dn 13.0
+P acf/_elev1_dn 20.0
 P acf/_elev1_max_sweep_rat 1.0
 P acf/_elev1_rat1 1.0
 P acf/_elev1_rat2 1.0
-P acf/_elev1_up 20.0
+P acf/_elev1_up 28.0
 P acf/_elev1_v1 0.0
 P acf/_elev1_v2 999.0
 P acf/_elev2_cratR 0.0
@@ -25983,7 +25983,7 @@ P acf/_elev2_rat2 1.0
 P acf/_elev2_up 0.0
 P acf/_elev2_v1 0.0
 P acf/_elev2_v2 999.0
-P acf/_elev_def_time 0.0
+P acf/_elev_def_time 3.0
 P acf/_elev_dn_trim 9.0
 P acf/_elev_tab 0.0
 P acf/_elev_trim_time 5.0
@@ -26971,8 +26971,8 @@ P acf/_rudd_trim_time 10.0
 P acf/_rudd_with_ailn_rat 0.0
 P acf/_rudd_with_fail 0.0
 P acf/_rwy_req_pave 0
-P acf/_sbrk1_cratR 0.150000006
-P acf/_sbrk1_cratT 0.150000006
+P acf/_sbrk1_cratR 0.200000003
+P acf/_sbrk1_cratT 0.200000003
 P acf/_sbrk1_up_flit 40.0
 P acf/_sbrk1_up_grnd 40.0
 P acf/_sbrk2_cratR 0.0
@@ -27269,7 +27269,7 @@ P acf/_vect_power_for 1.0
 P acf/_vect_rate 2.0
 P acf/_vectarmY 0.0
 P acf/_vectarmZ 0.0
-P acf/_version 1.02
+P acf/_version 1.03
 P acf/_vvi_but_adjusts_pitch 0
 P acf/_warn_airliner 0
 P acf/_warn_alt_app_100 0
@@ -27293,7 +27293,7 @@ P acf/_warn_transonic_EQ 0
 P acf/_warn_verbal_500_agl 0
 P acf/_wate_xyz/0 0.0
 P acf/_wate_xyz/1 0.200000003
-P acf/_wate_xyz/2 7.329999924
+P acf/_wate_xyz/2 6.329999924
 P acf/_wate_xyz/count 3
 P acf/_water_drop_dep_time 0.100000001
 P acf/_water_rud_Z 0.0
