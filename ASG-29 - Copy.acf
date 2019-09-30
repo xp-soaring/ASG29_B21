@@ -104,7 +104,7 @@ P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
 P _gear/0/_scon 2959.263671875
-P _gear/0/_stat_def 0.396764636
+P _gear/0/_stat_def 0.396764547
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
 P _gear/0/_strut_comp -0.100000001
@@ -138,7 +138,7 @@ P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
 P _gear/1/_scon 672.559875488
-P _gear/1/_stat_def 0.221335471
+P _gear/1/_stat_def 0.221335500
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -14958,7 +14958,7 @@ P _part/85/_part_specs_invis 1
 P _part/85/_part_tex 0
 P _part/85/_part_the 0.0
 P _part/85/_part_x 0.0
-P _part/85/_part_y -0.773235202
+P _part/85/_part_y -0.773235321
 P _part/85/_part_z 5.840000153
 P _part/85/_patt_con 0
 P _part/85/_patt_prt 0
@@ -16427,7 +16427,7 @@ P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.078664541
+P _part/86/_part_y -0.078664511
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -20927,10 +20927,10 @@ P _slid/9/_slider_time 0.0
 P _slid/count 24
 P _wing/10/_Croot 1.870000005
 P _wing/10/_Ctip 0.730000019
-P _wing/10/_afl_file_R0 B21_ASG29 (lo hi Re).afl
-P _wing/10/_afl_file_R1 B21_ASG29 (lo hi Re).afl
-P _wing/10/_afl_file_T0 B21_ASG29 (lo hi Re).afl
-P _wing/10/_afl_file_T1 B21_ASG29 (lo hi Re).afl
+P _wing/10/_afl_file_R0 B21_ASG29.afl
+P _wing/10/_afl_file_R1 B21_ASG29.afl
+P _wing/10/_afl_file_T0 B21_ASG29.afl
+P _wing/10/_afl_file_T1 B21_ASG29.afl
 P _wing/10/_ailn1/0 1
 P _wing/10/_ailn1/1 1
 P _wing/10/_ailn1/2 1
@@ -21287,10 +21287,10 @@ P _wing/10/_yawbr/9 0
 P _wing/10/_yawbr/count 10
 P _wing/11/_Croot 1.870000005
 P _wing/11/_Ctip 0.730000019
-P _wing/11/_afl_file_R0 B21_ASG29 (lo hi Re).afl
-P _wing/11/_afl_file_R1 B21_ASG29 (lo hi Re).afl
-P _wing/11/_afl_file_T0 B21_ASG29 (lo hi Re).afl
-P _wing/11/_afl_file_T1 B21_ASG29 (lo hi Re).afl
+P _wing/11/_afl_file_R0 B21_ASG29.afl
+P _wing/11/_afl_file_R1 B21_ASG29.afl
+P _wing/11/_afl_file_T0 B21_ASG29.afl
+P _wing/11/_afl_file_T1 B21_ASG29.afl
 P _wing/11/_ailn1/0 1
 P _wing/11/_ailn1/1 1
 P _wing/11/_ailn1/2 1
@@ -23447,10 +23447,10 @@ P _wing/18/_yawbr/9 0
 P _wing/18/_yawbr/count 10
 P _wing/8/_Croot 2.519999981
 P _wing/8/_Ctip 1.870000005
-P _wing/8/_afl_file_R0 B21_ASG29 (lo hi Re).afl
-P _wing/8/_afl_file_R1 B21_ASG29 (lo hi Re).afl
-P _wing/8/_afl_file_T0 B21_ASG29 (lo hi Re).afl
-P _wing/8/_afl_file_T1 B21_ASG29 (lo hi Re).afl
+P _wing/8/_afl_file_R0 B21_ASG29.afl
+P _wing/8/_afl_file_R1 B21_ASG29.afl
+P _wing/8/_afl_file_T0 B21_ASG29.afl
+P _wing/8/_afl_file_T1 B21_ASG29.afl
 P _wing/8/_ailn1/0 0
 P _wing/8/_ailn1/1 0
 P _wing/8/_ailn1/2 0
@@ -23807,10 +23807,10 @@ P _wing/8/_yawbr/9 0
 P _wing/8/_yawbr/count 10
 P _wing/9/_Croot 2.519999981
 P _wing/9/_Ctip 1.870000005
-P _wing/9/_afl_file_R0 B21_ASG29 (lo hi Re).afl
-P _wing/9/_afl_file_R1 B21_ASG29 (lo hi Re).afl
-P _wing/9/_afl_file_T0 B21_ASG29 (lo hi Re).afl
-P _wing/9/_afl_file_T1 B21_ASG29 (lo hi Re).afl
+P _wing/9/_afl_file_R0 B21_ASG29.afl
+P _wing/9/_afl_file_R1 B21_ASG29.afl
+P _wing/9/_afl_file_T0 B21_ASG29.afl
+P _wing/9/_afl_file_T1 B21_ASG29.afl
 P _wing/9/_ailn1/0 0
 P _wing/9/_ailn1/1 0
 P _wing/9/_ailn1/2 0
@@ -26365,8 +26365,8 @@ P acf/_feathered_pitch 0.0
 P acf/_ff_rat_idle_JET 0.100000001
 P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_file_writer_version 113601
-P acf/_flap1_cd 0.005000000
-P acf/_flap1_cl 0.500000000
+P acf/_flap1_cd 0.010000000
+P acf/_flap1_cl 0.300000012
 P acf/_flap1_cm -0.500000000
 P acf/_flap1_cratR 0.140000001
 P acf/_flap1_cratT 0.140000001
