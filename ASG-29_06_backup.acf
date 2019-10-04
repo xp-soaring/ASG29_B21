@@ -104,7 +104,7 @@ P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
 P _gear/0/_scon 2959.263671875
-P _gear/0/_stat_def 0.396764517
+P _gear/0/_stat_def 0.396764457
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
 P _gear/0/_strut_comp -0.100000001
@@ -244,7 +244,7 @@ P _lite/0/_width 45.0
 P _lite/count 1
 P _lite_equip/_land_lite_off_on_retract_EQ 0
 P _lite_equip/_taxi_lite_off_on_retract_EQ 0
-P _obja/0/_obj_flags 4124
+P _obja/0/_obj_flags 28
 P _obja/0/_v10_att_file_stl ../ASG-29_cockpit.obj
 P _obja/0/_v10_att_part -1
 P _obja/0/_v10_att_phi_ref 0.0
@@ -255,7 +255,7 @@ P _obja/0/_v10_att_y_acf_prt_ref 0.0
 P _obja/0/_v10_att_z_acf_prt_ref 0.0
 P _obja/0/_v10_is_internal -2058892532
 P _obja/0/_v10_steers_with_gear 0
-P _obja/1/_obj_flags 2076
+P _obja/1/_obj_flags 28
 P _obja/1/_v10_att_file_stl ../ASG-29_cockpit.obj
 P _obja/1/_v10_att_part -1
 P _obja/1/_v10_att_phi_ref 0.0
@@ -14958,7 +14958,7 @@ P _part/85/_part_specs_invis 1
 P _part/85/_part_tex 0
 P _part/85/_part_the 0.0
 P _part/85/_part_x 0.0
-P _part/85/_part_y -0.773235321
+P _part/85/_part_y -0.773235381
 P _part/85/_part_z 5.840000153
 P _part/85/_patt_con 0
 P _part/85/_patt_prt 0
@@ -26723,8 +26723,8 @@ P acf/_no_default_gear_fx 0
 P acf/_no_default_gun_fx 0
 P acf/_no_default_wash_fx 0
 P acf/_no_default_wing_fx 0
-P acf/_no_hydro_force_mult_brakes 0.0
-P acf/_no_hydro_force_mult_flcons 0.0
+P acf/_no_hydro_force_mult_brakes 1.0
+P acf/_no_hydro_force_mult_flcons 1.0
 P acf/_nom_bat_volt 12.0
 P acf/_nom_fuelP 30.0
 P acf/_nom_gen_volt 13.199999809
