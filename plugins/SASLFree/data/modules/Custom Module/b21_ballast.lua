@@ -4,7 +4,7 @@
 print("b21_ballast starting")
 
 local BALLAST_MAX_KG = 200       -- Max ballast capacity in Kg
-local BALLAST_DUMP_RATE = 2.22 -- Ballast dump rate in Kg/s => 90 second dump
+local BALLAST_DUMP_RATE = BALLAST_MAX_KG/240 -- Ballast dump rate in Kg/s => 4 minute dump
 
 -- WRITE datarefs
 local DATAREF_BALLAST_KG = globalPropertyf("sim/flightmodel/weight/m_jettison") -- Kg water ballast
