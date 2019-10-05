@@ -38,6 +38,7 @@ components = {
                 b21_wings_level {}, -- load before b21_controls_commands
                 b21_total_energy {}, -- load before variometers
                 b21_sounds {}, -- load before variometers
+                b21_ailerons {}, -- control aileron animation to support droop with flaps
                 b21_airbrakes {},
 	            b21_navpanel { -- digital nav panel
                     position = { 348, 637, 155, 210}
