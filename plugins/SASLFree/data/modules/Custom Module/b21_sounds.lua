@@ -13,6 +13,10 @@ local prev_mode = 0 -- sound mode 0 .. 1 (used for alternate sounds, TE=0, STF=1
 local sound_spoilers_unlock = loadSample(sasl.getAircraftPath()..'/sounds/systems/BrakesOut.wav')
 local sound_spoilers_lock = loadSample(sasl.getAircraftPath()..'/sounds/systems/BrakesIn.wav')
 local sound_spoilers_deployed = loadSample(sasl.getAircraftPath()..'/sounds/systems/spoilers.wav')
+local sound_canopy_open = loadSample(sasl.getAircraftPath()..'/sounds/systems/canopy_open.wav')
+local sound_canopy_close = loadSample(sasl.getAircraftPath()..'/sounds/systems/canopy_close.wav')
+local sound_gear_down = loadSample(sasl.getAircraftPath()..'/sounds/systems/gear_down.wav')
+local sound_gear_up = loadSample(sasl.getAircraftPath()..'/sounds/systems/gear_up.wav')
 
 local sounds = { climb = loadSample(sasl.getAircraftPath()..'/sounds/systems/vario_climb.wav'),
                  sink = loadSample(sasl.getAircraftPath()..'/sounds/systems/vario_sink.wav'),
@@ -20,8 +24,13 @@ local sounds = { climb = loadSample(sasl.getAircraftPath()..'/sounds/systems/var
 				 stf_sink = loadSample(sasl.getAircraftPath()..'/sounds/systems/stf_sink.wav')
                }
 
-local dataref_spoiler_ratio = globalPropertyf("sim/cockpit2/controls/speedbrake_ratio") -- get value of spoiler lever setting
-local dataref_airspeed_mps = globalPropertyf("sim/flightmodel/position/true_airspeed")
+-- READ datarefs
+local DATAREF_SPOILER_RATIO = globalPropertyf("sim/cockpit2/controls/speedbrake_ratio") -- get value of spoiler lever setting
+local DATAREF_AIRSPEED_MPS = globalPropertyf("sim/flightmodel/position/true_airspeed")
+
+local DATAREF_CANOPY_OPEN = globalPropertyi("sim/cockpit2/switches/canopy_open") -- =1 when canopy OPEN
+local DATAREF_GEAR_DOWN = globalPropertyi("sim/cockpit/switches/gear_handle_status") -- =1 when gear DOWN
+
 local DEBUG1 = globalPropertyf("b21/debug/1")
 local DEBUG2 = globalPropertyf("b21/debug/2")
 local DEBUG3 = globalPropertyf("b21/debug/3")
@@ -35,6 +44,10 @@ local spoilers_deployed = 0 -- flag to ensure spoiler sounds played once on open
 setSampleGain(sound_spoilers_lock, 500)
 setSampleGain(sound_spoilers_unlock, 500)
 setSampleGain(sound_spoilers_deployed, 0)
+setSampleGain(sound_canopy_open, 500)
+setSampleGain(sound_canopy_close, 500)
+setSampleGain(sound_gear_down, 500)
+setSampleGain(sound_gear_up, 500)
 
 setSampleGain(sounds.climb, project_settings.VARIO_VOLUME)
 setSampleGain(sounds.sink, project_settings.VARIO_VOLUME)
@@ -52,9 +65,9 @@ local current_sink = sounds.sink -- start off with sounds in TE mode, will updat
 --playSample(sound_spoilers_unlock)
 
 function update_spoilers()
-    local spoiler_ratio = get(dataref_spoiler_ratio)
+    local spoiler_ratio = get(DATAREF_SPOILER_RATIO)
     -- spoiler sound volume due to airspeed
-    local spoiler_volume_speed = (get(dataref_airspeed_mps) - 20) / 20
+    local spoiler_volume_speed = (get(DATAREF_AIRSPEED_MPS) - 20) / 20
     if spoiler_volume_speed < 0
     then
         spoiler_volume_speed = 0
@@ -78,7 +91,7 @@ function update_spoilers()
     set(DEBUG3, spoiler_volume)
 
 	-------------- generate airbrake lock / unlock sounds
-	if get(dataref_spoiler_ratio) > 0.03 and spoilers_deployed == 0 
+	if get(DATAREF_SPOILER_RATIO) > 0.03 and spoilers_deployed == 0 
 	then 
         playSample(sound_spoilers_unlock, false)
         playSample(sound_spoilers_deployed, true)
@@ -86,7 +99,7 @@ function update_spoilers()
         return
 	end
 
-	if get(dataref_spoiler_ratio) < 0.03 and spoilers_deployed == 1 
+	if get(DATAREF_SPOILER_RATIO) < 0.03 and spoilers_deployed == 1 
 	then
         playSample(sound_spoilers_lock, false)
         stopSample(sound_spoilers_deployed)
@@ -206,10 +219,54 @@ function update_vario()
     end
 end -- update_vario()
 
+-- canopy open/close sounds
+local prev_canopy_open = 0
+
+function update_canopy()
+    local canopy_open = get(DATAREF_CANOPY_OPEN)
+    if canopy_open == 1 and prev_canopy_open == 0
+    then
+        -- canopy opening
+        playSample(sound_canopy_open, false) -- no loop
+        prev_canopy_open = 1
+        return
+    end
+    if canopy_open == 0 and prev_canopy_open == 1
+    then
+        -- canopy closing
+        playSample(sound_canopy_close, false) -- no loop
+        prev_canopy_open = 0
+        return
+    end
+end
+
+-- gear up/down sounds
+local prev_gear_down = 1
+
+function update_gear()
+    local gear_down = get(DATAREF_GEAR_DOWN)
+    if gear_down == 1 and prev_gear_down == 0
+    then
+        -- gear down
+        playSample(sound_gear_down, false) -- no loop
+        prev_gear_down = 1
+        return
+    end
+    if gear_down == 0 and prev_gear_down == 1
+    then
+        -- gear up
+        playSample(sound_gear_up, false) -- no loop
+        prev_gear_down = 0
+        return
+    end
+end
+
 -- The main UPDATE function
 function update()
 	update_spoilers()
 	update_volume()
-	update_vario()
+    update_vario()
+    update_canopy()
+    update_gear()
 end --update()
 

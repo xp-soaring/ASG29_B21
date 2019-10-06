@@ -80,7 +80,7 @@ sasl.registerCommandHandler(command_close, 0, ballast_close)
 local init_required = true
 
 function ballast_init()
-    set(DATAREF_BALLAST_KG, BALLAST_MAX_KG) -- fill ballast to max
+    --set(DATAREF_BALLAST_KG, BALLAST_MAX_KG) -- fill ballast to max
     set(DATAREF_BALLAST_CONTROL, 0) -- set ballast dump particles to 'off'
 end
 
