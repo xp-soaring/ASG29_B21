@@ -84,7 +84,7 @@ local green = { 0.0, 1.0, 0.0, 1.0 }
 local blue =  { 0.0, 0.0, 1.0, 1.0 }
 local black = { 0.0, 0.0, 0.0, 1.0 }
 local white = { 1.0, 1.0, 1.0, 1.0 }
-local wp_color = { 0.0, 0.2, 0.0, 1.0 } -- muddy green
+local wp_color = { 1.0, 0.85, 0.0, 1.0 } -- yellow
 
 -- Pages:
 -- 1 : NAV (direction arrow, arrival height)
