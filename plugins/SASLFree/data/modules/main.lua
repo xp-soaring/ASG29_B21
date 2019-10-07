@@ -39,15 +39,17 @@ components = {
                 b21_total_energy {}, -- load before variometers
                 b21_sounds {}, -- load before variometers
                 b21_ailerons {}, -- control aileron animation to support droop with flaps
-                b21_airbrakes {},
-	            b21_navpanel { -- digital nav panel
+                b21_airbrakes {}, -- applies wheelbrake at > 75% airbrakes
+                b21_altimeter { -- digital altimeter
+                    position = { 455, 850, 148, 148}
+                },
+                b21_navpanel { -- digital nav panel
                     position = { 348, 637, 155, 210}
                 },
                 b21_vario_301 {},
                 b21_vario_57 {},
                 b21_clock {}, -- moves hands of watch on panel
                 b21_trim {}, -- provides trigger trim command and gradual movement of trim
-                b21_altimeter {}, -- moves needles of altimeter, supports imperial/metric units
                 b21_yawstring {}, -- moves yawstring
                 b21_ballast {}, -- provides ballast % indicator and "b21/ballast/[open,close,fill]"
                 b21_flap_indicator {},

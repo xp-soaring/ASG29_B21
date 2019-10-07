@@ -840,9 +840,9 @@ function draw_wind()
         local wind_str = tostring(math.floor(wind_speed))
 
         -- write numeric wind speed (knots or km/h) in circle
-        sasl.gl.drawText(font,89,114, wind_str, 20, true, false, TEXT_ALIGN_RIGHT, black)
+        sasl.gl.drawText(font,91,115, wind_str, 20, true, false, TEXT_ALIGN_RIGHT, white)
         -- and units string
-        sasl.gl.drawText(font,88,104, units_str, 12, true, false, TEXT_ALIGN_RIGHT, black)
+        sasl.gl.drawText(font,88,104, units_str, 12, true, false, TEXT_ALIGN_RIGHT, white)
         --
         -- now position pointer on wind circle graphic
         local wind_heading_deg = get(DATAREF_WIND_DEG) - aircraft_track_deg

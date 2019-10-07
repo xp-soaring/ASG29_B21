@@ -17,7 +17,6 @@
         b21/vario_302/needle_fpm
         b21/vario_302/number_bottom
         b21/vario_302/number_bottom_sign
-        b21/vario_302/number_right
         b21/vario_302/number_top
         b21/vario_302/number_top_minus
         b21/netto_fpm
@@ -61,7 +60,6 @@ DATAREF.VARIO_SOUND_FPM = globalPropertyf("b21/vario_sound_fpm")
 DATAREF.VARIO_SOUND_MODE = globalPropertyi("b21/vario_sound_mode")
 DATAREF.NUMBER_BOTTOM = createGlobalPropertyf("b21/vario_302/number_bottom",12.3,false,true,true)
 DATAREF.NUMBER_BOTTOM_SIGN = createGlobalPropertyi("b21/vario_302/number_bottom_sign",0,false,true,true)
-DATAREF.NUMBER_RIGHT = createGlobalPropertyf("b21/vario_302/number_right",34.5,false,true,true)
 DATAREF.NUMBER_TOP = createGlobalPropertyi("b21/vario_302/number_top",123,false,true,true)
 DATAREF.NUMBER_TOP_SIGN = createGlobalPropertyi("b21/vario_302/number_top_sign",0,false,true,true)
 DATAREF.STF_TE_IND = createGlobalPropertyi("b21/vario_302/stf_te_ind",0,false,true,true) -- stf/te indicator on lcd
@@ -370,12 +368,12 @@ function update_top_number()
     local reading = B21_302_glide_ratio -- numerical value to display, feet or meters
 
     -- limit reading to 4 digits
-    if reading < -9999
+    if reading < 0
     then
-        reading = -9999
-    elseif reading > 9999
+        reading = 0
+    elseif reading > 99
     then
-        reading = 9999
+        reading = 99
     end
 
     dataref_write("NUMBER_TOP", math.abs(reading))
@@ -385,32 +383,6 @@ function update_top_number()
     -- if negative we'll overlay a '-' to the left of the leftmost digit
     -- we use a gen_LED overlay which displays a '-' for '9' and blank for '0'
     -- e.g. 9000 will display "-   ", so overlaid over " 123" will show "-123"
-
-    local number_sign -- will be 9XXX where the X's represent the existing digits
-
-    if reading >= 0
-    then
-        if reading > 9999
-        then
-            reading = 9999
-        end
-        number_sign = 10^math.floor(math.log10(reading)+1)*8
-    else
-        if reading < -9999
-        then
-            reading = -9999
-        end
-        -- create number 'mask' to put '-' in the right place
-        -- e.g. reading = 123 => number_minus=9000, hence '-123'
-        number_sign = 10^math.floor(math.log10(-reading)+1)*9
-    end
-    -- fixup for readings 0.X, change 8 to 80, 9 to 90.
-    if number_sign < 10
-    then
-        number_sign = number_sign * 10
-    end
-
-    dataref_write("NUMBER_TOP_SIGN", number_sign)
 
 end
 
@@ -464,11 +436,6 @@ function update_bottom_number()
 
 end
 
---update right number of 302 vario with maccready setting
-function update_right_number()
-        dataref_write("NUMBER_RIGHT", 1.2)
-end
-
 -- Finally, here's the per-frame update() callabck
 function update()
     update_stf_te_mode()
@@ -480,5 +447,4 @@ function update()
     update_push()
     update_top_number()
     update_bottom_number()
-    update_right_number()
 end
