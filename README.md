@@ -6,33 +6,34 @@
 
 ## Modification list
 
-* alter navpanel current/next wp, wind colors
-* add sound to canopy open/close
-* add instruments to panel
-* make yawstring more realistic
-* create flightmodel best l/d polar (flap 4)
-* create flightmodel accurate for all flap settings
-* create flightmodel accurate for all ballast settings
 * add tow release handle
 * correct spoilers L/D
 * weaken wheelbrake effectiveness
-* add canopy toggle command to under-panel button (for close)
 * check netto, STF correct for zero/max ballast
 * check flap, spoiler, ground run, wheel down wind sounds
-* check aileron authority
-* check rudder authority
-* check canopy open/close sounds (birdsong?)
 * tidy up bezel highlight/shadow for ballast gauge
-* check Win CE tablet in cockpit properly disabled
-* add pilot model for external view
-* fix negative alpha, negative G (inverted loop) instability
-* adjust ailerons for correct roll rate
-* adjust Center of Mass and place ballast slightly forward
 * adjust trim max-min effect
-* remove arrival height / stf from vario_302 (make vario_301)
-* confirm STF adjustment should use netto or te
 * calibrate netto polar
 * correct color arcs on ASI
+* DONE add sound to canopy open/close
+* DONE add instruments to panel
+* DONE make yawstring more realistic
+* DONE create flightmodel best l/d polar (flap 4)
+* DONE create flightmodel accurate for all flap settings
+* DONE create flightmodel accurate for all ballast settings
+* DONE alter navpanel current/next wp, wind colors
+* DONE add canopy toggle command to under-panel button (for close)
+* DONE check aileron authority
+* DONE check rudder authority
+* DONE check canopy open/close sounds (birdsong?)
+* DONE remove arrival height / stf from vario_302 (make vario_301)
+* DONE confirm STF adjustment should use netto or te
+* DEFERRED add pilot model for external view
+* DONE fix negative alpha, negative G (inverted loop) instability
+* DONE adjust ailerons for correct roll rate
+* DONE adjust Center of Mass and place ballast slightly forward
+* DONE fix tailwheel jitter bounce
+* DONE check Win CE handheld object is removed properly
 * DONE speed up canopy open/close
 * DONE have netto include ballast
 * DONE move flap position indicator texture

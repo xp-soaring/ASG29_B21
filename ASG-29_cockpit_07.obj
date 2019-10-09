@@ -45516,6 +45516,7 @@ TRIS 61365 6
 ANIM_begin
 ANIM_trans 0.000000 0.140000 0.380000 0.000000 0.140000 0.380000 0.000000 0.000000 none
 ANIM_rotate 1.000000 -0.000000 0.000000 0.000000 -65.000000 0.0 1.0 sim/flightmodel2/misc/canopy_open_ratio
+#ANIM_rotate 1.000000 -0.000000 0.000000 -60.000000 0.000000 0.000000 0.511939 sim/flightmodel/controls/dihed_rat
 ANIM_trans -0.000000 -0.140000 -0.380000 -0.000000 -0.140000 -0.380000 0.000000 0.000000 none
 TRIS 61371 6597
 ATTR_no_cull
@@ -45540,17 +45541,17 @@ ATTR_reset
 TRIS 72549 72
 ANIM_begin
 ANIM_trans -0.000156 0.292632 0.757504 -0.000156 0.292632 0.757504 0.000000 0.000000 none
-#ANIM_rotate 0.000000 -0.951057 0.309016 -45.000000 45.000000 90.000000 -90.000000 sim/flightmodel/position/beta
+ANIM_rotate 0.000000 -0.951057 0.309016 -45.000000 45.000000 90.000000 -90.000000 sim/flightmodel/position/beta
 ANIM_trans 0.000156 -0.292632 -0.757504 0.000156 -0.292632 -0.757504 0.000000 0.000000 none
 ATTR_cull
 ATTR_emission_rgb 0.500000 0.500000 0.500000
 TRIS 72621 96
 ANIM_begin
 ANIM_trans 0.000044 0.293494 0.760171 0.000044 0.293494 0.760171 0.000000 0.000000 none
-ANIM_rotate 0.000000 -0.951056 0.309020 -50.000000 50.000000 90.000000 -90.000000 b21/yawstring/2
+ANIM_rotate 0.000000 -0.951056 0.309020 -45.000000 45.000000 90.000000 -90.000000 sim/flightmodel/position/beta
 ANIM_trans -0.000044 -0.293494 -0.760171 -0.000044 -0.293494 -0.760171 0.000000 0.000000 none
 ANIM_trans 0.000044 0.293496 0.760166 0.000044 0.293496 0.760166 0.000000 0.000000 none
-#ANIM_rotate 0.000000 0.309018 0.951056 0.000000 360.000000 0.000000 0.200000 b21/yawstring/2
+ANIM_rotate 0.000000 0.309018 0.951056 0.000000 360.000000 0.000000 0.200000 sim/flightmodel/position/indicated_airspeed
 ANIM_trans -0.000044 -0.293496 -0.760166 -0.000044 -0.293496 -0.760166 0.000000 0.000000 none
 TRIS 72717 528
 ANIM_end
@@ -45560,6 +45561,7 @@ ANIM_end
 ANIM_begin
 ANIM_trans -0.259764 0.084239 1.159060 -0.259764 0.084239 1.159060 0.000000 0.000000 none
 ANIM_rotate 0.000000 0.991445 -0.130526 -90.000000 0.000000 0.85 0.000000 sim/flightmodel2/misc/canopy_open_ratio
+#ANIM_rotate 0.000000 0.991445 -0.130526 -90.000000 0.000000 0.000000 0.511939 sim/flightmodel/controls/dihed_rat
 ANIM_trans 0.259764 -0.084239 -1.159060 0.259764 -0.084239 -1.159060 0.000000 0.000000 none
 ATTR_reset
 ATTR_manip_command button sim/flight_controls/canopy_toggle Canopy open/close toggle
@@ -45570,24 +45572,25 @@ ANIM_end
 ANIM_begin
 ANIM_trans 0.259568 0.084239 1.159280 0.259568 0.084239 1.159280 0.000000 0.000000 none
 ANIM_rotate 0.000000 0.991445 -0.130526 90.000000 0.000000 0.85 0.000000 sim/flightmodel2/misc/canopy_open_ratio
+#ANIM_rotate 0.000000 0.991445 -0.130526 90.000000 0.000000 0.000000 0.511939 sim/flightmodel/controls/dihed_rat
 ANIM_trans -0.259568 -0.084239 -1.159280 -0.259568 -0.084239 -1.159280 0.000000 0.000000 none
 ATTR_manip_command button sim/flight_controls/canopy_toggle Canopy open/close toggle
 TRIS 73449 204
 ANIM_end
 
 ANIM_begin
-ANIM_hide 0.000000 1.000000 sim/cockpit/engine/inverter_on[0]
+ANIM_hide 1.000000 1.000000 sim/cockpit/engine/inverter_on[0]
 ATTR_cockpit
 TRIS 73653 1284
 ANIM_begin
 ANIM_show 0.000000 1.000000 sim/cockpit/switches/yaw_damper_on
-ANIM_hide 0.000000 1.000000 sim/cockpit/engine/inverter_on[0]
+ANIM_hide 1.000000 1.000000 sim/cockpit/engine/inverter_on[0]
 ANIM_hide 0.000000 0.000000 sim/cockpit/switches/yaw_damper_on
 TRIS 74937 24
 ANIM_end
 ANIM_begin
 ANIM_show 1.000000 0.000000 sim/cockpit/switches/yaw_damper_on
-ANIM_hide 0.000000 1.000000 sim/cockpit/engine/inverter_on[0]
+ANIM_hide 1.000000 1.000000 sim/cockpit/engine/inverter_on[0]
 ANIM_hide 1.000000 1.000000 sim/cockpit/switches/yaw_damper_on
 TRIS 74961 24
 ANIM_end

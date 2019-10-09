@@ -91,7 +91,7 @@ P _gear/0/_gear_can_retract 1
 P _gear/0/_gear_castors 0
 P _gear/0/_gear_def_empty 0.0
 P _gear/0/_gear_def_gross 0.0
-P _gear/0/_gear_load_fraction 0.924216866
+P _gear/0/_gear_load_fraction 0.956361711
 P _gear/0/_gear_type 3
 P _gear/0/_gear_x 0.0
 P _gear/0/_gear_y -1.169999957
@@ -104,10 +104,10 @@ P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
 P _gear/0/_scon 2991.543212891
-P _gear/0/_stat_def 0.422177047
+P _gear/0/_stat_def 0.422945440
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
-P _gear/0/_strut_comp -0.100000001
+P _gear/0/_strut_comp 0.0
 P _gear/0/_strut_s1 0.0
 P _gear/0/_strut_s2 0.015625000
 P _gear/0/_strut_t1 0.128906250
@@ -125,7 +125,7 @@ P _gear/1/_gear_can_retract 0
 P _gear/1/_gear_castors 0
 P _gear/1/_gear_def_empty 0.0
 P _gear/1/_gear_def_gross 0.0
-P _gear/1/_gear_load_fraction 0.075783111
+P _gear/1/_gear_load_fraction 0.043638289
 P _gear/1/_gear_type 3
 P _gear/1/_gear_x 0.0
 P _gear/1/_gear_y -0.300000012
@@ -138,7 +138,7 @@ P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
 P _gear/1/_scon 679.896179199
-P _gear/1/_stat_def 0.167727664
+P _gear/1/_stat_def 0.084914640
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -14958,7 +14958,7 @@ P _part/85/_part_specs_invis 1
 P _part/85/_part_tex 0
 P _part/85/_part_the 0.0
 P _part/85/_part_x 0.0
-P _part/85/_part_y -0.747822762
+P _part/85/_part_y -0.747054398
 P _part/85/_part_z 6.840000153
 P _part/85/_patt_con 0
 P _part/85/_patt_prt 0
@@ -16427,7 +16427,7 @@ P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.132272348
+P _part/86/_part_y -0.215085372
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -24240,7 +24240,7 @@ P acf/_HUD_del_x 240.0
 P acf/_HUD_del_y 120.0
 P acf/_ICAO ASG29 B21
 P acf/_ITT_is_C 1
-P acf/_Jxx_unitmass 1.0
+P acf/_Jxx_unitmass 3.0
 P acf/_Jyy_unitmass 2.500000000
 P acf/_Jzz_unitmass 8.399999619
 P acf/_Mmo 0.0
@@ -25112,7 +25112,7 @@ P acf/_bouncer_spring_k/9,2 0.0
 P acf/_bouncer_spring_k/i_count 14
 P acf/_bouncer_spring_k/j_count 3
 P acf/_brake_co 0.600000024
-P acf/_brake_to_steer_power 4.0
+P acf/_brake_to_steer_power 0.0
 P acf/_burner_inc 0.0
 P acf/_bus_bat_is_on/0 0
 P acf/_bus_bat_is_on/1 0
@@ -26537,7 +26537,7 @@ P acf/_ground_pwr/0 0.0
 P acf/_ground_pwr/1 0.0
 P acf/_ground_pwr/2 0.0
 P acf/_ground_pwr/count 3
-P acf/_h_eqlbm 1.466912746
+P acf/_h_eqlbm 1.463493347
 P acf/_has_ADG 0
 P acf/_has_APU_bleed_air 0
 P acf/_has_APU_generator 0
@@ -26723,8 +26723,8 @@ P acf/_no_default_gear_fx 0
 P acf/_no_default_gun_fx 0
 P acf/_no_default_wash_fx 0
 P acf/_no_default_wing_fx 0
-P acf/_no_hydro_force_mult_brakes 0.0
-P acf/_no_hydro_force_mult_flcons 0.0
+P acf/_no_hydro_force_mult_brakes 1.0
+P acf/_no_hydro_force_mult_flcons 1.0
 P acf/_nom_bat_volt 12.0
 P acf/_nom_fuelP 30.0
 P acf/_nom_gen_volt 13.199999809
@@ -27233,7 +27233,7 @@ P acf/_tank_xyz_full/8,1 0.0
 P acf/_tank_xyz_full/8,2 0.0
 P acf/_tank_xyz_full/i_count 9
 P acf/_tank_xyz_full/j_count 3
-P acf/_the_eqlbm 3.988263130
+P acf/_the_eqlbm 3.672726393
 P acf/_thro_non_vect_props_at_sin_vect 0
 P acf/_thro_x_ctr 0.0
 P acf/_throt_max_fwd_emr 0.699999988
@@ -27458,19 +27458,6 @@ gen_LED vario_302_bottom_s
   PERIOD_WIDTH 6
   LED_ROWS 0
 
-gen_LED vario_302_number_r
-  POS 284.500000 574.500000
-  IMAGE vario_302/num_right
-  DATAREF b21/vario_302/number_right
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 10.000000 10.000000
-  DIGITS 3
-  DECIMALS 1
-  PERIOD_WIDTH 6
-  LED_ROWS 0
-
 gen_LED vario_203_number_t
   POS 264.500000 595.500000
   IMAGE vario_302/num_top
@@ -27549,7 +27536,7 @@ gen_rotary vario_302_stf_te_sw
   CLICK_DY 0
 
 gen_annun vario_302_stf_te_in
-  POS 296.000000 562.000000
+  POS 295.000000 575.000000
   IMAGE vario_302/stf_te_ind
   DATAREF 
   SHOW_EQUAL 1.000000 b21/vario_302/stf_te_ind
@@ -27621,7 +27608,7 @@ gen_rheostat vario_sound_volume
   WRAP 0
 
 gen_handle spoiler_indicator
-  POS 129.500000 491.000000
+  POS 175.500000 511.000000
   IMAGE spoiler_indicator/gen_handle
   DATAREF sim/cockpit2/controls/speedbrake_ratio
   LIGHT_MODE MECHANICAL
@@ -27632,7 +27619,7 @@ gen_handle spoiler_indicator
   HAS_DETENTS 0
 
 gen_handle spoilers_closed
-  POS 129.500000 491.000000
+  POS 175.500000 511.000000
   IMAGE spoiler_indicator/spoilers_closed
   DATAREF sim/cockpit2/controls/speedbrake_ratio
   SHOW_LESS 0.000000 sim/cockpit2/controls/speedbrake_ratio
@@ -27713,72 +27700,6 @@ gen_needle asi_stf_bug
   KEY_FRAME 150.000000 139.000000
   IS_DRAGGABLE 0
   OFFSET 0.000000
-
-gen_needle altimeter_ft
-  POS 526.000000 667.000000
-  IMAGE altimeter/altimeter_ft
-  DATAREF b21/altimeter/needle_3_deg
-  SHOW_EQUAL 0.000000 b21/units_altitude
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 360.000000 360.000000
-  IS_DRAGGABLE 0
-  OFFSET 0.000000
-
-gen_needle altimeter_m
-  POS 526.000000 667.000000
-  IMAGE altimeter/altimeter_m
-  DATAREF b21/altimeter/needle_3_deg
-  SHOW_EQUAL 1.000000 b21/units_altitude
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 360.000000 360.000000
-  IS_DRAGGABLE 0
-  OFFSET 0.000000
-
-gen_needle altimeter_needle_2
-  POS 526.000000 666.000000
-  IMAGE altimeter/needle_small
-  DATAREF b21/altimeter/needle_2_deg
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 360.000000 360.000000
-  IS_DRAGGABLE 0
-  OFFSET 0.000000
-
-gen_needle altimeter_needle_1
-  POS 526.000000 666.000000
-  IMAGE altimeter/needle_large
-  DATAREF b21/altimeter/needle_1_deg
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 360.000000 360.000000
-  IS_DRAGGABLE 0
-  OFFSET 0.000000
-
-gen_rheostat altimeter_knob
-  POS 485.000000 622.000000
-  IMAGE altimeter/knob
-  DATAREF b21/altimeter/knob
-  KF_WRAP_BOTTOM
-  KF_WRAP_TOP
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 3.000000 3.000000
-  CLICK_RADIUS 20.000000
-  CLICK_RADIUS_DY 0.000000
-  STEP1 1.000000
-  STEP2 1.000000
-  OFFSET 0.000000
-  CURSOR DEFAULT
-  CLICK_DX 0
-  CLICK_DY 0
-  WRAP 1
 
 gen_pointer trim
   POS 283.000000 487.000000
@@ -27932,7 +27853,7 @@ gen_trigger ballast_fill
   CLICK_DY 0
 
 gen_needle watch_h
-  POS 176.500000 512.000000
+  POS 540.500000 490.000000
   IMAGE watch/H
   DATAREF b21/clock/hours
   LIGHT_MODE MECHANICAL
@@ -27943,7 +27864,7 @@ gen_needle watch_h
   OFFSET 0.000000
 
 gen_needle watch_m
-  POS 175.500000 513.000000
+  POS 539.500000 491.000000
   IMAGE watch/M
   DATAREF b21/clock/minutes
   LIGHT_MODE MECHANICAL
@@ -27954,7 +27875,7 @@ gen_needle watch_m
   OFFSET 0.000000
 
 gen_needle watch_s
-  POS 176.500000 513.000000
+  POS 540.500000 491.000000
   IMAGE watch/S
   DATAREF b21/clock/seconds
   LIGHT_MODE MECHANICAL
@@ -27965,7 +27886,7 @@ gen_needle watch_s
   OFFSET 0.000000
 
 gen_annun gen_annun.png
-  POS 773.500000 459.000000
+  POS 528.500000 545.000000
   IMAGE gear_indicator/gear_indicator
   DATAREF 
   SHOW_EQUAL 1.000000 sim/cockpit/switches/gear_handle_status
