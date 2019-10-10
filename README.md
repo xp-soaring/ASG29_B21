@@ -15,6 +15,7 @@
 * adjust trim max-min effect
 * calibrate netto polar
 * correct color arcs on ASI
+* DONE add launch and landing checklists to navpanel
 * DONE default onground startup to 0 ballast, 4/A flaps
 * DONE allow USER_SETTINGS.lua to set startup flaps, ballast values
 * DONE position tow hooks

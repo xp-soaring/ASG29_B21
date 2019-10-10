@@ -47,18 +47,27 @@ local font = sasl.gl.loadFont( "fonts/OpenSans-Regular.ttf" )
 local debug_str1 = "DEBUG"
 local debug_str2 = "DEBUG"
 
--- images
+-- Pages:
+-- 1 : NAV (direction arrow, arrival height)
+-- 2 : TASK (load task button, display task)
+local page = 1
+local page_count = 6 -- nav, task, checklists 1,2,3,4
+
 local task_background_img = sasl.gl.loadImage("page_task.png")
 local nav_background_img = sasl.gl.loadImage("page_nav.png")
-local map_background_img = sasl.gl.loadImage("page_map.png")
 local page_checklist_1
-if project_settings.SPEED_UNITS == 0
+local page_checklist_3
+if project_settings.SPEED_UNITS == 0 -- 0=knots, 1=km/h
 then
     page_checklist_1 = sasl.gl.loadImage("page_checklist_1_knots.png")
+    page_checklist_3 = sasl.gl.loadImage("page_checklist_3_knots.png")
 else
     page_checklist_1 = sasl.gl.loadImage("page_checklist_1_kph.png")
+    page_checklist_3 = sasl.gl.loadImage("page_checklist_3_kph.png")
 end
 local page_checklist_2 = sasl.gl.loadImage("page_checklist_2.png")
+local page_checklist_4 = sasl.gl.loadImage("page_checklist_4.png")
+-- other images
 local logo_img = sasl.gl.loadImage("navpanel_logo.png")
 local nav_wp_pointer = sasl.gl.loadImage("nav_wp_pointer.png")
 local nav_wp2_pointer = sasl.gl.loadImage("nav_wp2_pointer.png")
@@ -85,13 +94,6 @@ local blue =  { 0.0, 0.0, 1.0, 1.0 }
 local black = { 0.0, 0.0, 0.0, 1.0 }
 local white = { 1.0, 1.0, 1.0, 1.0 }
 local wp_color = { 1.0, 0.85, 0.0, 1.0 } -- yellow
-
--- Pages:
--- 1 : NAV (direction arrow, arrival height)
--- 2 : TASK (load task button, display task)
--- 3 : (future) MAP (lat/long view of task)
-local page = 1
-local page_count = 4
 
 -- task contains the list [1..N] of waypoints
 local task = { }
@@ -452,7 +454,7 @@ function update_netto_ld()
     update_netto_ld_time_s = now
     -- ok, continue to update glide_ratio_display, including prev value for smoothing
     glide_ratio_display = glide_ratio_display * 0.9 + glide_ratio * 0.1
-    
+
 end
 
 -- Update STF and ballast values
@@ -523,7 +525,7 @@ end
 function height_needed_m(distance_m, bearing_deg)
     -- Theta is angle between wind and waypoint
     local theta_radians = math.rad(get(DATAREF_WIND_DEG)) - math.rad(bearing_deg) - math.pi
-   
+
     -- Wind speed
     local wind_mps = get(DATAREF_WIND_MPS)
 
@@ -573,7 +575,7 @@ function update_arrival_heights()
     -- find height needed for distance and bearing of next leg
     local next_height_m = height_needed_m(next_wp.leg_distance_m, next_wp.leg_bearing_deg)
 
-    -- arrival height at next waypoint = 
+    -- arrival height at next waypoint =
     --   (current aircraft altitude) minus
     --   (height needed to current waypoint) minus
     --   (height needed on next leg) minus
@@ -971,7 +973,7 @@ function draw_nav_next_wp()
     end
     -- draw altitude units i.e. "FT" or "M"
     sasl.gl.drawText(font,100,15, altitude_units_str, 12, true, false, TEXT_ALIGN_LEFT, color)
-    
+
     local arrival_height = wp.arrival_height_m -- meters
     if project_settings.ALTITUDE_UNITS == 0 -- 0 = FT, 1 = M
     then
@@ -1015,13 +1017,13 @@ function draw_stf_ld()
         speed_factor = MPS_TO_KPH
     end
     sasl.gl.drawText(font,83,60, speed_units_str, 12, true, false, TEXT_ALIGN_RIGHT, black)
-    
+
     sasl.gl.drawText(font,46,49, "STF", 10, true, false, TEXT_ALIGN_RIGHT, black)
     sasl.gl.drawText(font,46,37, "BASE", 10, true, false, TEXT_ALIGN_RIGHT, black)
-    
+
     sasl.gl.drawText(font,46,20, "STF", 10, true, false, TEXT_ALIGN_RIGHT, black)
     sasl.gl.drawText(font,46,8, "NOW", 10, true, false, TEXT_ALIGN_RIGHT, black)
-    
+
     -- draw STF_MC (Maccready speed to fly with zero sink)
     local speed_str = tostring(math.floor(stf_mc_mps * speed_factor + 0.5))
     sasl.gl.drawText(font,83,40, speed_str, 20, true, false, TEXT_ALIGN_RIGHT, black)
@@ -1078,12 +1080,28 @@ function draw_page_nav()
 
 end
 
-function draw_page_checklist_1()
-    sasl.gl.drawTexture(page_checklist_1, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
-end
+function draw_page_checklist(n)
+    if n == 1
+    then
+        sasl.gl.drawTexture(page_checklist_1, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- flaps
+        return
+    end
+    if n == 2
+    then
+        sasl.gl.drawTexture(page_checklist_2, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- ballast
+        return
+    end
+    if n == 3
+    then
+        sasl.gl.drawTexture(page_checklist_3, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- landing
+        return
+    end
+    if n == 4
+    then
+        sasl.gl.drawTexture(page_checklist_4, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- launch
+        return
+    end
 
-function draw_page_checklist_2()
-    sasl.gl.drawTexture(page_checklist_2, 0, 0, w, h, {1.0,1.0,1.0,1.0}) -- draw background texture
 end
 
 callback = {}
@@ -1099,12 +1117,8 @@ function draw()
     elseif page == 2
     then
         draw_page_task()
-    elseif page == 3
-    then
-        draw_page_checklist_1()
-    elseif page == 4
-    then
-        draw_page_checklist_2()
+    else
+        draw_page_checklist(page-2)
     end
     drawAll(components)
 end
