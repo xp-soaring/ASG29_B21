@@ -84,14 +84,14 @@ P _gear/0/_axiE 0.0
 P _gear/0/_axiN 0.0
 P _gear/0/_axiR 0.0
 P _gear/0/_cyc_time 0.500000000
-P _gear/0/_damp 299.154327393
+P _gear/0/_damp 294.579803467
 P _gear/0/_eagle_claw_deg 0.0
 P _gear/0/_gear_brakes 1
 P _gear/0/_gear_can_retract 1
 P _gear/0/_gear_castors 0
 P _gear/0/_gear_def_empty 0.0
 P _gear/0/_gear_def_gross 0.0
-P _gear/0/_gear_load_fraction 0.958378375
+P _gear/0/_gear_load_fraction 0.958416164
 P _gear/0/_gear_type 3
 P _gear/0/_gear_x 0.0
 P _gear/0/_gear_y -1.0
@@ -103,8 +103,8 @@ P _gear/0/_leg_len 1.0
 P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
-P _gear/0/_scon 2991.543212891
-P _gear/0/_stat_def 0.423837155
+P _gear/0/_scon 2945.798095703
+P _gear/0/_stat_def 0.430435866
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
 P _gear/0/_strut_comp 0.0
@@ -118,14 +118,14 @@ P _gear/1/_axiE 0.0
 P _gear/1/_axiN 0.0
 P _gear/1/_axiR 0.0
 P _gear/1/_cyc_time 1.0
-P _gear/1/_damp 67.989616394
+P _gear/1/_damp 66.949951172
 P _gear/1/_eagle_claw_deg 0.0
 P _gear/1/_gear_brakes 1
 P _gear/1/_gear_can_retract 0
 P _gear/1/_gear_castors 0
 P _gear/1/_gear_def_empty 0.0
 P _gear/1/_gear_def_gross 0.0
-P _gear/1/_gear_load_fraction 0.041621592
+P _gear/1/_gear_load_fraction 0.041583899
 P _gear/1/_gear_type 3
 P _gear/1/_gear_x 0.0
 P _gear/1/_gear_y -0.300000012
@@ -137,8 +137,8 @@ P _gear/1/_leg_len 0.0
 P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
-P _gear/1/_scon 679.896179199
-P _gear/1/_stat_def 0.080990367
+P _gear/1/_scon 669.499572754
+P _gear/1/_stat_def 0.082173586
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -152,7 +152,7 @@ P _gear/2/_axiE 0.0
 P _gear/2/_axiN 0.0
 P _gear/2/_axiR 0.0
 P _gear/2/_cyc_time 1.0
-P _gear/2/_damp 74.788581848
+P _gear/2/_damp 73.644950867
 P _gear/2/_eagle_claw_deg 0.0
 P _gear/2/_gear_brakes 0
 P _gear/2/_gear_can_retract 0
@@ -171,7 +171,7 @@ P _gear/2/_leg_len 0.0
 P _gear/2/_lonE 0.0
 P _gear/2/_lonN 0.0
 P _gear/2/_lonR 0.0
-P _gear/2/_scon 1495.771606445
+P _gear/2/_scon 1472.899047852
 P _gear/2/_stat_def 0.0
 P _gear/2/_steerdeg_hispeed 0.0
 P _gear/2/_steerdeg_lospeed 0.0
@@ -186,7 +186,7 @@ P _gear/3/_axiE 0.0
 P _gear/3/_axiN 0.0
 P _gear/3/_axiR 0.0
 P _gear/3/_cyc_time 1.0
-P _gear/3/_damp 74.788581848
+P _gear/3/_damp 73.644950867
 P _gear/3/_eagle_claw_deg 0.0
 P _gear/3/_gear_brakes 0
 P _gear/3/_gear_can_retract 0
@@ -205,7 +205,7 @@ P _gear/3/_leg_len 0.0
 P _gear/3/_lonE 0.0
 P _gear/3/_lonN 0.0
 P _gear/3/_lonR 0.0
-P _gear/3/_scon 1495.771606445
+P _gear/3/_scon 1472.899047852
 P _gear/3/_stat_def 0.0
 P _gear/3/_steerdeg_hispeed 0.0
 P _gear/3/_steerdeg_lospeed 0.0
@@ -14958,7 +14958,7 @@ P _part/85/_part_specs_invis 1
 P _part/85/_part_tex 0
 P _part/85/_part_the 0.0
 P _part/85/_part_x 0.0
-P _part/85/_part_y -0.576162696
+P _part/85/_part_y -0.569563985
 P _part/85/_part_z 6.840000153
 P _part/85/_patt_con 0
 P _part/85/_patt_prt 0
@@ -16427,7 +16427,7 @@ P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.219009638
+P _part/86/_part_y -0.217826426
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -26367,7 +26367,7 @@ P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_file_writer_version 113601
 P acf/_flap1_cd 0.003000000
 P acf/_flap1_cl 0.400000006
-P acf/_flap1_cm -0.100000001
+P acf/_flap1_cm -0.400000006
 P acf/_flap1_cratR 0.140000001
 P acf/_flap1_cratT 0.140000001
 P acf/_flap1_dn/0 0.0
@@ -26537,7 +26537,7 @@ P acf/_ground_pwr/0 0.0
 P acf/_ground_pwr/1 0.0
 P acf/_ground_pwr/2 0.0
 P acf/_ground_pwr/count 3
-P acf/_h_eqlbm 1.300317407
+P acf/_h_eqlbm 1.293944001
 P acf/_has_ADG 0
 P acf/_has_APU_bleed_air 0
 P acf/_has_APU_generator 0
@@ -26664,7 +26664,7 @@ P acf/_lock_n2 0.0
 P acf/_lock_with_elev_EQ 0
 P acf/_m_displaced 0.0
 P acf/_m_displaced_Y 0.0
-P acf/_m_empty 780.0
+P acf/_m_empty 880.0
 P acf/_m_fuel_max_tot 0.010000000
 P acf/_m_jett 0.050000001
 P acf/_m_max 1323.0
@@ -27233,7 +27233,7 @@ P acf/_tank_xyz_full/8,1 0.0
 P acf/_tank_xyz_full/8,2 0.0
 P acf/_tank_xyz_full/i_count 9
 P acf/_tank_xyz_full/j_count 3
-P acf/_the_eqlbm 2.902525187
+P acf/_the_eqlbm 2.878618240
 P acf/_thro_non_vect_props_at_sin_vect 0
 P acf/_thro_x_ctr 0.0
 P acf/_throt_max_fwd_emr 0.699999988
@@ -27484,6 +27484,16 @@ gen_LED vario_302_num_top_s
   PERIOD_WIDTH 0
   LED_ROWS 0
 
+gen_annun vario_302_stf_te_in
+  POS 295.000000 575.000000
+  IMAGE vario_302/stf_te_ind
+  DATAREF 
+  SHOW_EQUAL 1.000000 b21/vario_302/stf_te_ind
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
+
 gen_needle vario_302_needle
   POS 267.000000 574.500000
   IMAGE vario_302/vario_302
@@ -27534,16 +27544,6 @@ gen_rotary vario_302_stf_te_sw
   CURSOR DEFAULT
   CLICK_DX 0
   CLICK_DY 0
-
-gen_annun vario_302_stf_te_in
-  POS 295.000000 575.000000
-  IMAGE vario_302/stf_te_ind
-  DATAREF 
-  SHOW_EQUAL 1.000000 b21/vario_302/stf_te_ind
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
 
 gen_annun vario_57_background
   POS 329.000000 686.000000
