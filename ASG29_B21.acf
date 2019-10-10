@@ -104,7 +104,7 @@ P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
 P _gear/0/_scon 2991.543212891
-P _gear/0/_stat_def 0.423837215
+P _gear/0/_stat_def 0.423837155
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
 P _gear/0/_strut_comp 0.0
@@ -14958,7 +14958,7 @@ P _part/85/_part_specs_invis 1
 P _part/85/_part_tex 0
 P _part/85/_part_the 0.0
 P _part/85/_part_x 0.0
-P _part/85/_part_y -0.576162577
+P _part/85/_part_y -0.576162696
 P _part/85/_part_z 6.840000153
 P _part/85/_patt_con 0
 P _part/85/_patt_prt 0
@@ -24268,7 +24268,7 @@ P acf/_Vfe1_kts 999.0
 P acf/_Vfem_kts 999.0
 P acf/_Vle_kts 999.0
 P acf/_Vmca_kts 0.0
-P acf/_Vne_kts 154.0
+P acf/_Vne_kts 145.0
 P acf/_Vno_kts 0.0
 P acf/_Vs_kts 0.0
 P acf/_Vso_kts 0.0
@@ -26473,11 +26473,11 @@ P acf/_gear_warn_below_kias 77.0
 P acf/_gear_warn_below_thro_pct 50.0
 P acf/_generator_design_rpm_rat 0.250000000
 P acf/_get_tow/0 0.0
-P acf/_get_tow/1 0.0
-P acf/_get_tow/2 0.0
+P acf/_get_tow/1 -1.299999952
+P acf/_get_tow/2 5.0
 P acf/_get_tow/count 3
 P acf/_get_tow_new/0 0.0
-P acf/_get_tow_new/1 0.0
+P acf/_get_tow_new/1 -0.349999994
 P acf/_get_tow_new/2 0.0
 P acf/_get_tow_new/count 3
 P acf/_give_tow/0 0.0
@@ -26565,8 +26565,8 @@ P acf/_has_food_2 0
 P acf/_has_fuel_1 0
 P acf/_has_fuel_2 0
 P acf/_has_full_bleed_air 0
-P acf/_has_get_tow 0
-P acf/_has_get_tow_new 0
+P acf/_has_get_tow 1
+P acf/_has_get_tow_new 1
 P acf/_has_give_tow 0
 P acf/_has_ground_pwr 0
 P acf/_has_hsi 0
@@ -27791,7 +27791,7 @@ gen_LED ballast
   LED_ROWS 0
 
 gen_trigger ballast_close
-  POS 748.000000 472.000000
+  POS 743.000000 472.000000
   IMAGE ballast/gen_trigger
   COMMAND b21/ballast/close
   LIGHT_MODE MECHANICAL
@@ -27799,14 +27799,14 @@ gen_trigger ballast_close
   KEY_FRAME 0.000000 0.000000 1.000000
   KEY_FRAME 1.000000 1.000000
   TOOLTIP Ballast Close
-  CLICK_RADIUS 10.000000
+  CLICK_RADIUS 15.000000
   CLICK_RADIUS_DY 0.000000
   CURSOR HANDLE
   CLICK_DX 0
   CLICK_DY 0
 
 gen_trigger ballast_open
-  POS 748.000000 502.000000
+  POS 743.000000 507.000000
   IMAGE ballast/gen_trigger
   COMMAND b21/ballast/open
   LIGHT_MODE MECHANICAL
@@ -27815,7 +27815,7 @@ gen_trigger ballast_open
   KEY_FRAME 0.000000 0.000000 1.000000
   KEY_FRAME 1.000000 1.000000
   TOOLTIP Ballast open
-  CLICK_RADIUS 10.000000
+  CLICK_RADIUS 15.000000
   CLICK_RADIUS_DY 0.000000
   CURSOR BUTTON
   CLICK_DX 0

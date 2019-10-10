@@ -53,13 +53,20 @@ components = {
                 b21_yawstring {}, -- moves yawstring
                 b21_ballast {}, -- provides ballast % indicator and "b21/ballast/[open,close,fill]"
                 b21_flap_indicator {},
+                b21_startup {}, -- startup initializations, e.g. ballast, flaps
                 b21_controls_commands {}
              }
 
+-- *******************************
+-- Draw
+-- *******************************
 function draw()
     drawAll(components)
 end
 
+-- *******************************
+-- Update
+-- *******************************
 function update()
     updateAll(components)
 end

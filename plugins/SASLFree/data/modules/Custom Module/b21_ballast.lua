@@ -77,7 +77,7 @@ sasl.registerCommandHandler(command_open, 0, ballast_open)
 sasl.registerCommandHandler(command_close, 0, ballast_close)
 
 -- setup boolean to trigger init code on first run of update()
-local init_required = true
+local init_completed = false
 
 function ballast_init()
     --set(DATAREF_BALLAST_KG, BALLAST_MAX_KG) -- fill ballast to max
@@ -88,12 +88,12 @@ end
 function update()
 
     -- INIT code block
-    if init_required
+    if not init_completed
     then
         prev_time_s = get(DATAREF_TIME_S)
-        fill()
+        ballast_init()
         -- init complete, so prevent re-init of future update() calls
-        init_required = false
+        init_completed = true
     end
 
     local time_delta_s = get(DATAREF_TIME_S) - prev_time_s
