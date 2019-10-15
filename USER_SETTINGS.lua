@@ -22,5 +22,5 @@ project_settings.CLOCK_MODE = 0 -- cockpit panel clock display simulator local t
                                 -- simulator Zulu time (CLOCK_MODE = 1)
                                 -- or real-world local time (CLOCK_MODE = 2)
 
-project_settings.STARTUP_BALLAST_KG = 150 -- Ballast loaded on startup if on ground (0..200)
+project_settings.STARTUP_BALLAST_KG = 50 -- Ballast loaded on startup if on ground (0..200)
 project_settings.STARTUP_FLAPS = 4 -- Flap setting on startup if on ground (0..6)

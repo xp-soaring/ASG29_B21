@@ -3,6 +3,7 @@ print("b21_startup.lua starting")
 
 local DATAREF_BALLAST_KG = globalPropertyf("sim/flightmodel/weight/m_jettison")
 local DATAREF_FLAPS = globalPropertyf("sim/flightmodel/controls/flaprqst")
+local DATAREF_ALT_AGL_FT = globalPropertyf("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot")
 
 -- *******************************
 -- Startup
@@ -18,8 +19,11 @@ function init()
         return
     end
 
-    print("b21_startup in init mode")
-    local onground = get(globalPropertyf("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot")) < 10
+    local alt_agl_ft = get(DATAREF_ALT_AGL_FT)
+
+    print("b21_startup in init mode, alt agl ft = "..alt_agl_ft)
+
+    local onground = alt_agl_ft < 10
 
     print("init, onground=",onground)
 
@@ -38,5 +42,14 @@ function init()
 end
 
 function update()
-    init()
+    init() -- will do nothing after first update
+end
+
+function onAirportLoaded()
+    print("onAirportLoaded")
+    init_completed = false -- re-run init() on next update
+end
+
+function onPlaneLoaded()
+    print("onPlaneLoaded")
 end

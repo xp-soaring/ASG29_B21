@@ -25,7 +25,6 @@ local warning_ballast = false
 
 -- X-PLANE per-frame update
 function update()
-    -- if SPOILERS OUT & GEAR UP:
     local spoilers_out = get(DATAREF_SPEEDBRAKE) > 0.0
 
     local gear_down = get(DATAREF_GEAR) == 1
@@ -64,8 +63,10 @@ function update()
         warning_gear_down = false
     end
 
+    local on_ground = alt_agl_ft < 10
+
     -- SPOILERS / BALLAST WARNING
-    if (spoilers_out or gear_down) and carrying_ballast
+    if not on_ground and (spoilers_out or gear_down) and carrying_ballast
     then
         if not warning_ballast
         then

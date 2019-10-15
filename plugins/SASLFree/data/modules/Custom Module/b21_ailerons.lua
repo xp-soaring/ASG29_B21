@@ -68,7 +68,7 @@ function update()
     if flaps_deg ~= prev_flaps_deg
     then
         down, center, up = aileron_range(flaps_deg)
-        print("New aileron range", flaps_deg, down, center, up)
+        --print("New aileron range", flaps_deg, down, center, up)
         prev_flaps_deg = flaps_deg
     end
 
