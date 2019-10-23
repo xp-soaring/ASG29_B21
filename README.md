@@ -6,6 +6,9 @@
 
 ## Modification list
 
+* check USER_SETTINGS.lua flap numbers
+* add Timo sounds for wind, brakes
+* fix panel texture bleed through
 * add tow release handle
 * correct spoilers L/D
 * weaken wheelbrake effectiveness
