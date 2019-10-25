@@ -104,7 +104,7 @@ P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
 P _gear/0/_scon 2945.798095703
-P _gear/0/_stat_def 0.430435956
+P _gear/0/_stat_def 0.430435807
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
 P _gear/0/_strut_comp 0.0
@@ -138,7 +138,7 @@ P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
 P _gear/1/_scon 669.499572754
-P _gear/1/_stat_def 0.082173586
+P _gear/1/_stat_def 0.082173571
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -14958,7 +14958,7 @@ P _part/85/_part_specs_invis 1
 P _part/85/_part_tex 0
 P _part/85/_part_the 0.0
 P _part/85/_part_x 0.0
-P _part/85/_part_y -0.569563866
+P _part/85/_part_y -0.569563985
 P _part/85/_part_z 6.840000153
 P _part/85/_patt_con 0
 P _part/85/_patt_prt 0
@@ -16427,7 +16427,7 @@ P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.217826426
+P _part/86/_part_y -0.217826441
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -27693,8 +27693,8 @@ gen_needle asi_stf_bug
   DATAREF b21/stf_kts
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 -180.000000 1.000000
-  KEY_FRAME 40.000000 -149.000000 1.000000
+  KEY_FRAME 0.000000 -118.000000 1.000000
+  KEY_FRAME 40.000000 -118.000000 1.000000
   KEY_FRAME 50.000000 -118.000000 1.000000
   KEY_FRAME 100.000000 12.000000 1.000000
   KEY_FRAME 150.000000 139.000000

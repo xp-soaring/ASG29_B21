@@ -2,10 +2,16 @@
 
 ## Credits
 * Windsock team for 2007 original 3D model
-* rhb migrating the model forward through X-Plane 8,9,10 & 11
+* rhb: migrating the model forward through X-Plane 8,9,10 & 11
+* Timi Heitenan: sounds
+* Facebook X-Plane Gliders group: testing
 
 ## Modification list
 
+* add QFE/QNH button to Altimeter
+* ensure debug console disabled
+* check altimeter QFE knob with mouse wheel
+* check default flap index in USER_SETTINGS
 * add tow release handle
 * correct spoilers L/D
 * weaken wheelbrake effectiveness
@@ -14,7 +20,10 @@
 * tidy up bezel highlight/shadow for ballast gauge
 * adjust trim max-min effect
 * calibrate netto polar
-* correct color arcs on ASI
+* DONE limit STF bug on ASI to 50 knots min
+* DONE fix panel texture bleed through
+* DONE correct color arcs on ASI
+* DONE add Timi sounds
 * DONE add launch and landing checklists to navpanel
 * DONE default onground startup to 0 ballast, 4/A flaps
 * DONE allow USER_SETTINGS.lua to set startup flaps, ballast values
