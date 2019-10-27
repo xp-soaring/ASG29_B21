@@ -25,6 +25,7 @@ local gray = { 0.1, 0.1, 0.1, 1.0 }
 local altimeter_background_img = sasl.gl.loadImage("altimeter_background.png")
 local digits1_img = sasl.gl.loadImage("digits1.png")
 local digits2_img = sasl.gl.loadImage("digits2.png")
+local digits_tens_img = sasl.gl.loadImage("digits_tens.png")
 
 local ALT_UNITS_STR = "FEET"
 local ALT_CONVERT = 1
@@ -103,9 +104,12 @@ function draw()
 
     -- draw smaller digits
     local x, y = C1.x, C1.y
-    sasl.gl.drawTexturePart(digits1_img, x, y, C1.w, C1.h, 0, cy[1], C1.w, C1.h, white)
+    -- don't draw rightmost digit if using 'digits_tens'
+    -- sasl.gl.drawTexturePart(digits1_img, x, y, C1.w, C1.h, 0, cy[1], C1.w, C1.h, white)
     x = x - C1.w
-    sasl.gl.drawTexturePart(digits1_img, x, y, C1.w, C1.h, 0, cy[2], C1.w, C1.h, white)
+    -- don't draw single 10's digit if using 'digits_tens' (which has 00, 10, 20 ...)
+    -- sasl.gl.drawTexturePart(digits1_img, x, y, C1.w, C1.h, 0, cy[2], C1.w, C1.h, white)
+    sasl.gl.drawTexturePart(digits_tens_img, x, y, C1.w*2, C1.h, 0, cy[2], C1.w*2, C1.h, white)
     x = x - C1.w
     sasl.gl.drawTexturePart(digits1_img, x, y, C1.w, C1.h, 0, cy[3], C1.w, C1.h, white)
     -- draw larger digits
@@ -122,5 +126,7 @@ end
 
 components = {
     knob_left { id="knob_left", position = { 7, 8, 18, 24} },
-    knob_right { id="knob_right", position = { 26, 8, 18, 24} }
+    knob_right { id="knob_right", position = { 26, 8, 18, 24} },
+    button_qfe { id="button_qfe", position = { 43, 0, 30, 30} },
+    button_qne { id="button_qne", position = { 78, 0, 30, 30} }
 }

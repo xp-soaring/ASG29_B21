@@ -8,9 +8,7 @@
 
 ## Modification list
 
-* add QFE/QNH button to Altimeter
 * ensure debug console disabled
-* check altimeter QFE knob with mouse wheel
 * add tow release handle
 * correct spoilers L/D
 * weaken wheelbrake effectiveness
@@ -19,6 +17,7 @@
 * tidy up bezel highlight/shadow for ballast gauge
 * adjust trim max-min effect
 * calibrate netto polar
+* DONE add QFE/QNE button to Altimeter
 * DONE check USER_SETTINGS.lua flap numbers
 * DONE limit STF bug on ASI to 50 knots min
 * DONE fix panel texture bleed through

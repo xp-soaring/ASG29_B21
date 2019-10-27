@@ -760,7 +760,7 @@ end
 -- ** NAV PAGE ***************************************
 -- ***************************************************
 
--- draw distance to current and next waypoints on page
+-- draw distance to current waypoint on page
 function draw_distance_to_go()
     local distance_units_str = "MI"
     if project_settings.DISTANCE_UNITS == 1 -- 0 = MI, 1 = KM
@@ -768,7 +768,7 @@ function draw_distance_to_go()
         distance_units_str = "KM"
     end
     -- draw distance units i.e. "MI" or "KM"
-    sasl.gl.drawText(font,150,110, distance_units_str, 12, true, false, TEXT_ALIGN_RIGHT, black)
+    sasl.gl.drawText(font,150,110, distance_units_str, 12, true, false, TEXT_ALIGN_RIGHT, wp_color)
 
     local dist = task[task_index].distance_m / 1000 -- initially in KM
     if project_settings.DISTANCE_UNITS == 0 -- 0 = MI, 1 = KM
@@ -782,9 +782,7 @@ function draw_distance_to_go()
         dist_str = tostring(math.floor(dist * 10+0.5)/10)
     end
     -- draw distance value e.g. "123" or "6.7"
-    sasl.gl.drawText(font,150,90, dist_str, 20, true, false, TEXT_ALIGN_RIGHT, black)
-
-    -- debug still need to do distance to second waypoint
+    sasl.gl.drawText(font,150,90, dist_str, 20, true, false, TEXT_ALIGN_RIGHT, wp_color)
 end
 
 function draw_arrival_height()
@@ -794,7 +792,7 @@ function draw_arrival_height()
         altitude_units_str = "M"
     end
     -- draw altitude units i.e. "FT" or "M"
-    sasl.gl.drawText(font,150,70, altitude_units_str, 12, true, false, TEXT_ALIGN_RIGHT, black)
+    sasl.gl.drawText(font,150,70, altitude_units_str, 12, true, false, TEXT_ALIGN_RIGHT, wp_color)
 
     local arrival_height = task[task_index].arrival_height_m -- meters
     if project_settings.ALTITUDE_UNITS == 0 -- 0 = FT, 1 = M
@@ -804,11 +802,11 @@ function draw_arrival_height()
     -- build the actual arrival height number string "123" or "6.7"
     local arrival_height_str = tostring(math.floor(math.abs(arrival_height)))
 
-    local color = black
+    local color = wp_color
     if arrival_height < 0.0
     then
-        arrival_height_str = "-"..arrival_height_str
-        color = {0.3,0.0,0.0,1.0} -- dark red if negative
+        arrival_height_str = "–"..arrival_height_str
+    --    color = {0.3,0.0,0.0,1.0} -- dark red if negative
     else
         arrival_height_str = "+"..arrival_height_str
     end
@@ -971,8 +969,6 @@ function draw_nav_next_wp()
     then
         altitude_units_str = "M"
     end
-    -- draw altitude units i.e. "FT" or "M"
-    sasl.gl.drawText(font,100,15, altitude_units_str, 12, true, false, TEXT_ALIGN_LEFT, color)
 
     local arrival_height = wp.arrival_height_m -- meters
     if project_settings.ALTITUDE_UNITS == 0 -- 0 = FT, 1 = M
@@ -984,13 +980,16 @@ function draw_nav_next_wp()
 
     if arrival_height < 0.0
     then
-        arrival_height_str = "-"..arrival_height_str
+        arrival_height_str = "–"..arrival_height_str
     else
         arrival_height_str = "+"..arrival_height_str
         color = {0.0,0.15,0.0,1.0} -- green if positive
     end
     -- draw arrival_height value e.g. "123"
     sasl.gl.drawText(font,95,10, arrival_height_str, 20, true, false, TEXT_ALIGN_RIGHT, color)
+    
+    -- draw altitude units i.e. "FT" or "M"
+    sasl.gl.drawText(font,100,15, altitude_units_str, 12, true, false, TEXT_ALIGN_LEFT, color)
 
 end
 
