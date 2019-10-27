@@ -17,6 +17,7 @@
 * tidy up bezel highlight/shadow for ballast gauge
 * adjust trim max-min effect
 * calibrate netto polar
+* DONE fix yawstring tape bad transparency
 * DONE add QFE/QNE button to Altimeter
 * DONE check USER_SETTINGS.lua flap numbers
 * DONE limit STF bug on ASI to 50 knots min
