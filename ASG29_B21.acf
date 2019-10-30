@@ -104,7 +104,7 @@ P _gear/0/_lonE -90.0
 P _gear/0/_lonN -90.0
 P _gear/0/_lonR -130.0
 P _gear/0/_scon 2945.798095703
-P _gear/0/_stat_def 0.430435807
+P _gear/0/_stat_def 0.430435956
 P _gear/0/_steerdeg_hispeed 0.0
 P _gear/0/_steerdeg_lospeed 0.0
 P _gear/0/_strut_comp 0.0
@@ -138,7 +138,7 @@ P _gear/1/_lonE 0.0
 P _gear/1/_lonN 0.0
 P _gear/1/_lonR 0.0
 P _gear/1/_scon 669.499572754
-P _gear/1/_stat_def 0.082173571
+P _gear/1/_stat_def 0.082173586
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -14958,7 +14958,7 @@ P _part/85/_part_specs_invis 1
 P _part/85/_part_tex 0
 P _part/85/_part_the 0.0
 P _part/85/_part_x 0.0
-P _part/85/_part_y -0.569563985
+P _part/85/_part_y -0.569563866
 P _part/85/_part_z 6.840000153
 P _part/85/_patt_con 0
 P _part/85/_patt_prt 0
@@ -16427,7 +16427,7 @@ P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 0.0
-P _part/86/_part_y -0.217826441
+P _part/86/_part_y -0.217826426
 P _part/86/_part_z 19.799999237
 P _part/86/_patt_con 0
 P _part/86/_patt_prt 0
@@ -27761,7 +27761,7 @@ gen_rotary flap_indicator
   LIGHT_MODE MECHANICAL
   LIGHT_RHEOSTAT 0
   KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 6.000000 1.000000
+  KEY_FRAME 0.960000 6.000000 1.000000
   KEY_FRAME 1.900000 7.000000 1.000000
   KEY_FRAME 2.900000 8.000000 1.000000
   KEY_FRAME 3.900000 9.000000
@@ -27886,7 +27886,7 @@ gen_needle watch_s
   OFFSET 0.000000
 
 gen_annun gen_annun.png
-  POS 528.500000 545.000000
+  POS 528.000000 545.500000
   IMAGE gear_indicator/gear_indicator
   DATAREF 
   SHOW_EQUAL 1.000000 sim/cockpit/switches/gear_handle_status

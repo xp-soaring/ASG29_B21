@@ -3,7 +3,7 @@
 ## Credits
 * Windsock team for 2007 original 3D model
 * rhb: migrating the model forward through X-Plane 8,9,10 & 11
-* Timi Heitenan: sounds
+* Timi Hietenan: sounds
 * Facebook X-Plane Gliders group: testing
 
 ## Modification list
@@ -13,10 +13,10 @@
 * correct spoilers L/D
 * weaken wheelbrake effectiveness
 * check netto, STF correct for zero/max ballast
-* check flap, spoiler, ground run, wheel down wind sounds
-* tidy up bezel highlight/shadow for ballast gauge
 * adjust trim max-min effect
 * calibrate netto polar
+* DONE check flap, spoiler, ground run, wheel down wind sounds
+* DONE tidy up bezel highlight/shadow for ballast gauge
 * DONE fix yawstring tape bad transparency
 * DONE add QFE/QNE button to Altimeter
 * DONE check USER_SETTINGS.lua flap numbers
