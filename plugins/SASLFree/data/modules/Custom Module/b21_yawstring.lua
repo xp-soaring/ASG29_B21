@@ -16,6 +16,6 @@ local DATAREF_TIME_S = globalPropertyf("sim/network/misc/network_time_sec")
 
 function update()
     local yaw_deg = get(DATAREF_BETA)
-    local yaw_now_deg = yaw_deg * 4 + (math.random() - 0.5) * get(DATAREF_AIRSPEED_KTS) / 25.0
+    local yaw_now_deg = yaw_deg * 1.5 + (math.random() - 0.5) * get(DATAREF_AIRSPEED_KTS) / 25.0
     set(DATAREF_YAWSTRING_2_DEG, yaw_now_deg)
 end
